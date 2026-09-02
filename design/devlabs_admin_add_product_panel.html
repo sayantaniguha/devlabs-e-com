@@ -1,0 +1,505 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>DevLabs Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#e7eefe",
+                        "inverse-on-surface": "#ebf1ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#151c27",
+                        "secondary-fixed": "#e2dfff",
+                        "primary-fixed": "#e4e1e7",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "inverse-surface": "#2a313d",
+                        "surface": "#f9f9ff",
+                        "surface-container-high": "#e2e8f8",
+                        "on-primary-fixed": "#1b1b1f",
+                        "tertiary-container": "#002113",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#151c27",
+                        "primary": "#000000",
+                        "surface-dim": "#d3daea",
+                        "secondary": "#4b41e1",
+                        "primary-container": "#1b1b1f",
+                        "on-secondary-fixed-variant": "#3323cc",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f9f9ff",
+                        "surface-container-highest": "#dce2f3",
+                        "error-container": "#ffdad6",
+                        "background": "#f9f9ff",
+                        "on-primary-container": "#858388",
+                        "on-secondary-container": "#fffbff",
+                        "surface-tint": "#5f5e63",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-tertiary-fixed": "#002113",
+                        "outline-variant": "#c8c5cb",
+                        "tertiary-fixed": "#6ffbbe",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#47464b",
+                        "surface-container-low": "#f0f3ff",
+                        "inverse-primary": "#c8c5cb",
+                        "on-tertiary-container": "#009668",
+                        "on-surface-variant": "#47464b",
+                        "tertiary": "#000000",
+                        "secondary-fixed-dim": "#c3c0ff",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#c8c5cb",
+                        "outline": "#78767b",
+                        "on-secondary-fixed": "#0f0069",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#645efb",
+                        "surface-variant": "#dce2f3",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "32px",
+                        "stack-md": "16px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "24px",
+                        "stack-xl": "48px",
+                        "stack-sm": "8px",
+                        "stack-xs": "4px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "price-sm": ["JetBrains Mono"],
+                        "display": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "price-lg": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "price-sm": ["14px", { "lineHeight": "1", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "price-lg": ["18px", { "lineHeight": "1", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #F7F8FA; }
+        .hairline-border { border: 1px solid #E5E7EB; }
+        .card-shadow { box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05); }
+    </style>
+</head>
+<body class="text-on-surface font-body-sm min-h-screen flex">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-surface-container-lowest border-r border-outline-variant flex flex-col py-stack-lg px-stack-md z-20">
+<div class="mb-stack-lg">
+<img alt="DevLabs Logo" class="h-8 mb-2" src="https://lh3.googleusercontent.com/aida/AEtjO1WccrPUfLNyBwDl6LzdafxDQZ2up_HaSQigvHFioA92Kt71bZeZDRujGPjIs0lV8AtVne5W9u-ZBkhysdL4ppvo3o0B3h-GXbuNfNbgFa_8j8Td3Svem93s8lXFnNeBiuPEFKsOu0XgFkzscbEEjWf7CiSPhlMVxV3lDxHDIsE_DNYyHmfL0237yDxui6DNOB1j3nvMpTsr0F0vNZlcniqSYKTiBG7klgIdgDNlV1X-j4tG4mEMCsadXlk">
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Store Manager</p>
+</div>
+<div class="flex items-center gap-3 p-3 mb-stack-lg hairline-border rounded-lg bg-surface-container-low">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A professional close up portrait of an admin user with a clean, tech aesthetic background, natural lighting, looking confident and reliable." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAV_mQ5bL5AB5vHvBIo8GIadveRxU1SUYP2-HQ7j9qfYvLkMttKwgwUGS41ig9G5FBEYH1ta9KWXy6Vg0RGguzyqLfrKMW5XdgWQNsMVsByBpnkgo-SpLGq5DEgygnM6AliJBu9c-vElcBXOqrX0YaYp86LiaWFyYiyOP2THDOXT_Y-3y-X3ZcHq1c0GAm7ki4AB_NZuFzYpmk6fZJZWNppKKLq7-9IdALm9fEHiX_ReFLUkIgapbJ">
+<div>
+<p class="font-body-sm text-body-sm font-semibold">Admin User</p>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Full Access</p>
+</div>
+</div>
+<button class="w-full bg-[#4F46E5] text-white py-2 px-4 rounded-md font-body-sm text-body-sm font-semibold mb-stack-lg flex items-center justify-center gap-2 hover:bg-opacity-90 transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            + New Product
+        </button>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-md bg-[#4F46E5] text-white font-body-sm text-body-sm font-semibold" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">monitoring</span>
+                Analytics
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-on-surface-variant hover:bg-surface-container-low transition-colors font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+                Inventory
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-on-surface-variant hover:bg-surface-container-low transition-colors font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+                Orders
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-on-surface-variant hover:bg-surface-container-low transition-colors font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">category</span>
+                Categories
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-on-surface-variant hover:bg-surface-container-low transition-colors font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto">
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-on-surface-variant hover:bg-surface-container-low transition-colors font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+                Logout
+            </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[260px] flex-1 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="h-[72px] bg-surface-container-lowest border-b border-outline-variant flex items-center justify-between px-margin-desktop sticky top-0 z-10">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight">Dashboard Overview</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Performance metrics and recent activity.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="pl-9 pr-4 py-1.5 rounded-full hairline-border bg-surface-container-lowest text-body-sm font-body-sm focus:outline-none focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent w-64" placeholder="Search orders..." type="text">
+</div>
+<button class="p-2 text-on-surface-variant hover:text-on-surface transition-colors rounded-full hover:bg-surface-container-low flex items-center justify-center" aria-label="Toggle theme">
+  <span class="material-symbols-outlined text-[20px]">dark_mode</span>
+</button><button class="relative p-2 text-on-surface-variant hover:text-on-surface transition-colors rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-margin-desktop space-y-stack-xl max-w-container-max mx-auto w-full">
+<!-- ROW 1 (Stats) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="bg-surface-container-lowest hairline-border rounded-lg p-stack-lg card-shadow">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-1">Total Sales</p>
+<p class="font-price-lg text-price-lg font-bold text-on-surface">₹1,24,500</p>
+</div>
+<div class="w-10 h-10 rounded-md bg-[#4F46E5]/10 flex items-center justify-center text-[#4F46E5]">
+<span class="material-symbols-outlined">payments</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-tertiary-container bg-tertiary-fixed-dim/20 px-2 py-0.5 rounded text-xs font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +12.5%
+                        </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-xs">vs last month</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest hairline-border rounded-lg p-stack-lg card-shadow">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-1">Active Orders</p>
+<p class="font-headline-md text-headline-md font-bold text-on-surface">842</p>
+</div>
+<div class="w-10 h-10 rounded-md bg-[#4F46E5]/10 flex items-center justify-center text-[#4F46E5]">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-tertiary-container bg-tertiary-fixed-dim/20 px-2 py-0.5 rounded text-xs font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +5.2%
+                        </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-xs">vs last month</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest hairline-border rounded-lg p-stack-lg card-shadow">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-1">New Customers</p>
+<p class="font-headline-md text-headline-md font-bold text-on-surface">1,204</p>
+</div>
+<div class="w-10 h-10 rounded-md bg-[#4F46E5]/10 flex items-center justify-center text-[#4F46E5]">
+<span class="material-symbols-outlined">group</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-on-error-container bg-error-container/50 px-2 py-0.5 rounded text-xs font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_down</span> -2.1%
+                        </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-xs">vs last month</span>
+</div>
+</div>
+</div>
+<!-- ROW 2 (Charts/Status) -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Revenue Chart Placeholder -->
+<div class="lg:col-span-2 bg-surface-container-lowest hairline-border rounded-lg p-stack-lg card-shadow flex flex-col">
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface mb-stack-lg tracking-tight">Revenue Overview</h2>
+<div class="flex-1 flex items-end justify-between gap-2 h-48 pb-4">
+<!-- Chart Bars -->
+<div class="w-full flex flex-col items-center gap-2">
+<div class="w-8 md:w-12 bg-secondary-fixed/50 rounded-t-sm h-[40%]"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Mon</span>
+</div>
+<div class="w-full flex flex-col items-center gap-2">
+<div class="w-8 md:w-12 bg-secondary-fixed/50 rounded-t-sm h-[55%]"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Tue</span>
+</div>
+<div class="w-full flex flex-col items-center gap-2">
+<div class="w-8 md:w-12 bg-secondary-fixed/50 rounded-t-sm h-[45%]"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Wed</span>
+</div>
+<div class="w-full flex flex-col items-center gap-2">
+<div class="w-8 md:w-12 bg-secondary-fixed/50 rounded-t-sm h-[70%]"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Thu</span>
+</div>
+<div class="w-full flex flex-col items-center gap-2">
+<div class="w-8 md:w-12 bg-secondary-fixed/50 rounded-t-sm h-[85%]"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Fri</span>
+</div>
+<div class="w-full flex flex-col items-center gap-2">
+<div class="w-8 md:w-12 bg-[#4F46E5] rounded-t-sm h-[100%]"></div>
+<span class="font-label-caps text-label-caps font-bold text-on-surface">Sat</span>
+</div>
+<div class="w-full flex flex-col items-center gap-2">
+<div class="w-8 md:w-12 bg-secondary-fixed/50 rounded-t-sm h-[60%]"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Sun</span>
+</div>
+</div>
+</div>
+<!-- Inventory Status -->
+<div class="bg-surface-container-lowest hairline-border rounded-lg p-stack-lg card-shadow">
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface mb-stack-md tracking-tight">Inventory Status</h2>
+<ul class="divide-y divide-outline-variant/30">
+<li class="py-3 flex justify-between items-center">
+<div>
+<p class="font-body-sm text-body-sm font-semibold text-on-surface">Signature Hoodie</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs">24 units</p>
+</div>
+<span class="px-2 py-1 bg-amber-100 text-amber-800 text-[10px] font-bold uppercase tracking-wider rounded">Low Stock</span>
+</li>
+<li class="py-3 flex justify-between items-center">
+<div>
+<p class="font-body-sm text-body-sm font-semibold text-on-surface">'Ship It' Tee</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs">156 units</p>
+</div>
+<span class="px-2 py-1 bg-tertiary-fixed-dim/20 text-on-tertiary-fixed-variant text-[10px] font-bold uppercase tracking-wider rounded">In Stock</span>
+</li>
+<li class="py-3 flex justify-between items-center">
+<div>
+<p class="font-body-sm text-body-sm font-semibold text-on-surface">Backpack</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs">0 units</p>
+</div>
+<span class="px-2 py-1 bg-error-container/50 text-on-error-container text-[10px] font-bold uppercase tracking-wider rounded">Out of Stock</span>
+</li>
+<li class="py-3 flex justify-between items-center border-b-0">
+<div>
+<p class="font-body-sm text-body-sm font-semibold text-on-surface">Mousepad</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs">89 units</p>
+</div>
+<span class="px-2 py-1 bg-tertiary-fixed-dim/20 text-on-tertiary-fixed-variant text-[10px] font-bold uppercase tracking-wider rounded">In Stock</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- ROW 3 (Table) -->
+<div class="bg-surface-container-lowest hairline-border rounded-lg card-shadow overflow-hidden">
+<div class="px-stack-lg py-stack-md border-b border-outline-variant/50">
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface tracking-tight">Recent Orders</h2>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant/50 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">
+<th class="px-stack-lg py-3 font-semibold">Order #</th>
+<th class="px-stack-lg py-3 font-semibold">Customer</th>
+<th class="px-stack-lg py-3 font-semibold">Product</th>
+<th class="px-stack-lg py-3 font-semibold">Date</th>
+<th class="px-stack-lg py-3 font-semibold text-right">Amount</th>
+<th class="px-stack-lg py-3 font-semibold">Status</th>
+<th class="px-stack-lg py-3 font-semibold text-right"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30 font-body-sm text-body-sm">
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="px-stack-lg py-4 font-price-sm text-price-sm">#ORD-092</td>
+<td class="px-stack-lg py-4 font-semibold">Sarah Jenkins</td>
+<td class="px-stack-lg py-4 text-on-surface-variant">Signature Hoodie</td>
+<td class="px-stack-lg py-4 text-on-surface-variant">Today, 10:42 AM</td>
+<td class="px-stack-lg py-4 font-price-sm text-price-sm text-right">₹3,499</td>
+<td class="px-stack-lg py-4">
+<span class="px-2 py-1 bg-tertiary-fixed-dim/20 text-on-tertiary-fixed-variant text-[10px] font-bold uppercase tracking-wider rounded inline-block">Delivered</span>
+</td>
+<td class="px-stack-lg py-4 text-right">
+<button class="text-on-surface-variant hover:text-on-surface opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="px-stack-lg py-4 font-price-sm text-price-sm">#ORD-091</td>
+<td class="px-stack-lg py-4 font-semibold">Michael Chen</td>
+<td class="px-stack-lg py-4 text-on-surface-variant">'Ship It' Tee</td>
+<td class="px-stack-lg py-4 text-on-surface-variant">Yesterday</td>
+<td class="px-stack-lg py-4 font-price-sm text-price-sm text-right">₹1,299</td>
+<td class="px-stack-lg py-4">
+<span class="px-2 py-1 bg-amber-100 text-amber-800 text-[10px] font-bold uppercase tracking-wider rounded inline-block">Processing</span>
+</td>
+<td class="px-stack-lg py-4 text-right">
+<button class="text-on-surface-variant hover:text-on-surface opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="px-stack-lg py-4 font-price-sm text-price-sm">#ORD-090</td>
+<td class="px-stack-lg py-4 font-semibold">Alex Rivera</td>
+<td class="px-stack-lg py-4 text-on-surface-variant">Mousepad x2</td>
+<td class="px-stack-lg py-4 text-on-surface-variant">Oct 24, 2023</td>
+<td class="px-stack-lg py-4 font-price-sm text-price-sm text-right">₹1,798</td>
+<td class="px-stack-lg py-4">
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant text-[10px] font-bold uppercase tracking-wider rounded inline-block">Pending</span>
+</td>
+<td class="px-stack-lg py-4 text-right">
+<button class="text-on-surface-variant hover:text-on-surface opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="px-stack-lg py-4 font-price-sm text-price-sm">#ORD-089</td>
+<td class="px-stack-lg py-4 font-semibold">Priya Patel</td>
+<td class="px-stack-lg py-4 text-on-surface-variant">Developer Mug</td>
+<td class="px-stack-lg py-4 text-on-surface-variant">Oct 23, 2023</td>
+<td class="px-stack-lg py-4 font-price-sm text-price-sm text-right">₹599</td>
+<td class="px-stack-lg py-4">
+<span class="px-2 py-1 bg-tertiary-fixed-dim/20 text-on-tertiary-fixed-variant text-[10px] font-bold uppercase tracking-wider rounded inline-block">Shipped</span>
+</td>
+<td class="px-stack-lg py-4 text-right">
+<button class="text-on-surface-variant hover:text-on-surface opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<div aria-labelledby="slide-over-title" aria-modal="true" class="fixed inset-0 z-50 overflow-hidden" role="dialog">
+<div class="absolute inset-0 bg-on-surface/30 backdrop-blur-sm transition-opacity"></div>
+<div class="fixed inset-y-0 right-0 flex max-w-full pl-10">
+<div class="w-screen max-w-[520px] transform transition ease-in-out duration-500 sm:duration-700">
+<div class="flex h-full flex-col overflow-y-scroll bg-surface-container-lowest shadow-xl">
+<!-- Header -->
+<div class="px-stack-lg py-stack-md border-b border-outline-variant flex items-center justify-between sticky top-0 bg-surface-container-lowest z-10">
+<h2 class="text-headline-md font-semibold text-on-surface" id="slide-over-title">Add New Product</h2>
+<button class="rounded-md text-on-surface-variant hover:text-on-surface focus:outline-none">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Form Content -->
+<div class="relative flex-1 px-stack-lg py-stack-lg space-y-stack-lg">
+<div class="space-y-4">
+<div>
+<label class="block text-body-sm font-semibold text-on-surface mb-1">Product Name</label>
+<input class="w-full rounded-md border-outline-variant focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent py-2 px-3 text-body-sm" placeholder="e.g. Signature Hoodie v2" type="text">
+</div>
+<div>
+<label class="block text-body-sm font-semibold text-on-surface mb-1">Description</label>
+<textarea class="w-full rounded-md border-outline-variant focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent py-2 px-3 text-body-sm" placeholder="Describe your product..." rows="4"></textarea>
+</div>
+<div>
+<label class="block text-body-sm font-semibold text-on-surface mb-1">Category</label>
+<select class="w-full rounded-md border-outline-variant focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent py-2 px-3 text-body-sm">
+<option>Hoodies</option>
+<option>T-Shirts</option>
+<option>Desk</option>
+<option>Bags</option>
+<option>Drinkware</option>
+<option>Stickers</option>
+</select>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-body-sm font-semibold text-on-surface mb-1">Price (₹)</label>
+<input class="w-full rounded-md border-outline-variant focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent py-2 px-3 text-body-sm" placeholder="0.00" type="number">
+</div>
+<div>
+<label class="block text-body-sm font-semibold text-on-surface mb-1">Compare-at Price (₹)</label>
+<input class="w-full rounded-md border-outline-variant focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent py-2 px-3 text-body-sm" placeholder="0.00" type="number">
+</div>
+</div>
+<div>
+<label class="block text-body-sm font-semibold text-on-surface mb-1">SKU</label>
+<input class="w-full rounded-md border-outline-variant focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent py-2 px-3 font-price-sm" placeholder="DL-HD-002" type="text">
+</div>
+</div>
+<!-- Variants Section -->
+<div class="pt-4 border-t border-outline-variant/50">
+<h3 class="text-body-sm font-semibold text-on-surface mb-3">Variants</h3>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded-md">
+<span class="font-semibold w-12">S</span>
+<input class="w-20 rounded border-outline-variant py-1 px-2 text-xs" type="number" value="0">
+<button class="text-on-error-container"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+</div>
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded-md">
+<span class="font-semibold w-12">M</span>
+<input class="w-20 rounded border-outline-variant py-1 px-2 text-xs" type="number" value="0">
+<button class="text-on-error-container"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+</div>
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded-md">
+<span class="font-semibold w-12">L</span>
+<input class="w-20 rounded border-outline-variant py-1 px-2 text-xs" type="number" value="0">
+<button class="text-on-error-container"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+</div>
+</div>
+</div>
+<!-- Image Uploader -->
+<div class="pt-4 border-t border-outline-variant/50">
+<label class="block text-body-sm font-semibold text-on-surface mb-2">Product Images</label>
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-6 flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[32px] mb-2">cloud_upload</span>
+<p class="text-xs">Drag and drop or click to upload</p>
+</div>
+<div class="flex gap-3 mt-4">
+<div class="relative w-20 h-20 rounded-md overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAV_mQ5bL5AB5vHvBIo8GIadveRxU1SUYP2-HQ7j9qfYvLkMttKwgwUGS41ig9G5FBEYH1ta9KWXy6Vg0RGguzyqLfrKMW5XdgWQNsMVsByBpnkgo-SpLGq5DEgygnM6AliJBu9c-vElcBXOqrX0YaYp86LiaWFyYiyOP2THDOXT_Y-3y-X3ZcHq1c0GAm7ki4AB_NZuFzYpmk6fZJZWNppKKLq7-9IdALm9fEHiX_ReFLUkIgapbJ">
+<span class="absolute top-1 left-1 bg-[#4F46E5] text-white text-[8px] px-1 rounded">Primary</span>
+<button class="absolute top-1 right-1 bg-on-surface/50 text-white rounded-full p-0.5"><span class="material-symbols-outlined text-[12px]">close</span></button>
+</div>
+<div class="relative w-20 h-20 rounded-md overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover opacity-50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAV_mQ5bL5AB5vHvBIo8GIadveRxU1SUYP2-HQ7j9qfYvLkMttKwgwUGS41ig9G5FBEYH1ta9KWXy6Vg0RGguzyqLfrKMW5XdgWQNsMVsByBpnkgo-SpLGq5DEgygnM6AliJBu9c-vElcBXOqrX0YaYp86LiaWFyYiyOP2THDOXT_Y-3y-X3ZcHq1c0GAm7ki4AB_NZuFzYpmk6fZJZWNppKKLq7-9IdALm9fEHiX_ReFLUkIgapbJ">
+<button class="absolute top-1 right-1 bg-on-surface/50 text-white rounded-full p-0.5"><span class="material-symbols-outlined text-[12px]">close</span></button>
+</div>
+</div>
+</div>
+<!-- Toggle -->
+<div class="pt-4 border-t border-outline-variant/50 flex items-start gap-3">
+<div class="flex h-6 items-center">
+<button aria-checked="true" class="bg-[#4F46E5] relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none" role="switch" type="button">
+<span aria-hidden="true" class="translate-x-5 pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+</button>
+</div>
+<div>
+<p class="text-body-sm font-semibold text-on-surface">Active / Draft</p>
+<p class="text-xs text-on-surface-variant">Drafts are hidden from the storefront.</p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="px-stack-lg py-stack-md border-t border-outline-variant flex items-center justify-between sticky bottom-0 bg-surface-container-lowest">
+<button class="text-on-surface-variant hover:text-on-surface font-semibold py-2 px-4 rounded-md transition-colors">Cancel</button>
+<button class="bg-[#4F46E5] text-white font-semibold py-2 px-6 rounded-md hover:bg-opacity-90 transition-colors">Save Product</button>
+</div>
+</div>
+</div>
+</div>
+<text-blaze-app-reference style="display: contents !important;" role="none"></text-blaze-app-reference></div>
+
+</body></html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Shop All - DevLabs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline-variant": "#c8c5cb",
+                      "outline": "#78767b",
+                      "on-tertiary-fixed": "#002113",
+                      "on-error-container": "#93000a",
+                      "primary-fixed": "#e4e1e7",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed-variant": "#3323cc",
+                      "background": "#f9f9ff",
+                      "secondary": "#4b41e1",
+                      "on-primary-fixed": "#1b1b1f",
+                      "surface-bright": "#f9f9ff",
+                      "on-secondary-container": "#fffbff",
+                      "primary-container": "#1b1b1f",
+                      "error": "#ba1a1a",
+                      "on-surface-variant": "#47464b",
+                      "on-secondary-fixed": "#0f0069",
+                      "secondary-fixed": "#e2dfff",
+                      "inverse-on-surface": "#ebf1ff",
+                      "secondary-fixed-dim": "#c3c0ff",
+                      "surface-variant": "#dce2f3",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "on-surface": "#151c27",
+                      "tertiary": "#000000",
+                      "surface-tint": "#5f5e63",
+                      "secondary-container": "#645efb",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "surface-container-highest": "#dce2f3",
+                      "surface-container-high": "#e2e8f8",
+                      "tertiary-container": "#002113",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed-dim": "#c8c5cb",
+                      "inverse-primary": "#c8c5cb",
+                      "surface-dim": "#d3daea",
+                      "surface-container-low": "#f0f3ff",
+                      "on-primary-container": "#858388",
+                      "on-primary-fixed-variant": "#47464b",
+                      "on-tertiary-container": "#009668",
+                      "on-secondary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed": "#6ffbbe",
+                      "surface": "#f9f9ff",
+                      "on-tertiary": "#ffffff",
+                      "primary": "#000000",
+                      "surface-container": "#e7eefe",
+                      "on-background": "#151c27",
+                      "on-primary": "#ffffff",
+                      "inverse-surface": "#2a313d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-xs": "4px",
+                      "stack-lg": "24px",
+                      "container-max": "1280px",
+                      "stack-sm": "8px",
+                      "gutter": "24px",
+                      "stack-xl": "48px",
+                      "margin-desktop": "32px",
+                      "stack-md": "16px",
+                      "margin-mobile": "16px"
+              },
+              "fontFamily": {
+                      "display": [
+                              "Inter"
+                      ],
+                      "label-caps": [
+                              "Inter"
+                      ],
+                      "price-lg": [
+                              "JetBrains Mono"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "price-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "display": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "price-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "letterSpacing": "0",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "price-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "letterSpacing": "0",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #4b41e1;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: #4b41e1;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased font-body-lg text-body-lg min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-primary-container fixed top-0 w-full z-50 border-b border-outline-variant dark:border-outline shadow-sm">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-desktop py-4">
+<div class="flex items-center gap-stack-lg">
+<a class="text-headline-lg font-headline-lg font-bold text-on-background dark:text-surface" href="#">DevLabs</a>
+<nav class="hidden md:flex gap-stack-lg ml-stack-xl">
+<a class="text-secondary dark:text-secondary-fixed font-bold border-b-2 border-secondary font-label-caps text-label-caps py-2" href="#">Shop</a>
+<a class="text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-colors font-label-caps text-label-caps py-2" href="#">Courses</a>
+<a class="text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-colors font-label-caps text-label-caps py-2" href="#">About</a>
+<a class="text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-colors font-label-caps text-label-caps py-2" href="#">Contact</a>
+</nav>
+</div>
+<div class="flex items-center gap-stack-md"><button class="theme-toggle text-secondary dark:text-secondary-fixed hover:text-secondary dark:hover:text-secondary-fixed transition-all scale-95 active:scale-90 duration-150" onclick="document.documentElement.classList.toggle('dark')" aria-label="Toggle theme"><span class="material-symbols-outlined dark:hidden" data-icon="dark_mode">dark_mode</span><span class="material-symbols-outlined hidden dark:block" data-icon="light_mode">light_mode</span></button>
+<button class="text-secondary dark:text-secondary-fixed hover:text-secondary dark:hover:text-secondary-fixed transition-all scale-95 active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="text-secondary dark:text-secondary-fixed hover:text-secondary dark:hover:text-secondary-fixed transition-all scale-95 active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-[80px] max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full pb-stack-xl">
+<!-- Header & Breadcrumbs -->
+<div class="py-stack-lg border-b border-outline-variant/30 mb-stack-lg flex flex-col md:flex-row justify-between items-baseline gap-stack-sm">
+<div>
+<nav aria-label="Breadcrumb" class="flex text-body-sm font-body-sm text-on-surface-variant mb-stack-xs">
+<ol class="inline-flex items-center space-x-1 md:space-x-2">
+<li class="inline-flex items-center">
+<a class="hover:text-secondary transition-colors" href="#">Home</a>
+</li>
+<li class="">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+<a class="hover:text-secondary transition-colors text-on-background" href="#">Shop</a>
+</div>
+</li>
+</ol>
+</nav>
+<h1 class="text-display font-display text-on-background">Shop All</h1>
+</div>
+<span class="text-body-sm font-body-sm text-on-surface-variant">9 products</span>
+</div>
+<div class="flex flex-col md:flex-row gap-gutter">
+<!-- Left Sidebar (Filters) -->
+<aside class="w-full md:w-[240px] flex-shrink-0 space-y-stack-lg">
+<div class="flex justify-between items-center">
+<h2 class="text-headline-md font-headline-md text-on-background">Filters</h2>
+<button class="text-body-sm font-body-sm text-secondary hover:underline">Clear all</button>
+</div>
+<!-- Category -->
+<div class="border-b border-outline-variant/30 pb-stack-md">
+<h3 class="font-label-caps text-label-caps text-on-background mb-stack-sm">Category</h3>
+<div class="space-y-2">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded border-outline-variant text-secondary focus:ring-secondary/20 form-checkbox h-4 w-4 bg-surface-container-lowest" type="checkbox">
+<span class="text-body-sm font-body-sm text-on-surface-variant group-hover:text-on-background transition-colors">T-Shirts</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded border-outline-variant text-secondary focus:ring-secondary/20 form-checkbox h-4 w-4 bg-surface-container-lowest" type="checkbox">
+<span class="text-body-sm font-body-sm text-on-surface-variant group-hover:text-on-background transition-colors">Hoodies</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded border-outline-variant text-secondary focus:ring-secondary/20 form-checkbox h-4 w-4 bg-surface-container-lowest" type="checkbox">
+<span class="text-body-sm font-body-sm text-on-surface-variant group-hover:text-on-background transition-colors">Desk</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded border-outline-variant text-secondary focus:ring-secondary/20 form-checkbox h-4 w-4 bg-surface-container-lowest" type="checkbox">
+<span class="text-body-sm font-body-sm text-on-surface-variant group-hover:text-on-background transition-colors">Bags</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded border-outline-variant text-secondary focus:ring-secondary/20 form-checkbox h-4 w-4 bg-surface-container-lowest" type="checkbox">
+<span class="text-body-sm font-body-sm text-on-surface-variant group-hover:text-on-background transition-colors">Drinkware</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded border-outline-variant text-secondary focus:ring-secondary/20 form-checkbox h-4 w-4 bg-surface-container-lowest" type="checkbox">
+<span class="text-body-sm font-body-sm text-on-surface-variant group-hover:text-on-background transition-colors">Stickers</span>
+</label>
+</div>
+</div>
+<!-- Size -->
+<div class="border-b border-outline-variant/30 pb-stack-md">
+<h3 class="font-label-caps text-label-caps text-on-background mb-stack-sm">Size</h3>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1 border border-outline-variant rounded hover:border-secondary hover:text-secondary transition-colors text-body-sm font-body-sm bg-surface-container-lowest text-on-surface-variant">S</button>
+<button class="px-3 py-1 border border-outline-variant rounded hover:border-secondary hover:text-secondary transition-colors text-body-sm font-body-sm bg-surface-container-lowest text-on-surface-variant">M</button>
+<button class="px-3 py-1 border border-secondary bg-secondary/10 rounded text-secondary transition-colors text-body-sm font-body-sm">L</button>
+<button class="px-3 py-1 border border-outline-variant rounded hover:border-secondary hover:text-secondary transition-colors text-body-sm font-body-sm bg-surface-container-lowest text-on-surface-variant">XL</button>
+<button class="px-3 py-1 border border-outline-variant rounded hover:border-secondary hover:text-secondary transition-colors text-body-sm font-body-sm bg-surface-container-lowest text-on-surface-variant">XXL</button>
+</div>
+</div>
+<!-- Price Range -->
+<div class="border-b border-outline-variant/30 pb-stack-md">
+<h3 class="font-label-caps text-label-caps text-on-background mb-stack-sm">Price</h3>
+<div class="px-1">
+<input class="w-full h-1 bg-surface-variant rounded-lg appearance-none cursor-pointer" max="3000" min="0" type="range" value="3000">
+</div>
+<div class="flex justify-between mt-2 text-price-sm font-price-sm text-on-surface-variant">
+<span class="">₹0</span>
+<span class="">₹3,000</span>
+</div>
+</div>
+<!-- Stock Toggle -->
+<div class="flex items-center justify-between pt-stack-xs">
+<span class="text-body-sm font-body-sm text-on-background">In stock only</span>
+<button aria-checked="false" class="w-10 h-6 bg-surface-variant rounded-full relative transition-colors focus:outline-none focus:ring-2 focus:ring-secondary/50" onclick="this.setAttribute('aria-checked', this.getAttribute('aria-checked') === 'true' ? 'false' : 'true'); this.classList.toggle('bg-secondary'); this.classList.toggle('bg-surface-variant'); this.firstElementChild.classList.toggle('translate-x-4');" role="switch">
+<span class="absolute left-1 top-1 bg-surface-container-lowest w-4 h-4 rounded-full transition-transform transform"></span>
+</button>
+</div>
+</aside>
+<!-- Product Grid Area -->
+<div class="flex-grow flex flex-col gap-stack-lg">
+<!-- Toolbar -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-stack-md">
+<div class="relative w-full sm:w-64 group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-secondary transition-colors">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded focus:border-secondary focus:ring-2 focus:ring-secondary/10 transition-all text-body-sm font-body-sm outline-none placeholder:text-on-surface-variant/50" placeholder="Search products..." type="text">
+</div>
+<div class="flex items-center gap-stack-sm w-full sm:w-auto">
+<div class="relative w-full sm:w-48">
+<select class="w-full pl-3 pr-8 py-2 bg-surface-container-lowest border border-outline-variant rounded focus:border-secondary focus:ring-2 focus:ring-secondary/10 transition-all text-body-sm font-body-sm appearance-none outline-none text-on-background cursor-pointer">
+<option>Newest</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+<option>Most Popular</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[20px]">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Active Filters (if any) -->
+<div class="flex gap-2 flex-wrap">
+<span class="inline-flex items-center gap-1 px-2 py-1 bg-surface-variant text-on-background text-label-caps font-label-caps rounded">
+                        Size: L
+                        <button class="hover:text-error transition-colors flex items-center justify-center"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+</div>
+<!-- Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Product 1 -->
+<article class="group product-card flex flex-col bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden relative cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
+<div class="aspect-square bg-surface-variant relative overflow-hidden flex items-center justify-center p-4">
+<div class="w-full h-full bg-contain bg-center bg-no-repeat product-img transition-transform duration-500 ease-out" data-alt="A clean, highly detailed top-down product shot of an oversized white t-shirt with a subtle 'Ship It' graphic, lying flat on a pristine light gray surface. Minimalist high-end developer merch aesthetic, soft studio lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDPKRqbf4nKvvZzdcNoLGTrjEx3o-RkP2k4H4GoyO19GpSvnaySUwA-EYNZ1VwZpR4MqSPwJsCXAovnW_eX6CbjR9kuWbbnlfNFSUpxElBCwK_Zkv4T1BwNCFuJQosKezOGkWNFDKKlYjw4JdZqPa-lrHh0xPISS9e-lhwzqT7_QXoBI_wYKM_-o5ydZU_pBFmVRbHb6Klb32OwpxuRaen9-wxOR5QT1c0PalQr7rjhIEZqVUpNgC6d')"></div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<span class="text-label-caps font-label-caps text-on-surface-variant mb-1 uppercase">T-Shirts</span>
+<h3 class="text-body-lg font-body-lg font-medium text-on-background mb-2">"Ship It" Oversized Tee</h3>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-price-lg font-price-lg text-on-background">₹899</span>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-on-tertiary-container" data-weight="fill">star</span>
+<span class="text-body-sm font-body-sm ml-1">4.8 (124)</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Product 2 -->
+<article class="group product-card flex flex-col bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden relative cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
+<div class="aspect-square bg-surface-variant relative overflow-hidden flex items-center justify-center p-4">
+<div class="w-full h-full bg-contain bg-center bg-no-repeat product-img transition-transform duration-500 ease-out" data-alt="A premium flat-lay shot of a black t-shirt featuring a subtle '404 Not Found' minimalist typographic design on the chest. The shirt rests on a crisp white backdrop with soft, diffused shadows, technical premium style." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCDVinEc6duU6roIIK8b-1iACzzCf-cRaddIyma_S24Ht38LCX0vhjga4CFDQyGP-FJx5kOct9UbVcEhNZbKT_HZytSeV0g63G1fYnwKfptyFbtbMO0s7XCQYhYPbzkbmTXf12ZTPjTkale2c7anjsiM2p7ipCQwyZQ4M8PwtzLU8IggCGIJ9ibkKnPWr9HlbNYqEwRdzfZnXRml9QHfL0MBgSIQUK9kjz-cvolK9Eprf8Mw8bgLNL1')"></div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<span class="text-label-caps font-label-caps text-on-surface-variant mb-1 uppercase">T-Shirts</span>
+<h3 class="text-body-lg font-body-lg font-medium text-on-background mb-2">"404 Not Found" Tee</h3>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-price-lg font-price-lg text-on-background">₹899</span>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-on-tertiary-container" data-weight="fill">star</span>
+<span class="text-body-sm font-body-sm ml-1">4.9 (89)</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Product 3 -->
+<article class="group product-card flex flex-col bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden relative cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
+<span class="absolute top-3 left-3 z-10 bg-error/10 text-error px-2 py-1 rounded text-label-caps font-label-caps uppercase tracking-wide">Low stock</span>
+<div class="aspect-square bg-surface-variant relative overflow-hidden flex items-center justify-center p-4">
+<div class="w-full h-full bg-contain bg-center bg-no-repeat product-img transition-transform duration-500 ease-out" data-alt="A high-quality product photo of a premium heavyweight gray hoodie neatly folded against a clean light background. Minimalist branding. Technical premium lighting, precise focus, clean engineering aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBL_IOpUVy4C6ejP8R1TgjVEMHbUsKsiz9me8UZzi-dYGJB6INQKQQjzT7W0zWMqgZZ6mhmL4jC1TW22AXnIYRQddQdOL78W8PD5LFQOWP6hW7_0wTf_z8LBOk3sc4jPu33vAbYzwk5PKAaWzjxVaZ2ogWOCU2_s6Jh6Hw9JEqE_Axha-Gio9IemusQg_TXkxcIlWm--BJ5UeVHXhSEm7QSeiHyqNvWmN_CUPM3zU6GCSHzxkaXgh9_')"></div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<span class="text-label-caps font-label-caps text-on-surface-variant mb-1 uppercase">Hoodies</span>
+<h3 class="text-body-lg font-body-lg font-medium text-on-background mb-2">DevLabs Signature Hoodie</h3>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-price-lg font-price-lg text-on-background">₹2,299</span>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-on-tertiary-container" data-weight="fill">star</span>
+<span class="text-body-sm font-body-sm ml-1">4.7 (56)</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Product 4 -->
+<article class="group product-card flex flex-col bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden relative cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
+<span class="absolute top-3 left-3 z-10 bg-secondary/10 text-secondary px-2 py-1 rounded text-label-caps font-label-caps uppercase tracking-wide">New Arrival</span>
+<div class="aspect-square bg-surface-variant relative overflow-hidden flex items-center justify-center p-4">
+<div class="w-full h-full bg-contain bg-center bg-no-repeat product-img transition-transform duration-500 ease-out" data-alt="A sleek black hoodie shot flat-lay on a very light gray surface. The fabric texture is rich and detailed. Modern minimalist developer merchandise vibe, professional studio lighting, stark contrast." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAm__VRUIC6lBExUYluBl4LYLysR9yXexiCGj4gnrGIoCScesE7cDGUB-nSvYsWwR67GV2rCcmXz-j6rVJnUSN9D5mOcX5T_0bNGfoJFboBdB6RcdKH17EgqxR1eZBB5hA_GlXoI380cpFqEjU1F0_71qVE7H-8IbRYKdyMDvOg4oZYNCk29vSL5wMiXZc17lTW2HL-HFt3-sg0KUvdHNjux6AopUUt5JOAy2ZU7c5yC7TSFM2IdqpI')"></div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<span class="text-label-caps font-label-caps text-on-surface-variant mb-1 uppercase">Hoodies</span>
+<h3 class="text-body-lg font-body-lg font-medium text-on-background mb-2">Terminal Black Hoodie</h3>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-price-lg font-price-lg text-on-background">₹2,499</span>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-outline" data-weight="fill">star_half</span>
+<span class="text-body-sm font-body-sm ml-1">New</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Product 5 -->
+<article class="group product-card flex flex-col bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden relative cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
+<div class="aspect-square bg-surface-variant relative overflow-hidden flex items-center justify-center p-4">
+<div class="w-full h-full bg-contain bg-center bg-no-repeat product-img transition-transform duration-500 ease-out" data-alt="A wide, extra-large black desk mousepad featuring subtle dark-mode syntax highlighting graphics, shown angled on a pristine white desk surface. Technical premium product photography, sharp edges, clean minimalist feel." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDN9Wq7jWVTQNIHL91Jm-MYjm7pxPMeoa7Ewsd9jPrnrv1LZwLyTZFbRGEq08v2li6AdQe0USIN7o-yV1aFXVZQCykvF1mv5nZoiSOInvJkaMggCyNw1_49vh8j7fbCpF7sqOh5jSinqFnzMcPKlMPNztl1EF5_h4AtaqsVMQO5IncUG7Wmekw3Ha1iMtoiBYXrOBHMhmtnvdWSqb9IgMDx0ZPhW-OnrgPud6C_qxjCMP_HvZlkkx1j')"></div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<span class="text-label-caps font-label-caps text-on-surface-variant mb-1 uppercase">Desk</span>
+<h3 class="text-body-lg font-body-lg font-medium text-on-background mb-2">XL Desk Mousepad (Dark Mode)</h3>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-price-lg font-price-lg text-on-background">₹699</span>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-on-tertiary-container" data-weight="fill">star</span>
+<span class="text-body-sm font-body-sm ml-1">4.9 (210)</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Product 6 (Sold Out) -->
+<article class="group product-card flex flex-col bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden relative shadow-[0_4px_12px_rgba(0,0,0,0.05)] opacity-60 grayscale cursor-not-allowed">
+<span class="absolute inset-0 bg-surface/20 z-20 pointer-events-none"></span>
+<div class="absolute inset-0 flex items-center justify-center z-30 pointer-events-none">
+<span class="bg-surface border border-outline-variant px-3 py-1 rounded text-label-caps font-label-caps uppercase tracking-wide text-on-surface font-bold shadow-sm">Sold Out</span>
+</div>
+<div class="aspect-square bg-surface-variant relative overflow-hidden flex items-center justify-center p-4">
+<div class="w-full h-full bg-contain bg-center bg-no-repeat product-img" data-alt="A minimalist, utilitarian tech backpack in dark gray, shot straight-on against a light background. Features matte hardware and clean lines. High-end functional developer gear, sterile studio lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDvWu8J-XzWQmhQTiqMV0GGM_v6ceyvgXpPKUVlWygI9nwbR0pSxF5PFTYAS11j4K5_5FW_PIUeqGUrU68t9B952wbICcL4OCOz-WG04Csrx8YItOu6i0IrMvVPTeoROckPv-pmVXKuk4alZW2gzASbhTovrnkgqqELz4y9sWI46m0qwPNdtAyQh48SxZ912Iak3MLtFL7wLxUTvPB3TdK_TmgcmnHwlDWHknyQWQl0TirteMUH1p1R')"></div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<span class="text-label-caps font-label-caps text-on-surface-variant mb-1 uppercase">Bags</span>
+<h3 class="text-body-lg font-body-lg font-medium text-on-background mb-2">DevLabs Laptop Backpack</h3>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-price-lg font-price-lg text-on-background">₹2,999</span>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-on-tertiary-container" data-weight="fill">star</span>
+<span class="text-body-sm font-body-sm ml-1">4.6 (42)</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Product 7 -->
+<article class="group product-card flex flex-col bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden relative cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
+<div class="aspect-square bg-surface-variant relative overflow-hidden flex items-center justify-center p-4">
+<div class="w-full h-full bg-contain bg-center bg-no-repeat product-img transition-transform duration-500 ease-out" data-alt="A sleek, matte black insulated steel water bottle standing upright against a clean white backdrop. Subtle laser-engraved tech logo. Sharp, professional product photography conveying a technical premium lifestyle." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAZ9TFQPQ3UvTVPbm41sCrx4yldYjveX_8FtIUZjBtzOPfqtUgUnIX2o-2lAlmOssp4kNfOyS2BYR2ngf_MWgx4mQkwGwm9C-dDf0tgyrmiwRIpOW_FhISL7YTry7tI61XbVeVZaWJk2GwtyOL_8phVAdrcYSB9MfuLogiWI9Jpy-uiYw5pZE1IjR23GywDZ_DsV6h37m2qt35sf1Tf6auK1aS2v073Uosllc691oy4Faebz-Opv541')"></div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<span class="text-label-caps font-label-caps text-on-surface-variant mb-1 uppercase">Drinkware</span>
+<h3 class="text-body-lg font-body-lg font-medium text-on-background mb-2">Insulated Steel Water Bottle</h3>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-price-lg font-price-lg text-on-background">₹1,199</span>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-on-tertiary-container" data-weight="fill">star</span>
+<span class="text-body-sm font-body-sm ml-1">4.8 (76)</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Product 8 -->
+<article class="group product-card flex flex-col bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden relative cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
+<div class="aspect-square bg-surface-variant relative overflow-hidden flex items-center justify-center p-4">
+<div class="w-full h-full bg-contain bg-center bg-no-repeat product-img transition-transform duration-500 ease-out" data-alt="A pristine white ceramic coffee mug with the text 'git commit' printed in crisp, monospaced black font. Shot slightly angled on a light surface. Clean, minimalist aesthetic suitable for a developer desk setup." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCBp4Ik1cB_xDIMFEme37qOSzeNjjjNhqyaH6x21Yp53dDE1XHiOJNV6qqfkgnHkTyfiggA-lnfEYuQzFP1Z0gkg46yx_s_wMVKsdOSXhIE_rL2RMwQnHsPY9focH0gdwi4uTv__RJFkdJHHyWgJd-5Xi9gtxAdVZd_z8-HQ6iLF2LP5crlWLqI4CE3Fo_M6Ekq3TwzYAcIGa0-KqyTSNBtaBJTdI4yTM1DlOgw7YUkhvaioYdC5VAR')"></div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<span class="text-label-caps font-label-caps text-on-surface-variant mb-1 uppercase">Drinkware</span>
+<h3 class="text-body-lg font-body-lg font-medium text-on-background mb-2">"git commit" Ceramic Mug</h3>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-price-lg font-price-lg text-on-background">₹499</span>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-on-tertiary-container" data-weight="fill">star</span>
+<span class="text-body-sm font-body-sm ml-1">4.5 (112)</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Product 9 -->
+<article class="group product-card flex flex-col bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden relative cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
+<div class="aspect-square bg-surface-variant relative overflow-hidden flex items-center justify-center p-4">
+<div class="w-full h-full bg-contain bg-center bg-no-repeat product-img transition-transform duration-500 ease-out" data-alt="A high-quality top-down photo of a pack of 12 die-cut laptop stickers featuring various tech-themed minimalist graphics (code syntax, logos), scattered artfully on a stark white background. Premium light mode vibe." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB60OjK1zBNf2Y8N3xm43dSKZOpEWoi0X1bcjsDNkvkkeLV9aowGTjy2SbBWG7hicUhuie21FZTZy5d3u7m_wgHBn1Z4dlDTeKtj552P49ob1lbPs9BJoY8S6aeGTRbubGG-CMsdbifrsYfLmUUmMklpPXxx-cS1tRjiXZYFuKEsgGF6Vpq4OgFhp991-C4k6pKynV5iTt2xoppkUXWmJ3B8PTcm89ccndw7TT2Um8BOX7Cp73Uee31')"></div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<span class="text-label-caps font-label-caps text-on-surface-variant mb-1 uppercase">Stickers</span>
+<h3 class="text-body-lg font-body-lg font-medium text-on-background mb-2">Laptop Sticker Pack (12)</h3>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-price-lg font-price-lg text-on-background">₹299</span>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-on-tertiary-container" data-weight="fill">star</span>
+<span class="text-body-sm font-body-sm ml-1">4.9 (340)</span>
+</div>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination -->
+<div class="mt-stack-xl flex justify-center items-center gap-stack-sm border-t border-outline-variant/30 pt-stack-lg">
+<button class="px-4 py-2 text-body-sm font-body-sm text-on-surface-variant hover:text-secondary transition-colors disabled:opacity-50" disabled="">Previous</button>
+<div class="flex gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded bg-secondary text-on-secondary font-body-sm font-medium">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-variant text-on-surface-variant font-body-sm transition-colors">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-variant text-on-surface-variant font-body-sm transition-colors">3</button>
+</div>
+<button class="px-4 py-2 text-body-sm font-body-sm text-secondary hover:underline transition-colors">Next</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-primary-container w-full border-t border-outline-variant dark:border-outline">
+<div class="max-w-container-max mx-auto px-margin-desktop py-stack-xl grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="flex flex-col gap-stack-sm">
+<span class="font-headline-md text-headline-md font-bold text-on-surface dark:text-surface">DevLabs</span>
+<p class="text-body-sm font-body-sm text-on-surface-variant dark:text-on-primary-container">© 2024 DevLabs Infrastructure. All rights reserved.</p>
+</div>
+<div class="flex flex-col gap-stack-sm">
+<a class="text-on-surface dark:text-surface font-semibold font-label-caps text-label-caps opacity-80 hover:opacity-100 transition-opacity" href="#">Shop</a>
+</div>
+<div class="flex flex-col gap-stack-sm">
+<a class="text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-colors font-label-caps text-label-caps opacity-80 hover:opacity-100" href="#">Company</a>
+<a class="text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-colors font-label-caps text-label-caps opacity-80 hover:opacity-100" href="#">Support</a>
+</div>
+<div class="flex flex-col gap-stack-sm">
+<a class="text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-colors font-label-caps text-label-caps opacity-80 hover:opacity-100" href="#">Newsletter</a>
+</div>
+</div>
+</footer>
+
+
+</body></html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>DevLabs Signature Hoodie - DevLabs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#2a313d",
+                        "on-primary-container": "#858388",
+                        "surface-container-high": "#e2e8f8",
+                        "inverse-on-surface": "#ebf1ff",
+                        "primary-container": "#1b1b1f",
+                        "on-surface-variant": "#47464b",
+                        "outline-variant": "#c8c5cb",
+                        "surface-tint": "#5f5e63",
+                        "surface": "#f9f9ff",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#dce2f3",
+                        "primary-fixed-dim": "#c8c5cb",
+                        "primary": "#000000",
+                        "on-secondary-fixed-variant": "#3323cc",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "background": "#f9f9ff",
+                        "on-primary-fixed-variant": "#47464b",
+                        "on-background": "#151c27",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#0f0069",
+                        "tertiary": "#000000",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-tertiary-fixed": "#002113",
+                        "inverse-primary": "#c8c5cb",
+                        "surface-container-highest": "#dce2f3",
+                        "secondary-container": "#645efb",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#002113",
+                        "surface-container-low": "#f0f3ff",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#1b1b1f",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-tertiary-container": "#009668",
+                        "on-surface": "#151c27",
+                        "surface-bright": "#f9f9ff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "secondary": "#4b41e1",
+                        "outline": "#78767b",
+                        "primary-fixed": "#e4e1e7",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#c3c0ff",
+                        "secondary-fixed": "#e2dfff",
+                        "on-secondary-container": "#fffbff",
+                        "surface-container": "#e7eefe",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#d3daea"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "24px",
+                        "stack-xl": "48px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "margin-mobile": "16px",
+                        "stack-xs": "4px",
+                        "margin-desktop": "32px",
+                        "container-max": "1280px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "price-sm": ["JetBrains Mono"],
+                        "display": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "price-lg": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "price-sm": ["14px", { "lineHeight": "1", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "price-lg": ["18px", { "lineHeight": "1", "letterSpacing": "-0.02em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: theme('colors.surface'); color: theme('colors.on-surface'); }
+        .material-symbols-outlined { font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; display: inline-block; line-height: 1; text-transform: none; letter-spacing: normal; word-wrap: normal; white-space: nowrap; direction: ltr; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; -moz-osx-font-smoothing: grayscale; font-feature-settings: 'liga'; }
+        /* Hide scrollbar for clean horizontal scrolls */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Interactive element transitions */
+        .btn-hover { transition: all 0.2s ease-in-out; }
+        .btn-hover:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-hover:active { transform: translateY(0); }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-surface-container-lowest text-primary dark:text-inverse-primary font-body-lg text-body-lg sticky top-0 w-full z-50 border-b border-outline-variant dark:border-outline flat no shadows cursor-pointer active:scale-95 transition-transform">
+<div class="flex justify-between items-center px-margin-desktop max-w-container-max mx-auto h-16">
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-on-surface tracking-tight hover:opacity-80 transition-opacity">
+                DevLabs
+            </div>
+<div class="hidden md:flex space-x-gutter">
+<a class="text-secondary dark:text-secondary-fixed-dim font-semibold border-b-2 border-secondary pb-1" href="#">Shop</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Courses</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">About</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Contact</a>
+</div>
+<div class="flex space-x-stack-md">
+<span class="material-symbols-outlined hover:opacity-80 transition-opacity" data-icon="search">search</span>
+<span class="material-symbols-outlined hover:opacity-80 transition-opacity" data-icon="shopping_cart">shopping_cart</span>
+<button class="flex items-center justify-center hover:opacity-80 transition-opacity" id="theme-toggle" aria-label="Toggle dark mode">
+  <span class="material-symbols-outlined dark:hidden" data-icon="dark_mode">dark_mode</span>
+  <span class="material-symbols-outlined hidden dark:block" data-icon="light_mode">light_mode</span>
+</button><span class="material-symbols-outlined hover:opacity-80 transition-opacity" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-lg">
+<!-- Breadcrumb -->
+<div class="flex items-center space-x-stack-sm font-body-sm text-body-sm text-on-surface-variant mb-stack-lg">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Shop</a>
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+<span class="text-primary font-medium">Hoodies</span>
+</div>
+<!-- Product Hero Section (Two Column) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-xl mb-stack-xl">
+<!-- Left: Imagery -->
+<div class="flex flex-col space-y-stack-md">
+<div class="aspect-square bg-surface-container-low rounded-lg border border-outline-variant overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A high-quality, professional product photograph of a premium, heavy-weight charcoal gray hoodie. The hoodie is neatly laid flat against a clean, light gray background, highlighting its minimalist design, technical relaxed fit, and small discreet 'DevLabs' logo embroidered on the left chest. Soft, even studio lighting emphasizes the fabric's texture and quality, fitting a modern, technical aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFxPeSGyC5wbSFgtxBQBWxUQKGDCiBN2Esr3mhrx2EZaLi0-1q9S2n9O9j9SCfvutwS5Kz0_tuH9fnqeou_rgJFI7uOtN1UFxopkRaAGqeH88O9xUW5TxSAXHs4_xLUfKoGFlceh6XKVjKlA7fu9ffUFCzzrlq8WAOVDarnI-aXicUxCWaqkau6F8WSqM5OfR4OSMBMn1NFsVLqKCz7JxZkT8hPnX6xEGx9iGCEuK2QOTbFOVj8hyk">
+<div class="absolute top-4 left-4 bg-secondary-container text-on-secondary-container font-label-caps text-label-caps px-2 py-1 rounded">BEST SELLER</div>
+</div>
+<div class="grid grid-cols-4 gap-stack-sm">
+<div class="aspect-square bg-surface-container-low rounded border-2 border-secondary overflow-hidden cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Close-up shot of the charcoal hoodie's chest area showing the small, precisely embroidered DevLabs logo in a slightly lighter gray thread. The fabric weave is clearly visible, showcasing the heavy-weight premium cotton material under crisp studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAe2CAEIicS1_05tkqzVczqcbsVydrL-47ZTzJ-FpnBQx6zfcT2s7wJSdJFyUoShMic-xbirkP0_TDkM-Ky3ueZSPg8v5KTaCdxYzEh64TUNHsKlXtC4AUwecWRWnjaARXtCMwUASvtl7DLdoUXsR6sqq-ykK2EyZIiAsgEYSvrPQgoO-Dbb8HNtUypS4WL3JqRVqRG9TMEkf464s02J0NEF3nQOv-bylR0zivRX3xpuc0HOaGcAOH">
+</div>
+<div class="aspect-square bg-surface-container-low rounded border border-outline-variant hover:border-secondary transition-colors overflow-hidden cursor-pointer opacity-70 hover:opacity-100">
+<img class="w-full h-full object-cover" data-alt="Detail shot of the hoodie's robust metal zipper, heavy-duty drawstrings with matte black metal aglets, and the reinforced stitching around the hood, demonstrating high manufacturing quality and technical precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLm6srAQ-yjWBatVgMD4A7M3HePKslGswpmMTl9LpvwfUXVK-rzFSSJXf0r6Ivh9gdAXqYJp7IOfM2LugwsyM5DrBc07Vps8BOSSYSeEOwm-5lseU9RZFhsPPuF8zW6EZaoD-UTZlDeidKC7vsSv6hWccvxuNm-m2-AdJ6QtuKT3xrpHhHpFgxjsiT0FStX2xUx5gDszDx8E4PMhFnkr4dsdTbKLDxXkkp2y40Kwa83WJLce_HqOr3">
+</div>
+<div class="aspect-square bg-surface-container-low rounded border border-outline-variant hover:border-secondary transition-colors overflow-hidden cursor-pointer opacity-70 hover:opacity-100">
+<img class="w-full h-full object-cover" data-alt="Lifestyle shot of a person wearing the charcoal DevLabs hoodie sitting at a clean, modern desk setup with a mechanical keyboard and dual monitors. The lighting is moody and focused, highlighting the relaxed yet structured fit suitable for long coding sessions." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3D2CHl9i4lVNXVC3ZJTT900NdGnbXN4AOjFDWl9QwqRinMtLmdQ2hZWXUHfeIkvwi_dkAdIxe0FwU3tM1JP8uDlzrk_kY52tw35XyZ2dyrHmdNNmsN2tOZlCK7chS72jnKTCHH4PGj6o252IWAFvMs9xsA9gXduXD635J7cuyEUtKSouE5QYq9k_-3iK-8X4ELzjc0aARBmWhZ4T3Rufc170LZYx078R_yO5XDaMxPtrrjOJp3cdm">
+</div>
+<div class="aspect-square bg-surface-container-low rounded border border-outline-variant hover:border-secondary transition-colors overflow-hidden cursor-pointer opacity-70 hover:opacity-100">
+<img class="w-full h-full object-cover" data-alt="Close-up of the hoodie's sleeve and ribbed cuff, showing the thick, high-quality elastic material and clean stitching against a minimalist light gray backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0BIJ__RiZdtyWwBVzyUt7BNoGJrYiCU3ov7tVPMm7bPRId0k9ivKnoCksy9WF_PY_k1sbbmPgGVNgHHm7mRe5zN42MQTMUe_baYlFr1dqlygU1z2OnXnc8fRWk0_UyqjDMRlKV2SUkEmCVv7s7I49doBpoSLTtdTiEIa-HQJot-4wZwhniQtYBGL7cG-wipsFLrXzmhmuq21ZUV5TvM7cSc1u_wQ9fX6kO_aciUOClRnzDivGkgEY">
+</div>
+</div>
+</div>
+<!-- Right: Product Details -->
+<div class="flex flex-col">
+<h1 class="font-headline-lg text-headline-lg md:text-[32px] text-primary mb-stack-xs">DevLabs Signature Hoodie</h1>
+<div class="flex items-center space-x-stack-sm mb-stack-md">
+<div class="flex text-[#F59E0B]">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star_half" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">4.8 (42 reviews)</span>
+</div>
+<div class="font-price-lg text-price-lg text-primary mb-stack-md">₹2,299</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-stack-lg border-b border-outline-variant pb-stack-md">
+                    A premium, heavy-weight hoodie designed for long coding sessions. Featuring a minimalist DevLabs chest embroidery and a relaxed technical fit.
+                </p>
+<!-- Color Selector -->
+<div class="mb-stack-md">
+<div class="flex justify-between items-center mb-stack-xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant">COLOR: <span class="text-primary ml-1">Charcoal</span></span>
+</div>
+<div class="flex space-x-stack-sm">
+<button class="w-8 h-8 rounded-full bg-[#111111] border border-outline-variant hover:ring-2 ring-secondary ring-offset-2 transition-all"></button>
+<button class="w-8 h-8 rounded-full bg-[#4A4A4A] border-2 border-secondary ring-2 ring-secondary ring-offset-2 transition-all"></button>
+<button class="w-8 h-8 rounded-full bg-[#F5F5F5] border border-outline-variant hover:ring-2 ring-secondary ring-offset-2 transition-all"></button>
+</div>
+</div>
+<!-- Size Selector -->
+<div class="mb-stack-lg">
+<div class="flex justify-between items-center mb-stack-xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant">SIZE</span>
+<a class="font-body-sm text-body-sm text-secondary hover:underline" href="#">Size Guide</a>
+</div>
+<div class="flex flex-wrap gap-stack-sm">
+<button class="px-4 py-2 border border-outline-variant rounded font-body-sm text-body-sm text-on-surface hover:border-secondary transition-colors">S</button>
+<button class="px-4 py-2 border border-outline-variant rounded font-body-sm text-body-sm text-on-surface hover:border-secondary transition-colors">M</button>
+<button class="px-4 py-2 border border-outline-variant rounded font-body-sm text-body-sm text-on-surface hover:border-secondary transition-colors">L</button>
+<button class="px-4 py-2 bg-secondary text-on-secondary rounded font-body-sm text-body-sm font-medium transition-colors shadow-[0_4px_12px_rgba(79,70,229,0.2)]">XL</button>
+<button class="px-4 py-2 border border-outline-variant rounded font-body-sm text-body-sm text-outline-variant opacity-50 cursor-not-allowed line-through">XXL</button>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col space-y-stack-sm mb-stack-lg">
+<div class="flex space-x-stack-sm h-12">
+<!-- Quantity -->
+<div class="flex items-center border border-outline-variant rounded w-32 bg-surface">
+<button class="px-3 text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined" data-icon="remove">remove</span></button>
+<span class="flex-grow text-center font-body-lg text-body-lg text-primary">1</span>
+<button class="px-3 text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined" data-icon="add">add</span></button>
+</div>
+<!-- Add to Cart -->
+<button class="flex-grow border border-outline-variant rounded font-body-lg text-body-lg font-medium text-primary hover:border-primary transition-colors flex items-center justify-center space-x-2 btn-hover">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="">Add to Cart</span>
+</button>
+</div>
+<!-- Buy Now -->
+<button class="w-full h-12 bg-secondary text-on-secondary rounded font-body-lg text-body-lg font-medium shadow-[0_4px_12px_rgba(79,70,229,0.2)] btn-hover">
+                        Buy Now
+                    </button>
+</div>
+<!-- Trust Indicators -->
+<div class="flex flex-col space-y-stack-xs font-body-sm text-body-sm text-on-surface-variant mb-stack-lg border-b border-outline-variant pb-stack-md">
+<div class="flex items-center space-x-2 text-[#059669]">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+<span class="">In stock and ready to ship</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm" data-icon="local_shipping">local_shipping</span>
+<span class="">Ships in 2-3 business days</span>
+</div>
+</div>
+<!-- Accordions -->
+<div class="border-t border-outline-variant border-x-0 border-b-0 divide-y divide-outline-variant">
+<details class="group py-4" open="">
+<summary class="flex justify-between items-center font-headline-md text-headline-md text-primary cursor-pointer list-none">
+                            Description
+                            <span class="material-symbols-outlined transition group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="pt-4 font-body-sm text-body-sm text-on-surface-variant">
+                            The DevLabs Signature Hoodie is built for those who demand both comfort and durability. Constructed from 450GSM French Terry cotton, it offers a structured yet relaxed fit. The minimal aesthetic ensures it looks just as good on a video call as it feels during an all-nighter.
+                        </div>
+</details>
+<details class="group py-4">
+<summary class="flex justify-between items-center font-headline-md text-headline-md text-primary cursor-pointer list-none">
+                            Size &amp; Fit
+                            <span class="material-symbols-outlined transition group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="pt-4 font-body-sm text-body-sm text-on-surface-variant">
+                            Relaxed, slightly boxy fit. Fits true to size. For a more oversized look, we recommend sizing up.
+                        </div>
+</details>
+<details class="group py-4">
+<summary class="flex justify-between items-center font-headline-md text-headline-md text-primary cursor-pointer list-none">
+                            Fabric &amp; Care
+                            <span class="material-symbols-outlined transition group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="pt-4 font-body-sm text-body-sm text-on-surface-variant">
+                            100% Premium Cotton (450GSM). Machine wash cold with like colors. Tumble dry low. Do not iron embroidery.
+                        </div>
+</details>
+<details class="group py-4">
+<summary class="flex justify-between items-center font-headline-md text-headline-md text-primary cursor-pointer list-none">
+                            Shipping &amp; Returns
+                            <span class="material-symbols-outlined transition group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="pt-4 font-body-sm text-body-sm text-on-surface-variant">
+                            Free shipping on orders over ₹3,000. 30-day return policy for unworn items with tags attached.
+                        </div>
+</details>
+</div>
+</div>
+</div>
+<!-- Recommendations Section -->
+<section class="mt-stack-xl pt-stack-xl border-t border-outline-variant">
+<div class="flex justify-between items-end mb-stack-lg">
+<h2 class="font-headline-lg text-headline-lg md:text-[32px] text-primary">You may also like</h2>
+<a class="font-body-sm text-body-sm text-secondary hover:underline flex items-center" href="#">View all <span class="material-symbols-outlined text-sm ml-1" data-icon="arrow_forward">arrow_forward</span></a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-stack-md md:gap-stack-lg">
+<!-- Rec 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-square bg-surface-container-low rounded-lg border border-outline-variant mb-stack-sm overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A sleek black 'Terminal Black Hoodie' displayed flat on a white background. It features a subtle, tonal 'root' embroidered text on the chest, signifying its developer-focused branding. The styling is highly minimalist and modern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsEE8xtmhi5oy9AT1Kg7DqqocWahRA435TikjHiB9r7fA0TBsS4FHvWPMyiH0rYFFG8G8WGpl3A_YaA43l75GjvvsjHrCAv3mcrqBPogaBswCY6_PDzqbKzlV5Noy2HpvjtkdLeL3921T284FpGQeQBKIxeocWpL-ekfgLEzNoT3HbThHrmj90YwphfCu1TDWfsiqgB-tQEt2CBxXcicDxUmLwMLSYNhHuHBuiB7zQPznIJ40H5R1Z">
+</div>
+<h3 class="font-body-lg text-body-lg text-primary truncate group-hover:text-secondary transition-colors">Terminal Black Hoodie</h3>
+<div class="font-price-sm text-price-sm text-on-surface-variant mt-1">₹2,499</div>
+</div>
+<!-- Rec 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-square bg-surface-container-low rounded-lg border border-outline-variant mb-stack-sm overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="An oversized white t-shirt laid flat against a light gray background, featuring a bold, clean typography graphic that says 'Ship It' in a monospace font across the back. The shirt looks high-quality and thick." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfzSiiPNdaVFFg2tuVAeNWECmNxQ36E0Z7vY-SykZKLvC2L80aDdCMfd5nY4sZ4P7dAvAszx4b28bza9DRolTcLtYcj9ypa01s9wFhb38sj7CWPMreTFHYEJUr7ddQ3JVfFPGJcSF6FBm_AljJgUSJjA9KlA_InUyePNQlUzzVLSD85h-CUG1xnR5ajFuq1bnL3QIGUl3OSrNZVXfkLC5UGEQ_r9w8nz_pL2Y-Vx20l_VTSE2QU1Eo">
+</div>
+<h3 class="font-body-lg text-body-lg text-primary truncate group-hover:text-secondary transition-colors">'Ship It' Oversized Tee</h3>
+<div class="font-price-sm text-price-sm text-on-surface-variant mt-1">₹899</div>
+</div>
+<!-- Rec 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-square bg-surface-container-low rounded-lg border border-outline-variant mb-stack-sm overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A technical, modern laptop backpack in matte black with subtle waterproof zippers and minimal branding. It sits upright on a white surface, looking durable, structured, and designed for tech professionals." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBix1f4DEqZz3sebK_cBJqtYUstDoQ_-nc3ae2Gn7x8VJdGqh-OcTgD1FnMkvo8KATNjlxTIr3SdCBcoKZNllyz9SjQE0s2KNS430ara6JZS1czG5__LneuFcEQw9YBF6ON9tQwzZyP2WPL4zwAeamJd8trqm37_6Oc1GLm6fyNR5olxJga--RUxRHLHOgEfejkq0m1VaQQOpB6RZTH4BMdKiWZkUvPvztcXJVFeog0arnr4o3bJ-Au">
+</div>
+<h3 class="font-body-lg text-body-lg text-primary truncate group-hover:text-secondary transition-colors">DevLabs Laptop Backpack</h3>
+<div class="font-price-sm text-price-sm text-on-surface-variant mt-1">₹2,999</div>
+</div>
+<!-- Rec 4 -->
+<div class="group cursor-pointer">
+<div class="aspect-square bg-surface-container-low rounded-lg border border-outline-variant mb-stack-sm overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A wide, extra-large desk mousepad laid flat. It features a dark, abstract topographical map design in subtle greys and blacks, providing a clean, aesthetic backdrop for a developer's workspace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfbTOuejkcudOiHAqs-fHmYwh0GHWvkfATb6us-tLe6Lrco-hVyHIZ47VJXOwhmQ-jqidqey5resc4ZySEsHlyh9ZJ3efEdgHAy2AD8FG-I2j5AcltjDyCq0lCNn9KIpie0yrvRTz2fRh-j2Uv_th3eicMZv0uhHL1S9HHVJkTrCwBlvqXkuGSk0lOTv-N_TPXUjOZnowTUy26JKAUme2bAbDsatKMPE3p9Ewa6LrLNaBGHPVvLnCz">
+</div>
+<h3 class="font-body-lg text-body-lg text-primary truncate group-hover:text-secondary transition-colors">XL Desk Mousepad</h3>
+<div class="font-price-sm text-price-sm text-on-surface-variant mt-1">₹699</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-primary-container text-on-surface dark:text-on-primary-fixed font-body-sm text-body-sm w-full py-stack-xl mt-stack-xl border-t border-outline-variant dark:border-outline flat no shadows transition-all duration-200">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-stack-lg px-margin-desktop max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed mb-stack-md">DevLabs</div>
+<div class="text-on-surface-variant">© 2024 DevLabs Infrastructure. Built for engineers.</div>
+</div>
+<div class="flex flex-col space-y-stack-sm">
+<a class="text-primary dark:text-primary-fixed font-medium hover:underline decoration-secondary underline-offset-4" href="#">Shop All</a>
+<a class="text-on-surface-variant dark:text-on-primary-container hover:text-secondary transition-colors hover:underline decoration-secondary underline-offset-4" href="#">New Arrivals</a>
+<a class="text-on-surface-variant dark:text-on-primary-container hover:text-secondary transition-colors hover:underline decoration-secondary underline-offset-4" href="#">Best Sellers</a>
+<a class="text-on-surface-variant dark:text-on-primary-container hover:text-secondary transition-colors hover:underline decoration-secondary underline-offset-4" href="#">Developer Tools</a>
+</div>
+<div class="flex flex-col space-y-stack-sm">
+<a class="text-on-surface-variant dark:text-on-primary-container hover:text-secondary transition-colors hover:underline decoration-secondary underline-offset-4" href="#">Our Story</a>
+<a class="text-on-surface-variant dark:text-on-primary-container hover:text-secondary transition-colors hover:underline decoration-secondary underline-offset-4" href="#">Careers</a>
+<a class="text-on-surface-variant dark:text-on-primary-container hover:text-secondary transition-colors hover:underline decoration-secondary underline-offset-4" href="#">Press</a>
+<a class="text-on-surface-variant dark:text-on-primary-container hover:text-secondary transition-colors hover:underline decoration-secondary underline-offset-4" href="#">Privacy Policy</a>
+</div>
+<div class="flex flex-col space-y-stack-sm">
+<a class="text-on-surface-variant dark:text-on-primary-container hover:text-secondary transition-colors hover:underline decoration-secondary underline-offset-4" href="#">Contact Support</a>
+<a class="text-on-surface-variant dark:text-on-primary-container hover:text-secondary transition-colors hover:underline decoration-secondary underline-offset-4" href="#">Shipping FAQ</a>
+<a class="text-on-surface-variant dark:text-on-primary-container hover:text-secondary transition-colors hover:underline decoration-secondary underline-offset-4" href="#">Returns</a>
+<a class="text-on-surface-variant dark:text-on-primary-container hover:text-secondary transition-colors hover:underline decoration-secondary underline-offset-4" href="#">Documentation</a>
+</div>
+</div>
+</footer>
+
+
+</body></html>

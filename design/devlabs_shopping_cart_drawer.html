@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DevLabs Signature Hoodie - DevLabs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-surface": "#2a313d",
+                      "on-primary-container": "#858388",
+                      "surface-container-high": "#e2e8f8",
+                      "inverse-on-surface": "#ebf1ff",
+                      "primary-container": "#1b1b1f",
+                      "on-surface-variant": "#47464b",
+                      "outline-variant": "#c8c5cb",
+                      "surface-tint": "#5f5e63",
+                      "surface": "#f9f9ff",
+                      "on-secondary": "#ffffff",
+                      "surface-variant": "#dce2f3",
+                      "primary-fixed-dim": "#c8c5cb",
+                      "primary": "#000000",
+                      "on-secondary-fixed-variant": "#3323cc",
+                      "on-error-container": "#93000a",
+                      "error-container": "#ffdad6",
+                      "background": "#f9f9ff",
+                      "on-primary-fixed-variant": "#47464b",
+                      "on-background": "#151c27",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed": "#0f0069",
+                      "tertiary": "#000000",
+                      "tertiary-fixed": "#6ffbbe",
+                      "on-tertiary-fixed": "#002113",
+                      "inverse-primary": "#c8c5cb",
+                      "surface-container-highest": "#dce2f3",
+                      "secondary-container": "#645efb",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-container": "#002113",
+                      "surface-container-low": "#f0f3ff",
+                      "error": "#ba1a1a",
+                      "on-primary-fixed": "#1b1b1f",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "on-tertiary-container": "#009668",
+                      "on-surface": "#151c27",
+                      "surface-bright": "#f9f9ff",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "secondary": "#4b41e1",
+                      "outline": "#78767b",
+                      "primary-fixed": "#e4e1e7",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed-dim": "#c3c0ff",
+                      "secondary-fixed": "#e2dfff",
+                      "on-secondary-container": "#fffbff",
+                      "surface-container": "#e7eefe",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-dim": "#d3daea"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-lg": "24px",
+                      "stack-xl": "48px",
+                      "gutter": "24px",
+                      "stack-md": "16px",
+                      "margin-mobile": "16px",
+                      "stack-xs": "4px",
+                      "margin-desktop": "32px",
+                      "container-max": "1280px",
+                      "stack-sm": "8px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "price-sm": ["JetBrains Mono"],
+                      "display": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "label-caps": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "price-lg": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                      "price-sm": ["14px", {"lineHeight": "1", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+                      "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                      "headline-md": ["20px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "price-lg": ["18px", {"lineHeight": "1", "letterSpacing": "-0.02em", "fontWeight": "500"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-lg overflow-hidden">
+<!-- TopNavBar -->
+<nav class="bg-surface sticky top-0 w-full z-40 border-b border-outline-variant">
+<div class="flex justify-between items-center px-margin-desktop max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-stack-lg">
+<a class="text-headline-md font-headline-md font-bold text-primary tracking-tight" href="#">DevLabs</a>
+<div class="hidden md:flex gap-stack-lg items-center">
+<a class="text-secondary font-semibold border-b-2 border-secondary pb-1" href="#">Shop</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer hover:opacity-80 active:scale-95 transition-transform" href="#">Courses</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer hover:opacity-80 active:scale-95 transition-transform" href="#">About</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer hover:opacity-80 active:scale-95 transition-transform" href="#">Contact</a>
+</div>
+</div>
+<div class="flex items-center gap-stack-md text-primary">
+<span class="material-symbols-outlined cursor-pointer hover:opacity-80 transition-opacity active:scale-95 transition-transform" data-icon="search">search</span>
+<span class="material-symbols-outlined cursor-pointer hover:opacity-80 transition-opacity active:scale-95 transition-transform relative" data-icon="shopping_cart">explore_off</span>
+<span class="material-symbols-outlined cursor-pointer hover:opacity-80 transition-opacity active:scale-95 transition-transform hidden md:block" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+</nav>
+<!-- Main Content (Dimmed Backdrop) -->
+<main aria-hidden="true" class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-xl relative z-0">
+<!-- Overlay -->
+<div aria-hidden="true" class="fixed inset-0 bg-primary/50 z-50 backdrop-blur-sm transition-opacity duration-300"></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-xl lg:gap-stack-xl">
+<!-- Product Images -->
+<div class="space-y-stack-md relative h-[600px]">
+<img class="w-full h-full object-cover rounded-lg border border-outline-variant" data-alt="A clean, minimalist product shot of a premium black oversized hoodie with subtle white 'DevLabs' embroidery on the chest, laid flat against a pristine white background. High-key studio lighting emphasizes the heavy, high-quality fabric texture. Technical premium style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBC2Q4gbOmJPVH-Bj1OmosMhxGyZ_OwxBqR05QvSrkvKIfW3r3SE-zskuB7BnImQzJ-ovl6q9fpDkz7y4iLJuMO9auNCycIi11jvrQeyGoWovxku6Rf5E-uhP2JYDvTZtlD0HXSV9hUrQwwCrCUFf27zRoY6ydjhRyhWJKj5mh0OawM0p-P6_rMus-Y-0lQ3eYroWiQiWVoNbLDyEzC4aFCsY0AxlA6lZkLBNIIOg_ye8604XXDN-zj"/>
+</div>
+<!-- Product Info -->
+<div class="flex flex-col">
+<div class="flex justify-between items-start mb-stack-xs">
+<span class="font-label-caps text-label-caps text-secondary-container bg-surface-container-high px-2 py-1 rounded">NEW ARRIVAL</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-stack-sm">DevLabs Signature Hoodie</h1>
+<p class="font-price-lg text-price-lg text-on-surface-variant mb-stack-lg">₹2,299</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-stack-xl">
+                    Engineered for deep work. The Signature Hoodie features a 400gsm heavyweight cotton blend, oversized drop-shoulder fit, and an anti-pilling finish. Designed to be your daily driver for long coding sessions.
+                </p>
+<div class="mb-stack-lg">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-stack-sm">SIZE</h3>
+<div class="flex gap-stack-sm">
+<button class="w-12 h-12 rounded border border-outline-variant flex items-center justify-center font-body-sm text-body-sm hover:border-primary transition-colors bg-surface text-on-surface cursor-pointer">S</button>
+<button class="w-12 h-12 rounded border border-outline-variant flex items-center justify-center font-body-sm text-body-sm hover:border-primary transition-colors bg-surface text-on-surface cursor-pointer">M</button>
+<button class="w-12 h-12 rounded border border-outline-variant flex items-center justify-center font-body-sm text-body-sm hover:border-primary transition-colors bg-surface text-on-surface cursor-pointer">L</button>
+<button class="w-12 h-12 rounded border-2 border-primary flex items-center justify-center font-body-sm text-body-sm bg-surface text-primary font-medium cursor-pointer">XL</button>
+</div>
+</div>
+<button class="w-full bg-[#4F46E5] text-on-secondary h-14 rounded-lg font-headline-md text-headline-md md:text-[16px] flex items-center justify-center gap-2 hover:opacity-90 transition-opacity active:scale-[0.98] mb-stack-xl">
+                    Add to Cart
+                    <span class="material-symbols-outlined text-[20px]" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Cart Drawer (Active) -->
+<div aria-modal="true" class="fixed inset-y-0 right-0 w-full md:w-[480px] bg-surface shadow-2xl z-50 flex flex-col transform translate-x-0 transition-transform duration-300 border-l border-outline-variant" role="dialog">
+<!-- Drawer Header -->
+<div class="h-16 border-b border-outline-variant flex items-center justify-between px-stack-lg shrink-0">
+<h2 class="font-headline-md text-headline-md text-primary">Your Cart (2)</h2>
+<button class="p-2 -mr-2 text-on-surface-variant hover:text-primary transition-colors cursor-pointer rounded hover:bg-surface-container">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Drawer Body (Line Items) -->
+<div class="flex-1 overflow-y-auto p-stack-lg flex flex-col gap-stack-lg no-scrollbar">
+<!-- Line Item 1 -->
+<div class="flex gap-stack-md">
+<div class="w-24 h-24 shrink-0 rounded border border-outline-variant bg-surface-container-low overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A small thumbnail image of a premium black oversized hoodie laid flat against a white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdvUVeGtSuwSs_QwiC2ePxVJy2LisQVNiWtqIOj00MkIoI7nLlo7T4d7GiqCDKzfe1DrjTS2pwwEjCeI374_hfNrVtYLT7xDslyIIgjrHh9D6ayM7HyQreVPR-u8-Mc-ryzpXoRPo0QVK8kOX-KSdYtcpJ8xvWYXsuUVmYwL0r7jtBnpDgV_YZoe9wMIZa_-5ght6vgiq-HdYuAeE1Dv-T0ybT1ZM8pWbrJXWqaNz2RyEzzxclDxSV"/>
+</div>
+<div class="flex flex-col flex-1 py-1">
+<div class="flex justify-between items-start">
+<h3 class="font-body-lg text-body-lg text-primary font-medium line-clamp-2 pr-4">DevLabs Signature Hoodie</h3>
+<button class="text-on-surface-variant hover:text-error transition-colors p-1 -mr-1 -mt-1 cursor-pointer">
+<span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Size XL</p>
+<div class="flex justify-between items-end mt-auto">
+<div class="flex items-center border border-outline-variant rounded h-8">
+<button class="w-8 h-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[16px]" data-icon="remove">remove</span></button>
+<span class="font-body-sm text-body-sm w-8 text-center">1</span>
+<button class="w-8 h-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[16px]" data-icon="add">add</span></button>
+</div>
+<span class="font-price-sm text-price-sm text-primary">₹2,299</span>
+</div>
+</div>
+</div>
+<hr class="border-t border-outline-variant"/>
+<!-- Line Item 2 -->
+<div class="flex gap-stack-md">
+<div class="w-24 h-24 shrink-0 rounded border border-outline-variant bg-surface-container-low overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A small thumbnail image of a loose-fitting, minimalist white t-shirt with a small black logo on the chest, against a clean white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-i6IESCmvi5Zvc4hyeY1wUklnQMXZSHN0c0wo2RunwROPqQX3IOt38jOthPydL0n5v6IbkxnTQh60on8BHfq3e6Q6cYC5U1k0BDDreKhH3H8r4xBkxfSy55jBLrkF6066T70J085F5QmogxvXIhDnMa7ikg29EVcXN2vVdY5yfOvjv-GomeLYq8TsMOtSMpMOLxyoRAA-FPoKl_gJKpUn-d8NNRkYx3IILfmRKG3WstDbH4P4f6Ub"/>
+</div>
+<div class="flex flex-col flex-1 py-1">
+<div class="flex justify-between items-start">
+<h3 class="font-body-lg text-body-lg text-primary font-medium line-clamp-2 pr-4">Ship It Oversized Tee</h3>
+<button class="text-on-surface-variant hover:text-error transition-colors p-1 -mr-1 -mt-1 cursor-pointer">
+<span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Size L</p>
+<div class="flex justify-between items-end mt-auto">
+<div class="flex items-center border border-outline-variant rounded h-8">
+<button class="w-8 h-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[16px]" data-icon="remove">remove</span></button>
+<span class="font-body-sm text-body-sm w-8 text-center">1</span>
+<button class="w-8 h-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[16px]" data-icon="add">add</span></button>
+</div>
+<span class="font-price-sm text-price-sm text-primary">₹899</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Drawer Footer -->
+<div class="border-t border-outline-variant p-stack-lg bg-surface-container-lowest shrink-0">
+<div class="flex justify-between items-center mb-stack-sm">
+<span class="font-body-lg text-body-lg text-on-surface-variant">Subtotal</span>
+<span class="font-price-lg text-price-lg text-primary font-bold">₹3,198</span>
+</div>
+<div class="flex items-center gap-2 text-on-tertiary-container bg-tertiary-fixed-dim/20 px-3 py-2 rounded mb-stack-md">
+<span class="material-symbols-outlined text-[18px]" data-icon="check_circle">check_circle</span>
+<span class="font-body-sm text-body-sm font-medium">Free shipping over ₹1,499 applied</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-stack-lg">Taxes and shipping calculated at checkout.</p>
+<button class="w-full bg-[#4F46E5] text-on-secondary h-12 rounded-lg font-headline-md text-headline-md md:text-[16px] flex items-center justify-center hover:opacity-90 transition-opacity active:scale-[0.98]">
+                Proceed to Checkout
+            </button>
+</div>
+</div>
+</body></html>
