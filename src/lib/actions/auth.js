@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 
 const credentialsSchema = z.object({
@@ -42,7 +43,7 @@ export async function signUp(formData) {
   }
 
   const supabase = await createClient();
-  const { error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email: parsed.data.email,
     password: parsed.data.password,
     options: { data: { full_name: parsed.data.fullName } },
@@ -51,7 +52,23 @@ export async function signUp(formData) {
     return { error: error.message };
   }
 
+  if (data.user) {
+    await linkGuestOrders(data.user.id, parsed.data.email);
+  }
+
   redirect("/account");
+}
+
+// Claims any past guest orders placed under this email so a new account
+// immediately sees its order history — writes go through the admin client
+// since orders have no client-side update policy (service-role only).
+async function linkGuestOrders(userId, email) {
+  const supabase = createAdminClient();
+  await supabase
+    .from("orders")
+    .update({ user_id: userId })
+    .is("user_id", null)
+    .ilike("guest_email", email);
 }
 
 export async function signOut() {

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { AdminTopbar } from "@/components/admin/AdminTopbar";
-import { OrderStatusBadge } from "@/components/admin/OrderStatusBadge";
 import { OrderStatusForm } from "@/components/admin/OrderStatusForm";
+import { OrderStatusBadge } from "@/components/ui/OrderStatusBadge";
 import { getAdminOrderById } from "@/lib/data/admin";
 import { formatPrice } from "@/lib/utils/format";
 

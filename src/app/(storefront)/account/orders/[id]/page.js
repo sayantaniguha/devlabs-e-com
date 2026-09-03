@@ -1,43 +1,56 @@
 import Link from "next/link";
-import { getOrderForConfirmation } from "@/lib/data/orders";
+import { notFound } from "next/navigation";
+import { OrderStatusBadge } from "@/components/ui/OrderStatusBadge";
+import { getCurrentProfile } from "@/lib/auth";
+import { getMyOrderById } from "@/lib/data/orders";
 import { formatPrice } from "@/lib/utils/format";
 
-export default async function CheckoutSuccessPage({ searchParams }) {
-  const sp = await searchParams;
-  const order = await getOrderForConfirmation(sp.order, sp.token);
+export default async function OrderDetailPage({ params }) {
+  const { id } = await params;
+  const profile = await getCurrentProfile();
 
-  if (!order) {
+  if (!profile) {
     return (
       <section className="max-w-md mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl text-center">
         <h1 className="font-headline-lg text-headline-lg text-on-background dark:text-inverse-on-surface mb-stack-md">
-          Order not found
+          You're not logged in
         </h1>
         <Link
-          href="/shop"
+          href="/login"
           className="inline-block bg-secondary text-on-primary px-8 py-3 rounded font-semibold hover:bg-secondary-container transition-colors"
         >
-          Continue shopping
+          Log in
         </Link>
       </section>
     );
   }
 
-  const isPaid = order.status !== "pending";
+  const order = await getMyOrderById(id);
+  if (!order) notFound();
 
   return (
     <section className="max-w-2xl mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl">
-      <div className="text-center mb-stack-xl">
-        <span className="material-symbols-outlined text-[48px] text-on-tertiary-container mb-stack-sm">
-          {isPaid ? "check_circle" : "hourglass_top"}
-        </span>
-        <h1 className="font-headline-lg text-headline-lg text-on-background dark:text-inverse-on-surface">
-          {isPaid ? "Order confirmed" : "Confirming your payment…"}
-        </h1>
-        <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container mt-stack-xs">
-          Order {order.order_number}
-          {!isPaid &&
-            " — this can take a few seconds to finalize. Refresh if it doesn't update."}
-        </p>
+      <Link
+        href="/account/orders"
+        className="font-body-sm text-body-sm text-secondary hover:underline mb-stack-md inline-block"
+      >
+        ← Back to orders
+      </Link>
+
+      <div className="flex items-center justify-between mb-stack-lg">
+        <div>
+          <h1 className="font-headline-lg text-headline-lg text-on-background dark:text-inverse-on-surface">
+            {order.order_number}
+          </h1>
+          <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container">
+            {new Date(order.created_at).toLocaleDateString("en-IN", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            })}
+          </p>
+        </div>
+        <OrderStatusBadge status={order.status} />
       </div>
 
       <div className="bg-surface-container-lowest border border-outline-variant dark:border-outline rounded-lg p-stack-lg mb-stack-lg">
@@ -83,9 +96,9 @@ export default async function CheckoutSuccessPage({ searchParams }) {
         </div>
       </div>
 
-      <div className="bg-surface-container-lowest border border-outline-variant dark:border-outline rounded-lg p-stack-lg mb-stack-lg">
+      <div className="bg-surface-container-lowest border border-outline-variant dark:border-outline rounded-lg p-stack-lg">
         <h2 className="font-headline-md text-headline-md text-on-background dark:text-inverse-on-surface mb-stack-sm">
-          Shipping to
+          Shipped to
         </h2>
         <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container">
           {order.shipping_name}
@@ -96,30 +109,6 @@ export default async function CheckoutSuccessPage({ searchParams }) {
           {order.shipping_city}, {order.shipping_state}{" "}
           {order.shipping_postal_code}
         </p>
-      </div>
-
-      {!order.user_id && order.guest_email && (
-        <div className="bg-surface-container-low dark:bg-primary-container border border-outline-variant dark:border-outline rounded-lg p-stack-lg mb-stack-lg text-center">
-          <p className="font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface mb-stack-sm">
-            Create an account to track this order and check out faster next
-            time.
-          </p>
-          <Link
-            href={`/signup?email=${encodeURIComponent(order.guest_email)}`}
-            className="inline-block bg-secondary text-on-primary px-6 py-2 rounded font-semibold hover:bg-secondary-container transition-colors"
-          >
-            Create an account
-          </Link>
-        </div>
-      )}
-
-      <div className="text-center">
-        <Link
-          href="/shop"
-          className="inline-block bg-secondary text-on-primary px-8 py-3 rounded font-semibold hover:bg-secondary-container transition-colors"
-        >
-          Continue shopping
-        </Link>
       </div>
     </section>
   );

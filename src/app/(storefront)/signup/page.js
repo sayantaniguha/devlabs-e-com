@@ -1,12 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useActionState } from "react";
 import { signUp } from "@/lib/actions/auth";
 
 const initialState = { error: null };
 
 export default function SignupPage() {
+  const searchParams = useSearchParams();
+  const emailParam = searchParams.get("email") ?? "";
   const [state, formAction, pending] = useActionState(
     async (_prevState, formData) => (await signUp(formData)) ?? initialState,
     initialState,
@@ -37,6 +40,7 @@ export default function SignupPage() {
             type="email"
             name="email"
             required
+            defaultValue={emailParam}
             className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-surface-container-low text-on-surface dark:text-inverse-on-surface focus:outline-none focus:border-secondary"
           />
         </label>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { AdminTopbar } from "@/components/admin/AdminTopbar";
-import { OrderStatusBadge } from "@/components/admin/OrderStatusBadge";
+import { OrderStatusBadge } from "@/components/ui/OrderStatusBadge";
 import { getAdminOrders } from "@/lib/data/admin";
 import { formatPrice } from "@/lib/utils/format";
 
