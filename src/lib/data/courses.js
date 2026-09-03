@@ -2,15 +2,74 @@ import "server-only";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 
-export async function getCourses() {
+function ratingSummary(reviews) {
+  const list = reviews ?? [];
+  const count = list.length;
+  const average = count
+    ? list.reduce((sum, r) => sum + r.rating, 0) / count
+    : 0;
+  const breakdown = [5, 4, 3, 2, 1].map((star) => ({
+    star,
+    count: list.filter((r) => r.rating === star).length,
+  }));
+  return { average, count, breakdown };
+}
+
+export async function getCourseCategories() {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("courses")
-    .select("id, title, slug, price, compare_at_price, thumbnail_url")
+    .select("category")
     .eq("status", "active")
-    .order("created_at", { ascending: false });
+    .not("category", "is", null);
   if (error) throw error;
-  return data;
+  return [...new Set(data.map((c) => c.category))].sort();
+}
+
+export async function getCourses({
+  category,
+  search,
+  maxPrice,
+  minRating,
+  sort = "newest",
+} = {}) {
+  const supabase = await createClient();
+  let query = supabase
+    .from("courses")
+    .select(
+      "id, title, slug, price, compare_at_price, thumbnail_url, category, level, duration_hours, created_at, reviews:course_reviews(rating)",
+    )
+    .eq("status", "active");
+
+  if (search) query = query.ilike("title", `%${search}%`);
+  if (maxPrice != null) query = query.lte("price", maxPrice);
+
+  if (sort === "price-asc") {
+    query = query.order("price", { ascending: true });
+  } else if (sort === "price-desc") {
+    query = query.order("price", { ascending: false });
+  } else {
+    query = query.order("created_at", { ascending: false });
+  }
+  query = query.order("id", { ascending: true });
+
+  const { data, error } = await query;
+  if (error) throw error;
+
+  let courses = data.map((c) => ({ ...c, rating: ratingSummary(c.reviews) }));
+
+  if (category?.length) {
+    const categories = Array.isArray(category) ? category : [category];
+    courses = courses.filter((c) => categories.includes(c.category));
+  }
+  if (minRating) {
+    courses = courses.filter((c) => c.rating.average >= minRating);
+  }
+  if (sort === "rating-desc") {
+    courses = [...courses].sort((a, b) => b.rating.average - a.rating.average);
+  }
+
+  return courses;
 }
 
 // Trusted server-side read: fetches every lesson (including video_url) via
@@ -24,7 +83,7 @@ export async function getCourseBySlug(slug) {
   const { data: course, error } = await supabase
     .from("courses")
     .select(
-      "id, title, slug, description, price, compare_at_price, thumbnail_url, lessons:course_lessons(id, title, position, is_preview, video_url)",
+      "id, title, slug, description, price, compare_at_price, thumbnail_url, category, level, duration_hours, lessons:course_lessons(id, title, position, is_preview, video_url), reviews:course_reviews(id, reviewer_name, rating, comment, created_at)",
     )
     .eq("slug", slug)
     .eq("status", "active")
@@ -42,7 +101,16 @@ export async function getCourseBySlug(slug) {
       video_url: l.is_preview ? l.video_url : null,
     }));
 
-  return { ...course, lessons };
+  const reviews = [...(course.reviews ?? [])].sort(
+    (a, b) => new Date(b.created_at) - new Date(a.created_at),
+  );
+
+  return {
+    ...course,
+    lessons,
+    reviews,
+    rating: ratingSummary(course.reviews),
+  };
 }
 
 export async function getMyEnrollment(courseId) {
@@ -54,6 +122,22 @@ export async function getMyEnrollment(courseId) {
     .maybeSingle();
   if (error) throw error;
   return Boolean(data);
+}
+
+export async function getMyReview(courseId) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return null;
+  const { data, error } = await supabase
+    .from("course_reviews")
+    .select("id, rating, comment")
+    .eq("course_id", courseId)
+    .eq("user_id", user.id)
+    .maybeSingle();
+  if (error) throw error;
+  return data;
 }
 
 export async function getMyEnrolledCourses() {

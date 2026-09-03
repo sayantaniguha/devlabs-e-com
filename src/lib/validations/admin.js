@@ -29,6 +29,12 @@ export const courseSchema = z.object({
   id: z.string().uuid().optional(),
   title: z.string().trim().min(1, "Course title is required"),
   description: z.string().trim().optional().nullable(),
+  category: z.string().trim().optional().nullable(),
+  level: z
+    .enum(["Beginner", "Intermediate", "Advanced", "Beginner–Advanced"])
+    .optional()
+    .nullable(),
+  duration_hours: z.coerce.number().positive().optional().nullable(),
   price: z.coerce.number().positive("Price must be greater than 0"),
   compare_at_price: z.coerce.number().positive().optional().nullable(),
   thumbnail_url: z.string().trim().url().optional().nullable(),

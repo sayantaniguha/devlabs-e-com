@@ -23,6 +23,9 @@ function courseFields(data) {
   return {
     title: data.title,
     description: data.description || null,
+    category: data.category || null,
+    level: data.level || null,
+    duration_hours: data.duration_hours || null,
     price: data.price,
     compare_at_price: data.compare_at_price || null,
     thumbnail_url: data.thumbnail_url || null,

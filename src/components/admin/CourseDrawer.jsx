@@ -36,6 +36,11 @@ export function CourseDrawer({ course }) {
 
   const [title, setTitle] = useState(course?.title ?? "");
   const [description, setDescription] = useState(course?.description ?? "");
+  const [category, setCategory] = useState(course?.category ?? "");
+  const [level, setLevel] = useState(course?.level ?? "");
+  const [durationHours, setDurationHours] = useState(
+    course?.duration_hours ?? "",
+  );
   const [price, setPrice] = useState(course?.price ?? "");
   const [compareAtPrice, setCompareAtPrice] = useState(
     course?.compare_at_price ?? "",
@@ -97,6 +102,9 @@ export function CourseDrawer({ course }) {
       id: course?.id,
       title,
       description,
+      category: category || null,
+      level: level || null,
+      duration_hours: durationHours || null,
       price,
       compare_at_price: compareAtPrice || null,
       thumbnail_url: thumbnailUrl || null,
@@ -182,6 +190,52 @@ export function CourseDrawer({ course }) {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Describe the course..."
+                    className="w-full rounded-md border border-outline-variant dark:border-outline bg-surface dark:bg-primary-container text-on-surface dark:text-inverse-on-surface focus:ring-2 focus:ring-secondary focus:border-transparent py-2 px-3 text-body-sm"
+                  />
+                </label>
+                <div className="grid grid-cols-2 gap-4">
+                  <label className="block">
+                    <span className="block text-body-sm font-semibold text-on-surface dark:text-inverse-on-surface mb-1">
+                      Category
+                    </span>
+                    <input
+                      type="text"
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                      placeholder="e.g. Web Development"
+                      className="w-full rounded-md border border-outline-variant dark:border-outline bg-surface dark:bg-primary-container text-on-surface dark:text-inverse-on-surface focus:ring-2 focus:ring-secondary focus:border-transparent py-2 px-3 text-body-sm"
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="block text-body-sm font-semibold text-on-surface dark:text-inverse-on-surface mb-1">
+                      Level
+                    </span>
+                    <select
+                      value={level}
+                      onChange={(e) => setLevel(e.target.value)}
+                      className="w-full rounded-md border border-outline-variant dark:border-outline bg-surface dark:bg-primary-container text-on-surface dark:text-inverse-on-surface focus:ring-2 focus:ring-secondary focus:border-transparent py-2 px-3 text-body-sm"
+                    >
+                      <option value="">—</option>
+                      <option value="Beginner">Beginner</option>
+                      <option value="Intermediate">Intermediate</option>
+                      <option value="Advanced">Advanced</option>
+                      <option value="Beginner–Advanced">
+                        Beginner–Advanced
+                      </option>
+                    </select>
+                  </label>
+                </div>
+                <label className="block">
+                  <span className="block text-body-sm font-semibold text-on-surface dark:text-inverse-on-surface mb-1">
+                    Duration (hours)
+                  </span>
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.5"
+                    value={durationHours}
+                    onChange={(e) => setDurationHours(e.target.value)}
+                    placeholder="e.g. 22"
                     className="w-full rounded-md border border-outline-variant dark:border-outline bg-surface dark:bg-primary-container text-on-surface dark:text-inverse-on-surface focus:ring-2 focus:ring-secondary focus:border-transparent py-2 px-3 text-body-sm"
                   />
                 </label>

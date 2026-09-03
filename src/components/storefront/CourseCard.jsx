@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { StarRating } from "@/components/storefront/StarRating";
 import { formatPrice } from "@/lib/utils/format";
 
 export function CourseCard({ course, priority = false }) {
@@ -21,16 +22,41 @@ export function CourseCard({ course, priority = false }) {
         )}
       </div>
       <div className="p-stack-md flex flex-col gap-1">
+        {course.category && (
+          <span className="font-label-caps text-label-caps text-secondary dark:text-secondary-fixed-dim uppercase">
+            {course.category}
+          </span>
+        )}
         <h3 className="font-body-lg text-body-lg font-semibold text-on-surface dark:text-inverse-on-surface line-clamp-2">
           {course.title}
         </h3>
-        <div className="flex items-center gap-2 mt-1">
-          <span className="font-price-sm text-price-sm text-on-surface dark:text-inverse-on-surface">
-            {formatPrice(course.price)}
-          </span>
-          {course.compare_at_price && (
-            <span className="font-price-sm text-price-sm text-on-surface-variant dark:text-on-primary-container line-through">
-              {formatPrice(course.compare_at_price)}
+
+        {course.rating?.count > 0 && (
+          <div className="flex items-center gap-1.5">
+            <span className="font-price-sm text-price-sm text-amber-600 dark:text-amber-400">
+              {course.rating.average.toFixed(1)}
+            </span>
+            <StarRating average={course.rating.average} size={14} />
+            <span className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container">
+              ({course.rating.count})
+            </span>
+          </div>
+        )}
+
+        <div className="flex items-center justify-between mt-1">
+          <div className="flex items-center gap-2">
+            <span className="font-price-sm text-price-sm text-on-surface dark:text-inverse-on-surface">
+              {formatPrice(course.price)}
+            </span>
+            {course.compare_at_price && (
+              <span className="font-price-sm text-price-sm text-on-surface-variant dark:text-on-primary-container line-through">
+                {formatPrice(course.compare_at_price)}
+              </span>
+            )}
+          </div>
+          {course.level && (
+            <span className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container">
+              {course.level}
             </span>
           )}
         </div>
