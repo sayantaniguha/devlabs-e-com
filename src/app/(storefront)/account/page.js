@@ -29,6 +29,19 @@ export default async function AccountPage() {
       <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container mb-stack-lg">
         {profile.email}
       </p>
+
+      {profile.role === "admin" && (
+        <Link
+          href="/admin"
+          className="inline-flex items-center gap-2 bg-secondary text-on-secondary px-6 py-2 rounded font-semibold hover:opacity-90 transition-opacity mb-stack-lg"
+        >
+          <span className="material-symbols-outlined text-[18px]">
+            admin_panel_settings
+          </span>
+          Admin Panel
+        </Link>
+      )}
+
       <form action={signOut}>
         <button
           type="submit"

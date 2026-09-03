@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { LOW_STOCK_THRESHOLD } from "@/lib/constants";
 import { formatPrice } from "@/lib/utils/format";
-
-const LOW_STOCK_THRESHOLD = 30;
 
 export function ProductCard({ product, priority = false }) {
   const soldOut = product.totalStock <= 0;
