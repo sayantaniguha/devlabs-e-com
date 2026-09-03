@@ -1,1 +1,160 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Colors — consolidated from the DevLabs design mockups */
+  --color-surface-container: #e7eefe;
+  --color-inverse-on-surface: #ebf1ff;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-background: #151c27;
+  --color-secondary-fixed: #e2dfff;
+  --color-primary-fixed: #e4e1e7;
+  --color-tertiary-fixed-dim: #4edea3;
+  --color-inverse-surface: #2a313d;
+  --color-surface: #f9f9ff;
+  --color-surface-container-high: #e2e8f8;
+  --color-on-primary-fixed: #1b1b1f;
+  --color-tertiary-container: #002113;
+  --color-on-error-container: #93000a;
+  --color-on-surface: #151c27;
+  --color-primary: #000000;
+  --color-surface-dim: #d3daea;
+  --color-secondary: #4b41e1;
+  --color-primary-container: #1b1b1f;
+  --color-on-secondary-fixed-variant: #3323cc;
+  --color-on-secondary: #ffffff;
+  --color-surface-bright: #f9f9ff;
+  --color-surface-container-highest: #dce2f3;
+  --color-error-container: #ffdad6;
+  --color-background: #f9f9ff;
+  --color-on-primary-container: #858388;
+  --color-on-secondary-container: #fffbff;
+  --color-surface-tint: #5f5e63;
+  --color-on-tertiary-fixed-variant: #005236;
+  --color-on-tertiary-fixed: #002113;
+  --color-outline-variant: #c8c5cb;
+  --color-tertiary-fixed: #6ffbbe;
+  --color-error: #ba1a1a;
+  --color-on-primary-fixed-variant: #47464b;
+  --color-surface-container-low: #f0f3ff;
+  --color-inverse-primary: #c8c5cb;
+  --color-on-tertiary-container: #009668;
+  --color-on-surface-variant: #47464b;
+  --color-tertiary: #000000;
+  --color-secondary-fixed-dim: #c3c0ff;
+  --color-on-primary: #ffffff;
+  --color-primary-fixed-dim: #c8c5cb;
+  --color-outline: #78767b;
+  --color-on-secondary-fixed: #0f0069;
+  --color-on-tertiary: #ffffff;
+  --color-secondary-container: #645efb;
+  --color-surface-variant: #dce2f3;
+  --color-on-error: #ffffff;
+
+  /* Border radius */
+  --radius-DEFAULT: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+
+  /* Spacing (also drives width/max-width utilities, e.g. max-w-container-max) */
+  --spacing-margin-desktop: 32px;
+  --spacing-margin-mobile: 16px;
+  --spacing-container-max: 1280px;
+  --spacing-gutter: 24px;
+  --spacing-stack-xs: 4px;
+  --spacing-stack-sm: 8px;
+  --spacing-stack-md: 16px;
+  --spacing-stack-lg: 24px;
+  --spacing-stack-xl: 48px;
+
+  /* Font families (self-hosted via next/font in layout.js) */
+  --font-display: var(--font-inter);
+  --font-headline-lg: var(--font-inter);
+  --font-headline-lg-mobile: var(--font-inter);
+  --font-headline-md: var(--font-inter);
+  --font-body-lg: var(--font-inter);
+  --font-body-sm: var(--font-inter);
+  --font-label-caps: var(--font-inter);
+  --font-price-lg: var(--font-jetbrains-mono);
+  --font-price-sm: var(--font-jetbrains-mono);
+
+  /* Font sizes (size + line-height + letter-spacing + weight) */
+  --text-display: 48px;
+  --text-display--line-height: 1.1;
+  --text-display--letter-spacing: -0.04em;
+  --text-display--font-weight: 700;
+
+  --text-headline-lg: 32px;
+  --text-headline-lg--line-height: 1.2;
+  --text-headline-lg--letter-spacing: -0.02em;
+  --text-headline-lg--font-weight: 600;
+
+  --text-headline-lg-mobile: 24px;
+  --text-headline-lg-mobile--line-height: 1.2;
+  --text-headline-lg-mobile--letter-spacing: -0.01em;
+  --text-headline-lg-mobile--font-weight: 600;
+
+  --text-headline-md: 20px;
+  --text-headline-md--line-height: 1.4;
+  --text-headline-md--letter-spacing: -0.01em;
+  --text-headline-md--font-weight: 600;
+
+  --text-body-lg: 16px;
+  --text-body-lg--line-height: 1.6;
+  --text-body-lg--letter-spacing: 0;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 1.5;
+  --text-body-sm--letter-spacing: 0;
+  --text-body-sm--font-weight: 400;
+
+  --text-label-caps: 12px;
+  --text-label-caps--line-height: 1;
+  --text-label-caps--letter-spacing: 0.05em;
+  --text-label-caps--font-weight: 600;
+
+  --text-price-lg: 18px;
+  --text-price-lg--line-height: 1;
+  --text-price-lg--letter-spacing: -0.02em;
+  --text-price-lg--font-weight: 500;
+
+  --text-price-sm: 14px;
+  --text-price-sm--line-height: 1;
+  --text-price-sm--letter-spacing: -0.02em;
+  --text-price-sm--font-weight: 500;
+}
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
