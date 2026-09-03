@@ -3,9 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cartItemCount, cartSubtotal, useCartStore } from "@/lib/cart-store";
+import { FREE_SHIPPING_THRESHOLD } from "@/lib/constants";
 import { formatPrice } from "@/lib/utils/format";
-
-const FREE_SHIPPING_THRESHOLD = 1499;
 
 export function CartDrawer() {
   const isOpen = useCartStore((s) => s.isOpen);
