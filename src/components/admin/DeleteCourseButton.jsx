@@ -2,16 +2,16 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { deleteProduct } from "@/lib/actions/admin/products";
+import { deleteCourse } from "@/lib/actions/admin/courses";
 
-export function DeleteProductButton({ productId, productName }) {
+export function DeleteCourseButton({ courseId, courseName }) {
   const router = useRouter();
   const [deleting, setDeleting] = useState(false);
 
   async function handleDelete() {
-    if (!confirm(`Delete "${productName}"? This cannot be undone.`)) return;
+    if (!confirm(`Delete "${courseName}"? This cannot be undone.`)) return;
     setDeleting(true);
-    const result = await deleteProduct(productId);
+    const result = await deleteCourse(courseId);
     setDeleting(false);
     if (result?.error) {
       alert(result.error);
@@ -26,7 +26,7 @@ export function DeleteProductButton({ productId, productName }) {
       onClick={handleDelete}
       disabled={deleting}
       className="text-on-error-container hover:opacity-70 disabled:opacity-40"
-      aria-label={`Delete ${productName}`}
+      aria-label={`Delete ${courseName}`}
     >
       <span className="material-symbols-outlined text-[20px]">delete</span>
     </button>

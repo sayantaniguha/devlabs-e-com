@@ -101,29 +101,35 @@ export function CartDrawer() {
                       </p>
                     )}
                     <div className="flex justify-between items-end mt-auto">
-                      <div className="flex items-center border border-outline-variant rounded h-8">
-                        <button
-                          type="button"
-                          onClick={() => setQuantity(item, item.quantity - 1)}
-                          className="w-8 h-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"
-                        >
-                          <span className="material-symbols-outlined text-[16px]">
-                            remove
-                          </span>
-                        </button>
-                        <span className="font-body-sm text-body-sm w-8 text-center">
-                          {item.quantity}
+                      {item.itemType === "course" ? (
+                        <span className="font-body-sm text-body-sm text-on-surface-variant">
+                          1 seat
                         </span>
-                        <button
-                          type="button"
-                          onClick={() => setQuantity(item, item.quantity + 1)}
-                          className="w-8 h-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"
-                        >
-                          <span className="material-symbols-outlined text-[16px]">
-                            add
+                      ) : (
+                        <div className="flex items-center border border-outline-variant rounded h-8">
+                          <button
+                            type="button"
+                            onClick={() => setQuantity(item, item.quantity - 1)}
+                            className="w-8 h-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"
+                          >
+                            <span className="material-symbols-outlined text-[16px]">
+                              remove
+                            </span>
+                          </button>
+                          <span className="font-body-sm text-body-sm w-8 text-center">
+                            {item.quantity}
                           </span>
-                        </button>
-                      </div>
+                          <button
+                            type="button"
+                            onClick={() => setQuantity(item, item.quantity + 1)}
+                            className="w-8 h-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"
+                          >
+                            <span className="material-symbols-outlined text-[16px]">
+                              add
+                            </span>
+                          </button>
+                        </div>
+                      )}
                       <span className="font-price-sm text-price-sm text-primary">
                         {formatPrice(item.unitPrice * item.quantity)}
                       </span>

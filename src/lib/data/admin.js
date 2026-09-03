@@ -254,3 +254,28 @@ export async function getAdminOrderById(id) {
   if (error) throw error;
   return data;
 }
+
+export async function getAdminCourses() {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from("courses")
+    .select("*, lessons:course_lessons(id)")
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+  return data;
+}
+
+export async function getAdminCourseById(id) {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from("courses")
+    .select("*, lessons:course_lessons(*)")
+    .eq("id", id)
+    .maybeSingle();
+  if (error) throw error;
+  if (!data) return null;
+  return {
+    ...data,
+    lessons: [...(data.lessons ?? [])].sort((a, b) => a.position - b.position),
+  };
+}

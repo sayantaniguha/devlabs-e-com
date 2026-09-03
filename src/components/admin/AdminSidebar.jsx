@@ -7,6 +7,7 @@ import { signOut } from "@/lib/actions/auth";
 const NAV_ITEMS = [
   { href: "/admin", label: "Analytics", icon: "monitoring" },
   { href: "/admin/products", label: "Inventory", icon: "inventory_2" },
+  { href: "/admin/courses", label: "Courses", icon: "school" },
   { href: "/admin/orders", label: "Orders", icon: "shopping_cart" },
   { href: "/admin/categories", label: "Categories", icon: "category" },
 ];

@@ -126,15 +126,24 @@ export async function deleteProduct(id) {
     .from("product_images")
     .select("url")
     .eq("product_id", id);
+
+  const { error } = await supabase.from("products").delete().eq("id", id);
+  if (error) {
+    if (error.code === "23503") {
+      return {
+        error:
+          "Could not delete this product — it appears in past orders. Mark it as Draft instead to hide it from the storefront.",
+      };
+    }
+    return { error: "Could not delete product." };
+  }
+
   const paths = (images ?? [])
     .map((img) => img.url.split("/product-images/")[1])
     .filter(Boolean);
   if (paths.length) {
     await supabase.storage.from("product-images").remove(paths);
   }
-
-  const { error } = await supabase.from("products").delete().eq("id", id);
-  if (error) return { error: "Could not delete product." };
 
   revalidatePath("/admin/products");
   revalidatePath("/shop");
