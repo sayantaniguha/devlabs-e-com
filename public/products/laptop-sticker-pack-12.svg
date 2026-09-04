@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <defs>
+    <linearGradient id="g-1939590098" gradientTransform="rotate(36)">
+      <stop offset="0%" stop-color="#4b41e1" />
+      <stop offset="100%" stop-color="#aab8e6" />
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="48" />
+    </filter>
+    
+  <pattern id="d-1939590098" width="28" height="28" patternUnits="userSpaceOnUse">
+    <circle cx="2" cy="2" r="1.4" fill="#ffffff" opacity="0.16" />
+  </pattern>
+  </defs>
+  <rect width="800" height="800" fill="url(#g-1939590098)" />
+  <circle cx="618" cy="466" r="268" fill="#ffffff" opacity="0.18" filter="url(#blur)" /><circle cx="528" cy="59" r="197" fill="#ffffff" opacity="0.16" filter="url(#blur)" /><circle cx="595" cy="784" r="318" fill="#ffffff" opacity="0.14" filter="url(#blur)" />
+  <rect width="800" height="800" fill="url(#d-1939590098)" />
+  <path d="M526,156 L595,156 L595,325 L440,325 L440,411 L440,574" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.25" stroke-linecap="round" stroke-linejoin="round" /><circle cx="526" cy="156" r="3.5" fill="#ffffff" opacity="0.35" /><circle cx="595" cy="156" r="3.5" fill="#ffffff" opacity="0.35" /><circle cx="595" cy="325" r="3.5" fill="#ffffff" opacity="0.35" /><circle cx="440" cy="325" r="3.5" fill="#ffffff" opacity="0.35" /><circle cx="440" cy="411" r="3.5" fill="#ffffff" opacity="0.35" /><circle cx="440" cy="574" r="3.5" fill="#ffffff" opacity="0.35" />
+  
+  
+  <g>
+    <circle cx="400" cy="400" r="190" fill="#ffffff" opacity="0.14" />
+    <circle cx="400" cy="400" r="180" fill="#ffffff" opacity="0.1" />
+    <g transform="translate(400,400) scale(2.280) translate(-50,-50)" stroke="#ffffff" stroke-width="4.39" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+      
+    <rect x="14" y="40" width="40" height="40" rx="10" transform="rotate(-12 34 60)" />
+    <path d="M60,26 L70,46 L92,49 L76,64 L80,86 L60,75 L40,86 L44,64 L28,49 L50,46 Z" transform="translate(4,-6) scale(0.62)" />
+  
+    </g>
+  </g>
+</svg>

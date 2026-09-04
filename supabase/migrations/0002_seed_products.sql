@@ -2,10 +2,9 @@
 -- Run once in the Supabase SQL Editor, after 0001_init.sql, against an
 -- otherwise-empty catalog. Plain inserts, not re-run-safe.
 --
--- Images use placehold.co as a stand-in (product name as the label, sized
--- 800x800 to match the storefront's square product frames) until admin
--- image upload to Supabase Storage is built — swap these for real Storage
--- URLs at that point.
+-- Images are served locally from public/products/ (generated studio shots)
+-- until admin image upload to Supabase Storage is built — swap these for
+-- real Storage URLs at that point.
 
 -- =========================================================================
 -- Categories
@@ -146,35 +145,36 @@ insert into public.product_variants (product_id, sku, stock_quantity) values
   ((select id from public.products where slug = 'laptop-sticker-pack-12'),      'DL-ST-001', 300);
 
 -- =========================================================================
--- Images (placehold.co stand-ins; Signature Hoodie gets 4 to exercise the
--- multi-image gallery, matching its dedicated product-page mockup —
--- every other product gets the single image shown in the catalogue mockup)
+-- Images (generated studio shots, served from public/products/; Signature
+-- Hoodie gets 4 to exercise the multi-image gallery, matching its dedicated
+-- product-page mockup — every other product gets the single image shown in
+-- the catalogue mockup)
 -- =========================================================================
 
 insert into public.product_images (product_id, url, position, is_primary) values
   ((select id from public.products where slug = 'ship-it-oversized-tee'),
-    'https://placehold.co/800x800/e7eefe/151c27?text=Ship+It+Tee', 0, true),
+    '/products/ship-it-oversized-tee-1.png', 0, true),
   ((select id from public.products where slug = '404-not-found-tee'),
-    'https://placehold.co/800x800/151c27/f9f9ff?text=404+Not+Found', 0, true),
+    '/products/404-not-found-tee-1.png', 0, true),
   ((select id from public.products where slug = 'devlabs-laptop-backpack'),
-    'https://placehold.co/800x800/e7eefe/151c27?text=Laptop+Backpack', 0, true),
+    '/products/devlabs-laptop-backpack-1.png', 0, true),
   ((select id from public.products where slug = 'insulated-steel-water-bottle'),
-    'https://placehold.co/800x800/151c27/f9f9ff?text=Water+Bottle', 0, true),
+    '/products/insulated-steel-water-bottle-1.png', 0, true),
   ((select id from public.products where slug = 'git-commit-ceramic-mug'),
-    'https://placehold.co/800x800/e7eefe/151c27?text=git+commit+Mug', 0, true),
+    '/products/git-commit-ceramic-mug-1.png', 0, true),
   ((select id from public.products where slug = 'laptop-sticker-pack-12'),
-    'https://placehold.co/800x800/e7eefe/151c27?text=Sticker+Pack', 0, true),
+    '/products/laptop-sticker-pack-12-1.png', 0, true),
   ((select id from public.products where slug = 'xl-desk-mousepad-dark-mode'),
-    'https://placehold.co/800x800/151c27/f9f9ff?text=Desk+Mousepad', 0, true),
+    '/products/xl-desk-mousepad-dark-mode-1.png', 0, true),
   ((select id from public.products where slug = 'terminal-black-hoodie'),
-    'https://placehold.co/800x800/151c27/f9f9ff?text=Terminal+Hoodie', 0, true);
+    '/products/terminal-black-hoodie-1.png', 0, true);
 
 insert into public.product_images (product_id, url, position, is_primary) values
   ((select id from public.products where slug = 'devlabs-signature-hoodie'),
-    'https://placehold.co/800x800/e7eefe/151c27?text=Signature+Hoodie', 0, true),
+    '/products/devlabs-signature-hoodie-1.png', 0, true),
   ((select id from public.products where slug = 'devlabs-signature-hoodie'),
-    'https://placehold.co/800x800/e7eefe/151c27?text=Chest+Embroidery', 1, false),
+    '/products/devlabs-signature-hoodie-2.png', 1, false),
   ((select id from public.products where slug = 'devlabs-signature-hoodie'),
-    'https://placehold.co/800x800/e7eefe/151c27?text=Zipper+Detail', 2, false),
+    '/products/devlabs-signature-hoodie-3.png', 2, false),
   ((select id from public.products where slug = 'devlabs-signature-hoodie'),
-    'https://placehold.co/800x800/e7eefe/151c27?text=Lifestyle+Shot', 3, false);
+    '/products/devlabs-signature-hoodie-4.png', 3, false);

@@ -40,9 +40,9 @@ export default async function MyCoursesPage() {
             <Link
               key={course.id}
               href={`/learn/${course.slug}`}
-              className="flex items-center gap-stack-md border border-outline-variant dark:border-outline rounded-lg p-stack-md hover:bg-surface-container-low dark:hover:bg-surface-container-lowest transition-colors"
+              className="flex items-center gap-stack-md border border-outline-variant dark:border-outline rounded-lg p-stack-md hover:bg-surface-container-low dark:hover:bg-inverse-surface transition-colors"
             >
-              <div className="relative w-20 aspect-video shrink-0 rounded overflow-hidden bg-surface-container-low">
+              <div className="relative w-20 aspect-video shrink-0 rounded overflow-hidden bg-surface-container-low dark:bg-inverse-surface">
                 {course.thumbnail_url && (
                   <Image
                     src={course.thumbnail_url}

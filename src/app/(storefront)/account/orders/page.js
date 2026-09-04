@@ -41,7 +41,7 @@ export default async function OrderHistoryPage() {
             <Link
               key={order.id}
               href={`/account/orders/${order.id}`}
-              className="flex items-center justify-between border border-outline-variant dark:border-outline rounded-lg p-stack-md hover:bg-surface-container-low dark:hover:bg-surface-container-lowest transition-colors"
+              className="flex items-center justify-between border border-outline-variant dark:border-outline rounded-lg p-stack-md hover:bg-surface-container-low dark:hover:bg-inverse-surface transition-colors"
             >
               <div>
                 <p className="font-price-sm text-price-sm text-on-surface dark:text-inverse-on-surface">

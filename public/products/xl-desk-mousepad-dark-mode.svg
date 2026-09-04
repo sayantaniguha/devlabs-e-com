@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <defs>
+    <linearGradient id="g-3341759542" gradientTransform="rotate(28)">
+      <stop offset="0%" stop-color="#151c27" />
+      <stop offset="100%" stop-color="#0b0f17" />
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="48" />
+    </filter>
+    
+  <pattern id="d-3341759542" width="28" height="28" patternUnits="userSpaceOnUse">
+    <circle cx="2" cy="2" r="1.4" fill="#ffffff" opacity="0.16" />
+  </pattern>
+  </defs>
+  <rect width="800" height="800" fill="url(#g-3341759542)" />
+  <circle cx="341" cy="414" r="147" fill="#ffffff" opacity="0.11" filter="url(#blur)" /><circle cx="481" cy="480" r="255" fill="#ffffff" opacity="0.11" filter="url(#blur)" /><circle cx="496" cy="578" r="283" fill="#ffffff" opacity="0.21" filter="url(#blur)" />
+  <rect width="800" height="800" fill="url(#d-3341759542)" />
+  <path d="M557,149 L426,149 L491,149 L491,298 L567,298 L567,472" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.25" stroke-linecap="round" stroke-linejoin="round" /><circle cx="557" cy="149" r="3.5" fill="#ffffff" opacity="0.35" /><circle cx="426" cy="149" r="3.5" fill="#ffffff" opacity="0.35" /><circle cx="491" cy="149" r="3.5" fill="#ffffff" opacity="0.35" /><circle cx="491" cy="298" r="3.5" fill="#ffffff" opacity="0.35" /><circle cx="567" cy="298" r="3.5" fill="#ffffff" opacity="0.35" /><circle cx="567" cy="472" r="3.5" fill="#ffffff" opacity="0.35" />
+  
+  
+  <g>
+    <circle cx="400" cy="400" r="190" fill="#ffffff" opacity="0.14" />
+    <circle cx="400" cy="400" r="180" fill="#ffffff" opacity="0.1" />
+    <g transform="translate(400,400) scale(2.280) translate(-50,-50)" stroke="#ffffff" stroke-width="4.39" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+      
+    <rect x="6" y="34" width="88" height="46" rx="8" />
+    <circle cx="72" cy="72" r="13" />
+    <path d="M72,63 L72,72 L80,78" />
+  
+    </g>
+  </g>
+</svg>

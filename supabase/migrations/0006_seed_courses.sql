@@ -11,10 +11,8 @@
 -- Mux / Cloudflare Stream) before launch. Every course's first two lessons
 -- are free previews.
 --
--- Thumbnails are placehold.co stand-ins (1280x720, matching the 16:9 course
--- card frame) — each course gets a distinct, saturated color rather than
--- reusing the two neutral tones from the product seed, so the catalogue
--- reads as vivid and varied rather than a wall of identical grey boxes.
+-- Thumbnails are served locally from public/courses/ (generated icon-on-
+-- gradient illustrations, 16:9, one per course topic).
 
 -- =========================================================================
 -- Courses
@@ -26,7 +24,7 @@ insert into public.courses (title, slug, description, price, compare_at_price, t
     'red-team-fundamentals',
     'Learn offensive security the way working pentesters do — recon, exploitation, and privilege escalation inside a legal lab you build yourself. Ends with the deliverable that actually gets paid for: the report.',
     5999, 11999,
-    'https://placehold.co/1280x720/dc2626/ffffff?text=Red+Team+Fundamentals',
+    '/courses/red-team-fundamentals.png',
     'active'
   ),
   (
@@ -34,7 +32,7 @@ insert into public.courses (title, slug, description, price, compare_at_price, t
     'dsa-javascript',
     'The interview-critical data structures and algorithms, taught entirely in JavaScript so you''re not translating from C++ under pressure. Pattern-first, not problem-count-first.',
     6999, 13999,
-    'https://placehold.co/1280x720/ca8a04/ffffff?text=DSA+in+JavaScript',
+    '/courses/dsa-javascript.png',
     'active'
   ),
   (
@@ -42,7 +40,7 @@ insert into public.courses (title, slug, description, price, compare_at_price, t
     'production-llm-apps',
     'The gap between a RAG demo and a RAG product is retrieval quality, evals, and cost control. This course is about that gap.',
     7999, 15999,
-    'https://placehold.co/1280x720/7c3aed/ffffff?text=Production+LLM+Apps',
+    '/courses/production-llm-apps.png',
     'active'
   ),
   (
@@ -50,7 +48,7 @@ insert into public.courses (title, slug, description, price, compare_at_price, t
     'mern-launchpad',
     'Build and deploy one real subscription product end to end — schema, auth, payments, uploads, background jobs, monitoring. The flagship track, and the longest.',
     8999, 17999,
-    'https://placehold.co/1280x720/059669/ffffff?text=The+MERN+Launchpad',
+    '/courses/mern-launchpad.png',
     'active'
   ),
   (
@@ -58,7 +56,7 @@ insert into public.courses (title, slug, description, price, compare_at_price, t
     'system-design-interviews',
     'A repeatable framework for open-ended design questions, plus the trade-off vocabulary interviewers are listening for. Two full mock interviews included.',
     6999, 14999,
-    'https://placehold.co/1280x720/2563eb/ffffff?text=System+Design',
+    '/courses/system-design-interviews.png',
     'active'
   ),
   (
@@ -66,7 +64,7 @@ insert into public.courses (title, slug, description, price, compare_at_price, t
     'devops-aws',
     'Containers, orchestration, and pipelines with the parts nobody demos — secrets, rollbacks, and what happens when you''re the one on call.',
     7499, 14999,
-    'https://placehold.co/1280x720/ea580c/ffffff?text=DevOps+on+AWS',
+    '/courses/devops-aws.png',
     'active'
   ),
   (
@@ -74,7 +72,7 @@ insert into public.courses (title, slug, description, price, compare_at_price, t
     'advanced-react',
     'For developers who already ship React and keep getting surprised by it. Rendering model, streaming, and measurable performance work.',
     5499, 10999,
-    'https://placehold.co/1280x720/06b6d4/ffffff?text=Advanced+React',
+    '/courses/advanced-react.png',
     'active'
   ),
   (
@@ -82,7 +80,7 @@ insert into public.courses (title, slug, description, price, compare_at_price, t
     'backend-nodejs',
     'Server-side Node beyond CRUD tutorials — the event loop, auth you can defend in review, Postgres relations, Redis, and background jobs.',
     5999, 11999,
-    'https://placehold.co/1280x720/16a34a/ffffff?text=Backend+Node.js',
+    '/courses/backend-nodejs.png',
     'active'
   ),
   (
@@ -90,7 +88,7 @@ insert into public.courses (title, slug, description, price, compare_at_price, t
     'sql-analytics-engineering',
     'Start with set-based thinking, end with a version-controlled data model and a dashboard stakeholders actually trust.',
     4999, 9999,
-    'https://placehold.co/1280x720/4f46e5/ffffff?text=SQL+%26+Analytics',
+    '/courses/sql-analytics-engineering.png',
     'active'
   ),
   (
@@ -98,7 +96,7 @@ insert into public.courses (title, slug, description, price, compare_at_price, t
     'python-automation',
     'The cheapest, fastest win in this catalogue — automate the repetitive parts of your job in an afternoon, then put it on a schedule.',
     3499, 6999,
-    'https://placehold.co/1280x720/eab308/151c27?text=Python+for+Automation',
+    '/courses/python-automation.png',
     'active'
   ),
   (
@@ -106,7 +104,7 @@ insert into public.courses (title, slug, description, price, compare_at_price, t
     'react-native-production',
     'Most React Native courses stop at the simulator. This one ends with signed builds live in both stores, notifications included.',
     5999, 11999,
-    'https://placehold.co/1280x720/0ea5e9/ffffff?text=React+Native',
+    '/courses/react-native-production.png',
     'active'
   ),
   (
@@ -114,7 +112,7 @@ insert into public.courses (title, slug, description, price, compare_at_price, t
     'aws-saa-sprint',
     'Exam-shaped, not encyclopaedia-shaped. Covers the services SAA-C03 actually weights, and ends with a full timed practice exam.',
     4499, 8999,
-    'https://placehold.co/1280x720/f97316/ffffff?text=AWS+SAA+Sprint',
+    '/courses/aws-saa-sprint.png',
     'active'
   ),
   (
@@ -122,7 +120,7 @@ insert into public.courses (title, slug, description, price, compare_at_price, t
     'solidity-smart-contracts',
     'Write, test, exploit, and then harden your own contracts. Security-first, because on-chain bugs are permanent and expensive.',
     6499, 12999,
-    'https://placehold.co/1280x720/9333ea/ffffff?text=Solidity+%26+DeFi',
+    '/courses/solidity-smart-contracts.png',
     'active'
   ),
   (
@@ -130,7 +128,7 @@ insert into public.courses (title, slug, description, price, compare_at_price, t
     'ai-engineering-claude',
     'Treat prompting as engineering. Structured outputs, tool use, Model Context Protocol, and how to tell whether your agent got better or just got louder.',
     7499, 14999,
-    'https://placehold.co/1280x720/a21caf/ffffff?text=AI+Engineering',
+    '/courses/ai-engineering-claude.png',
     'active'
   ),
   (
@@ -138,7 +136,7 @@ insert into public.courses (title, slug, description, price, compare_at_price, t
     'rust-systems',
     'Ownership and borrowing explained until they click, then straight into traits, fearless concurrency, and publishing a real CLI to crates.io.',
     5499, 10999,
-    'https://placehold.co/1280x720/b45309/ffffff?text=Rust+for+Systems',
+    '/courses/rust-systems.png',
     'active'
   );
 

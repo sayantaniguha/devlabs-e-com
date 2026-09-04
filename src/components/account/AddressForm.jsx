@@ -3,7 +3,7 @@
 import { useActionState, useEffect } from "react";
 
 const fieldClass =
-  "px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-surface-container-low text-on-surface dark:text-inverse-on-surface focus:outline-none focus:border-secondary";
+  "px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface focus:outline-none focus:border-secondary";
 
 export function AddressForm({ action, address, onSuccess, onCancel }) {
   const [state, formAction, pending] = useActionState(action, null);
@@ -83,7 +83,7 @@ export function AddressForm({ action, address, onSuccess, onCancel }) {
           <button
             type="button"
             onClick={onCancel}
-            className="border border-outline-variant dark:border-outline text-on-surface dark:text-inverse-on-surface px-6 py-2 rounded font-semibold hover:bg-surface-container dark:hover:bg-surface-container-low transition-colors"
+            className="border border-outline-variant dark:border-outline text-on-surface dark:text-inverse-on-surface px-6 py-2 rounded font-semibold hover:bg-surface-container dark:hover:bg-inverse-surface transition-colors"
           >
             Cancel
           </button>

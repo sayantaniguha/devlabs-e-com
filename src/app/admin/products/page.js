@@ -69,7 +69,7 @@ export default async function AdminProductsPage({ searchParams }) {
                         <div className="flex items-center gap-2">
                           <StockStatusBadge totalStock={totalStock} />
                           {product.status === "draft" && (
-                            <span className="px-2 py-1 bg-surface-variant text-on-surface-variant text-[10px] font-bold uppercase tracking-wider rounded">
+                            <span className="px-2 py-1 bg-surface-variant text-on-surface-variant dark:bg-inverse-surface dark:text-inverse-on-surface text-[10px] font-bold uppercase tracking-wider rounded">
                               Draft
                             </span>
                           )}

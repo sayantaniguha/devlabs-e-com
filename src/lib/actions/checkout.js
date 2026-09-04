@@ -1,7 +1,9 @@
 "use server";
 
+import crypto from "node:crypto";
 import { getCurrentProfile } from "@/lib/auth";
 import { FLAT_SHIPPING_FEE, FREE_SHIPPING_THRESHOLD } from "@/lib/constants";
+import { markPaymentCaptured } from "@/lib/payments";
 import { getRazorpay } from "@/lib/razorpay";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { generateOrderNumber } from "@/lib/utils/orderNumber";
@@ -64,6 +66,19 @@ export async function createOrder(input) {
         return {
           error: "One of the courses in your cart is no longer available.",
         };
+      }
+      if (profile) {
+        const { data: existingEnrollment } = await supabase
+          .from("enrollments")
+          .select("id")
+          .eq("user_id", profile.id)
+          .eq("course_id", course.id)
+          .maybeSingle();
+        if (existingEnrollment) {
+          return {
+            error: `You already have access to "${course.title}" — check My Courses in your account.`,
+          };
+        }
       }
       priced.push({
         itemType: "course",
@@ -154,4 +169,41 @@ export async function createOrder(input) {
     customerEmail: profile?.email ?? guestEmail,
     customerPhone: shipping.phone,
   };
+}
+
+// Confirms payment from the checkout redirect itself, rather than waiting on
+// the Razorpay webhook — webhooks can't reach localhost in dev, and even in
+// production they can be delayed, so the client-side success handler is the
+// primary confirmation path with the webhook as a durable backstop.
+// markPaymentCaptured (shared with the webhook handler) is idempotent via
+// confirm_paid_order, so running both is safe.
+export async function confirmPayment({
+  razorpayOrderId,
+  razorpayPaymentId,
+  razorpaySignature,
+}) {
+  if (!razorpayOrderId || !razorpayPaymentId || !razorpaySignature) {
+    return { error: "Missing payment confirmation details." };
+  }
+
+  const expected = crypto
+    .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+    .update(`${razorpayOrderId}|${razorpayPaymentId}`)
+    .digest("hex");
+  const provided = Buffer.from(razorpaySignature);
+  if (
+    provided.length !== expected.length ||
+    !crypto.timingSafeEqual(Buffer.from(expected), provided)
+  ) {
+    return { error: "Payment verification failed." };
+  }
+
+  const supabase = createAdminClient();
+  const result = await markPaymentCaptured(supabase, {
+    gatewayOrderId: razorpayOrderId,
+    gatewayPaymentId: razorpayPaymentId,
+  });
+  if (result.notFound) return { error: "Payment record not found." };
+  if (result.error) return { error: "Order confirmation failed." };
+  return { success: true };
 }

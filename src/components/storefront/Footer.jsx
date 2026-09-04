@@ -92,7 +92,7 @@ export function Footer() {
           </p>
           <form className="flex">
             <input
-              className="w-full px-4 py-2 border border-outline-variant rounded-l focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/10 bg-surface font-body-sm text-body-sm"
+              className="w-full px-4 py-2 border border-outline-variant rounded-l focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/10 bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface placeholder:text-on-surface-variant/50 dark:placeholder:text-on-primary-container/50 font-body-sm text-body-sm"
               placeholder="Email address"
               type="email"
               name="email"

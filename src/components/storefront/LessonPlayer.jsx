@@ -39,7 +39,7 @@ export function LessonPlayer({ lessons }) {
             className={`flex items-center gap-stack-sm px-stack-md py-stack-sm text-left transition-colors ${
               lesson.id === active?.id
                 ? "bg-secondary text-on-secondary"
-                : "bg-surface-container-lowest text-on-surface dark:text-inverse-on-surface hover:bg-surface-container-low dark:hover:bg-surface-container-lowest"
+                : "bg-surface-container-lowest dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface hover:bg-surface-container-low dark:hover:bg-primary-container"
             }`}
           >
             <span className="material-symbols-outlined text-[18px]">

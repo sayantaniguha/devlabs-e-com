@@ -61,7 +61,7 @@ export function ReviewForm({ courseId, courseSlug }) {
         name="comment"
         rows={3}
         placeholder="What did you think of this course? (optional)"
-        className="w-full rounded-md border border-outline-variant dark:border-outline bg-surface dark:bg-surface-container-low text-on-surface dark:text-inverse-on-surface focus:outline-none focus:border-secondary py-2 px-3 text-body-sm"
+        className="w-full rounded-md border border-outline-variant dark:border-outline bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface focus:outline-none focus:border-secondary py-2 px-3 text-body-sm"
       />
 
       {state?.error && (

@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import Script from "next/script";
 import { useState } from "react";
-import { createOrder } from "@/lib/actions/checkout";
+import { confirmPayment, createOrder } from "@/lib/actions/checkout";
 import { cartSubtotal, useCartStore } from "@/lib/cart-store";
 import { FLAT_SHIPPING_FEE, FREE_SHIPPING_THRESHOLD } from "@/lib/constants";
 import { formatPrice } from "@/lib/utils/format";
@@ -88,7 +88,12 @@ export function CheckoutForm({ profile }) {
         contact: result.customerPhone,
       },
       theme: { color: "#4b41e1" },
-      handler: () => {
+      handler: async (response) => {
+        await confirmPayment({
+          razorpayOrderId: response.razorpay_order_id,
+          razorpayPaymentId: response.razorpay_payment_id,
+          razorpaySignature: response.razorpay_signature,
+        });
         clearCart();
         router.push(
           `/checkout/success?order=${result.orderId}&token=${result.confirmationToken}`,
@@ -126,7 +131,7 @@ export function CheckoutForm({ profile }) {
                 type="email"
                 name="guestEmail"
                 required
-                className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface text-on-surface"
+                className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface"
               />
             </label>
           )}
@@ -140,7 +145,7 @@ export function CheckoutForm({ profile }) {
               name="fullName"
               required
               defaultValue={profile?.full_name ?? ""}
-              className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface text-on-surface"
+              className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface"
             />
           </label>
 
@@ -152,7 +157,7 @@ export function CheckoutForm({ profile }) {
               type="tel"
               name="phone"
               required
-              className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface text-on-surface"
+              className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface"
             />
           </label>
 
@@ -164,7 +169,7 @@ export function CheckoutForm({ profile }) {
               type="text"
               name="line1"
               required
-              className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface text-on-surface"
+              className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface"
             />
           </label>
 
@@ -175,7 +180,7 @@ export function CheckoutForm({ profile }) {
             <input
               type="text"
               name="line2"
-              className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface text-on-surface"
+              className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface"
             />
           </label>
 
@@ -188,7 +193,7 @@ export function CheckoutForm({ profile }) {
                 type="text"
                 name="city"
                 required
-                className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface text-on-surface"
+                className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface"
               />
             </label>
             <label className="flex flex-col gap-1">
@@ -199,7 +204,7 @@ export function CheckoutForm({ profile }) {
                 type="text"
                 name="state"
                 required
-                className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface text-on-surface"
+                className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface"
               />
             </label>
           </div>
@@ -212,7 +217,7 @@ export function CheckoutForm({ profile }) {
               type="text"
               name="postalCode"
               required
-              className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface text-on-surface w-40"
+              className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface w-40"
             />
           </label>
 
@@ -229,7 +234,7 @@ export function CheckoutForm({ profile }) {
           </button>
         </form>
 
-        <div className="bg-surface-container-lowest border border-outline-variant dark:border-outline rounded-lg p-stack-lg h-fit">
+        <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg p-stack-lg h-fit">
           <h2 className="font-headline-md text-headline-md text-on-background dark:text-inverse-on-surface mb-stack-md">
             Order summary
           </h2>

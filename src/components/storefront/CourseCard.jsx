@@ -7,7 +7,7 @@ export function CourseCard({ course, priority = false }) {
   return (
     <Link
       href={`/courses/${course.slug}`}
-      className="group flex flex-col bg-surface-container-lowest border border-outline-variant dark:border-outline rounded-lg overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.05)]"
+      className="group flex flex-col bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.05)]"
     >
       <div className="relative aspect-video bg-surface-container-low">
         {course.thumbnail_url && (

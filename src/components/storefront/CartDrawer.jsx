@@ -39,7 +39,7 @@ export function CartDrawer() {
           <button
             type="button"
             onClick={closeCart}
-            className="p-2 -mr-2 text-on-surface-variant hover:text-primary transition-colors rounded hover:bg-surface-container"
+            className="p-2 -mr-2 text-on-surface-variant dark:text-on-primary-container hover:text-primary dark:hover:text-inverse-on-surface transition-colors rounded hover:bg-surface-container dark:hover:bg-inverse-surface"
           >
             <span className="material-symbols-outlined">close</span>
           </button>
@@ -47,7 +47,7 @@ export function CartDrawer() {
 
         <div className="flex-1 overflow-y-auto p-stack-lg flex flex-col gap-stack-lg no-scrollbar">
           {items.length === 0 ? (
-            <div className="flex flex-col items-center justify-center flex-1 gap-stack-sm text-on-surface-variant">
+            <div className="flex flex-col items-center justify-center flex-1 gap-stack-sm text-on-surface-variant dark:text-on-primary-container">
               <span className="material-symbols-outlined text-[40px]">
                 shopping_cart
               </span>
@@ -68,7 +68,7 @@ export function CartDrawer() {
                   : `variant:${item.variantId}`;
               return (
                 <div key={key} className="flex gap-stack-md">
-                  <div className="relative w-24 h-24 shrink-0 rounded border border-outline-variant bg-surface-container-low overflow-hidden">
+                  <div className="relative w-24 h-24 shrink-0 rounded border border-outline-variant bg-surface-container-low dark:bg-inverse-surface overflow-hidden">
                     {item.image && (
                       <Image
                         src={item.image}
@@ -81,14 +81,14 @@ export function CartDrawer() {
                   </div>
                   <div className="flex flex-col flex-1 py-1">
                     <div className="flex justify-between items-start">
-                      <h3 className="font-body-lg text-body-lg text-primary font-medium line-clamp-2 pr-4">
+                      <h3 className="font-body-lg text-body-lg text-primary dark:text-inverse-on-surface font-medium line-clamp-2 pr-4">
                         {item.name}
                       </h3>
                       <button
                         type="button"
                         onClick={() => removeItem(item)}
                         aria-label="Remove item"
-                        className="text-on-surface-variant hover:text-error transition-colors p-1 -mr-1 -mt-1"
+                        className="text-on-surface-variant dark:text-on-primary-container hover:text-error transition-colors p-1 -mr-1 -mt-1"
                       >
                         <span className="material-symbols-outlined text-[20px]">
                           close
@@ -96,13 +96,13 @@ export function CartDrawer() {
                       </button>
                     </div>
                     {item.variantLabel && (
-                      <p className="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                      <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container mt-1">
                         {item.variantLabel}
                       </p>
                     )}
                     <div className="flex justify-between items-end mt-auto">
                       {item.itemType === "course" ? (
-                        <span className="font-body-sm text-body-sm text-on-surface-variant">
+                        <span className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container">
                           1 seat
                         </span>
                       ) : (
@@ -110,7 +110,7 @@ export function CartDrawer() {
                           <button
                             type="button"
                             onClick={() => setQuantity(item, item.quantity - 1)}
-                            className="w-8 h-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"
+                            className="w-8 h-full flex items-center justify-center text-on-surface-variant dark:text-on-primary-container hover:text-primary dark:hover:text-inverse-on-surface transition-colors"
                           >
                             <span className="material-symbols-outlined text-[16px]">
                               remove
@@ -122,7 +122,11 @@ export function CartDrawer() {
                           <button
                             type="button"
                             onClick={() => setQuantity(item, item.quantity + 1)}
-                            className="w-8 h-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"
+                            disabled={
+                              item.maxQuantity != null &&
+                              item.quantity >= item.maxQuantity
+                            }
+                            className="w-8 h-full flex items-center justify-center text-on-surface-variant dark:text-on-primary-container hover:text-primary dark:hover:text-inverse-on-surface transition-colors disabled:opacity-40 disabled:pointer-events-none"
                           >
                             <span className="material-symbols-outlined text-[16px]">
                               add
@@ -130,7 +134,7 @@ export function CartDrawer() {
                           </button>
                         </div>
                       )}
-                      <span className="font-price-sm text-price-sm text-primary">
+                      <span className="font-price-sm text-price-sm text-primary dark:text-inverse-on-surface">
                         {formatPrice(item.unitPrice * item.quantity)}
                       </span>
                     </div>
@@ -142,12 +146,12 @@ export function CartDrawer() {
         </div>
 
         {items.length > 0 && (
-          <div className="border-t border-outline-variant p-stack-lg bg-surface-container-lowest shrink-0">
+          <div className="border-t border-outline-variant dark:border-outline p-stack-lg bg-surface-container-lowest dark:bg-inverse-surface shrink-0">
             <div className="flex justify-between items-center mb-stack-sm">
-              <span className="font-body-lg text-body-lg text-on-surface-variant">
+              <span className="font-body-lg text-body-lg text-on-surface-variant dark:text-on-primary-container">
                 Subtotal
               </span>
-              <span className="font-price-lg text-price-lg text-primary font-bold">
+              <span className="font-price-lg text-price-lg text-primary dark:text-inverse-on-surface font-bold">
                 {formatPrice(subtotal)}
               </span>
             </div>
@@ -162,12 +166,12 @@ export function CartDrawer() {
                 </span>
               </div>
             ) : (
-              <p className="font-body-sm text-body-sm text-on-surface-variant mb-stack-md">
+              <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container mb-stack-md">
                 Add {formatPrice(FREE_SHIPPING_THRESHOLD - subtotal)} more for
                 free shipping.
               </p>
             )}
-            <p className="font-body-sm text-body-sm text-on-surface-variant mb-stack-lg">
+            <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container mb-stack-lg">
               Taxes and shipping calculated at checkout.
             </p>
             <Link

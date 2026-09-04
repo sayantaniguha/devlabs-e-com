@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="g-1074708321" gradientTransform="rotate(64)">
+      <stop offset="0%" stop-color="#0ea5e9" />
+      <stop offset="100%" stop-color="#0c5375" />
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="77" />
+    </filter>
+    
+  <pattern id="d-1074708321" width="28" height="28" patternUnits="userSpaceOnUse">
+    <circle cx="2" cy="2" r="1.4" fill="#ffffff" opacity="0.16" />
+  </pattern>
+  </defs>
+  <rect width="1280" height="720" fill="url(#g-1074708321)" />
+  <circle cx="789" cy="227" r="321" fill="#ffffff" opacity="0.16" filter="url(#blur)" /><circle cx="749" cy="244" r="439" fill="#ffffff" opacity="0.10" filter="url(#blur)" /><circle cx="587" cy="483" r="460" fill="#ffffff" opacity="0.20" filter="url(#blur)" />
+  <rect width="1280" height="720" fill="url(#d-1074708321)" />
+  <path d="M1022,134 L1022,253 L1022,379 L1022,486 L1022,584" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.25" stroke-linecap="round" stroke-linejoin="round" /><circle cx="1022" cy="134" r="3.5" fill="#ffffff" opacity="0.35" /><circle cx="1022" cy="253" r="3.5" fill="#ffffff" opacity="0.35" /><circle cx="1022" cy="379" r="3.5" fill="#ffffff" opacity="0.35" /><circle cx="1022" cy="486" r="3.5" fill="#ffffff" opacity="0.35" /><circle cx="1022" cy="584" r="3.5" fill="#ffffff" opacity="0.35" />
+  
+  
+</svg>

@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { requireAdmin } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { slugify } from "@/lib/utils/slugify";
@@ -60,11 +60,18 @@ export async function createCourse(input) {
           position: i,
         })),
       );
-    if (lessonsError) return { error: "Could not save lessons." };
+    if (lessonsError) {
+      // Don't leave a lesson-less course behind — createCourse is all-or-
+      // nothing from the caller's perspective.
+      await supabase.from("courses").delete().eq("id", course.id);
+      return { error: "Could not save lessons." };
+    }
   }
 
   revalidatePath("/admin/courses");
   revalidatePath("/courses");
+  revalidateTag("courses");
+  revalidateTag("course-categories");
   return { id: course.id };
 }
 
@@ -93,33 +100,47 @@ export async function updateCourse(input) {
 
   const toDelete = [...existingIds].filter((id) => !submittedIds.has(id));
   if (toDelete.length) {
-    await supabase.from("course_lessons").delete().in("id", toDelete);
+    const { error: deleteError } = await supabase
+      .from("course_lessons")
+      .delete()
+      .in("id", toDelete);
+    if (deleteError) {
+      return {
+        error:
+          "Could not remove one or more lessons — they may be referenced elsewhere.",
+      };
+    }
   }
 
-  for (const [i, l] of parsed.data.lessons.entries()) {
-    if (l.id) {
-      await supabase
-        .from("course_lessons")
-        .update({
-          title: l.title,
-          video_url: l.video_url || null,
-          is_preview: l.is_preview,
-          position: i,
-        })
-        .eq("id", l.id);
-    } else {
-      await supabase.from("course_lessons").insert({
-        course_id: parsed.data.id,
-        title: l.title,
-        video_url: l.video_url || null,
-        is_preview: l.is_preview,
-        position: i,
-      });
-    }
+  const lessonResults = await Promise.all(
+    parsed.data.lessons.map((l, i) =>
+      l.id
+        ? supabase
+            .from("course_lessons")
+            .update({
+              title: l.title,
+              video_url: l.video_url || null,
+              is_preview: l.is_preview,
+              position: i,
+            })
+            .eq("id", l.id)
+        : supabase.from("course_lessons").insert({
+            course_id: parsed.data.id,
+            title: l.title,
+            video_url: l.video_url || null,
+            is_preview: l.is_preview,
+            position: i,
+          }),
+    ),
+  );
+  if (lessonResults.some((r) => r.error)) {
+    return { error: "Could not save one or more lessons." };
   }
 
   revalidatePath("/admin/courses");
   revalidatePath("/courses");
+  revalidateTag("courses");
+  revalidateTag("course-categories");
   return { id: parsed.data.id };
 }
 
@@ -149,5 +170,7 @@ export async function deleteCourse(id) {
 
   revalidatePath("/admin/courses");
   revalidatePath("/courses");
+  revalidateTag("courses");
+  revalidateTag("course-categories");
   return { success: true };
 }

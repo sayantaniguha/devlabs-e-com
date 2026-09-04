@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { requireAdmin } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { slugify } from "@/lib/utils/slugify";
@@ -20,6 +20,10 @@ export async function createCategory(_prevState, formData) {
 
   revalidatePath("/admin/categories");
   revalidatePath("/shop");
+  revalidateTag("categories");
+  // Product listings embed each product's category name/slug, so a rename
+  // or delete here must invalidate the products cache too.
+  revalidateTag("products");
   return { success: true };
 }
 
@@ -40,6 +44,10 @@ export async function updateCategory(_prevState, formData) {
 
   revalidatePath("/admin/categories");
   revalidatePath("/shop");
+  revalidateTag("categories");
+  // Product listings embed each product's category name/slug, so a rename
+  // or delete here must invalidate the products cache too.
+  revalidateTag("products");
   return { success: true };
 }
 
@@ -55,5 +63,9 @@ export async function deleteCategory(id) {
 
   revalidatePath("/admin/categories");
   revalidatePath("/shop");
+  revalidateTag("categories");
+  // Product listings embed each product's category name/slug, so a rename
+  // or delete here must invalidate the products cache too.
+  revalidateTag("products");
   return { success: true };
 }

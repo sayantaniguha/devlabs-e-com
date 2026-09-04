@@ -63,7 +63,7 @@ export default async function AdminCoursesPage({ searchParams }) {
                         className={`px-2 py-1 text-[10px] font-bold uppercase tracking-wider rounded ${
                           course.status === "active"
                             ? "bg-tertiary-fixed-dim/20 text-on-tertiary-fixed-variant"
-                            : "bg-surface-variant text-on-surface-variant"
+                            : "bg-surface-variant text-on-surface-variant dark:bg-inverse-surface dark:text-inverse-on-surface"
                         }`}
                       >
                         {course.status}

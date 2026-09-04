@@ -26,7 +26,7 @@ export default function LoginPage() {
             type="email"
             name="email"
             required
-            className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-surface-container-low text-on-surface dark:text-inverse-on-surface focus:outline-none focus:border-secondary"
+            className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface focus:outline-none focus:border-secondary"
           />
         </label>
         <label className="flex flex-col gap-1">
@@ -38,7 +38,7 @@ export default function LoginPage() {
             name="password"
             required
             minLength={8}
-            className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-surface-container-low text-on-surface dark:text-inverse-on-surface focus:outline-none focus:border-secondary"
+            className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface focus:outline-none focus:border-secondary"
           />
         </label>
 

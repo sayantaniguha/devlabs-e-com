@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { requireAdmin } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { slugify } from "@/lib/utils/slugify";
@@ -55,10 +55,16 @@ export async function createProduct(input) {
         stock_quantity: v.stock_quantity,
       })),
     );
-  if (variantsError) return { error: "Could not save variants." };
+  if (variantsError) {
+    // Don't leave a variant-less product behind — createProduct is all-or-
+    // nothing from the caller's perspective.
+    await supabase.from("products").delete().eq("id", product.id);
+    return { error: "Could not save variants." };
+  }
 
   revalidatePath("/admin/products");
   revalidatePath("/shop");
+  revalidateTag("products");
   return { id: product.id };
 }
 
@@ -90,20 +96,36 @@ export async function updateProduct(input) {
   const toInsert = parsed.data.variants.filter((v) => !v.id);
 
   if (toDelete.length) {
-    await supabase.from("product_variants").delete().in("id", toDelete);
-  }
-  for (const v of toUpdate) {
-    await supabase
+    const { error: deleteError } = await supabase
       .from("product_variants")
-      .update({
-        size: v.size || null,
-        sku: v.sku || null,
-        stock_quantity: v.stock_quantity,
-      })
-      .eq("id", v.id);
+      .delete()
+      .in("id", toDelete);
+    if (deleteError) {
+      return {
+        error:
+          "Could not remove one or more variants — they may be referenced by past orders.",
+      };
+    }
   }
+
+  const updateResults = await Promise.all(
+    toUpdate.map((v) =>
+      supabase
+        .from("product_variants")
+        .update({
+          size: v.size || null,
+          sku: v.sku || null,
+          stock_quantity: v.stock_quantity,
+        })
+        .eq("id", v.id),
+    ),
+  );
+  if (updateResults.some((r) => r.error)) {
+    return { error: "Could not update one or more variants." };
+  }
+
   if (toInsert.length) {
-    await supabase.from("product_variants").insert(
+    const { error: insertError } = await supabase.from("product_variants").insert(
       toInsert.map((v) => ({
         product_id: parsed.data.id,
         size: v.size || null,
@@ -111,10 +133,12 @@ export async function updateProduct(input) {
         stock_quantity: v.stock_quantity,
       })),
     );
+    if (insertError) return { error: "Could not save new variants." };
   }
 
   revalidatePath("/admin/products");
   revalidatePath("/shop");
+  revalidateTag("products");
   return { id: parsed.data.id };
 }
 
@@ -147,6 +171,7 @@ export async function deleteProduct(id) {
 
   revalidatePath("/admin/products");
   revalidatePath("/shop");
+  revalidateTag("products");
   return { success: true };
 }
 
@@ -169,6 +194,7 @@ export async function addProductImage(productId, url) {
 
   revalidatePath("/admin/products");
   revalidatePath("/shop");
+  revalidateTag("products");
   return { success: true };
 }
 
@@ -205,6 +231,7 @@ export async function removeProductImage(imageId) {
 
   revalidatePath("/admin/products");
   revalidatePath("/shop");
+  revalidateTag("products");
   return { success: true };
 }
 
@@ -223,5 +250,6 @@ export async function setPrimaryImage(productId, imageId) {
 
   revalidatePath("/admin/products");
   revalidatePath("/shop");
+  revalidateTag("products");
   return { success: true };
 }

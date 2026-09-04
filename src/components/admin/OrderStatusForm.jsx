@@ -4,13 +4,14 @@ import { useActionState } from "react";
 import { updateOrderStatus } from "@/lib/actions/admin/orders";
 
 const STATUSES = [
-  "pending",
-  "paid",
-  "processing",
-  "shipped",
-  "delivered",
-  "cancelled",
-  "refunded",
+  { value: "pending", label: "Pending" },
+  { value: "paid", label: "Paid" },
+  { value: "processing", label: "Processing" },
+  { value: "shipped", label: "Shipped" },
+  { value: "delivered", label: "Delivered" },
+  { value: "cancelled", label: "Cancelled" },
+  { value: "refunded", label: "Refunded" },
+  { value: "payment_failed", label: "Payment Failed" },
 ];
 
 export function OrderStatusForm({ orderId, status }) {
@@ -22,11 +23,11 @@ export function OrderStatusForm({ orderId, status }) {
       <select
         name="status"
         defaultValue={status}
-        className="rounded-md border border-outline-variant dark:border-outline bg-surface dark:bg-primary-container text-on-surface dark:text-inverse-on-surface py-2 px-3 text-body-sm capitalize"
+        className="rounded-md border border-outline-variant dark:border-outline bg-surface dark:bg-primary-container text-on-surface dark:text-inverse-on-surface py-2 px-3 text-body-sm"
       >
         {STATUSES.map((s) => (
-          <option key={s} value={s} className="capitalize">
-            {s}
+          <option key={s.value} value={s.value}>
+            {s.label}
           </option>
         ))}
       </select>

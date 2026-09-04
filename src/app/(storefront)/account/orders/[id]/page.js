@@ -53,7 +53,7 @@ export default async function OrderDetailPage({ params }) {
         <OrderStatusBadge status={order.status} />
       </div>
 
-      <div className="bg-surface-container-lowest border border-outline-variant dark:border-outline rounded-lg p-stack-lg mb-stack-lg">
+      <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg p-stack-lg mb-stack-lg">
         <h2 className="font-headline-md text-headline-md text-on-background dark:text-inverse-on-surface mb-stack-md">
           Items
         </h2>
@@ -96,7 +96,7 @@ export default async function OrderDetailPage({ params }) {
         </div>
       </div>
 
-      <div className="bg-surface-container-lowest border border-outline-variant dark:border-outline rounded-lg p-stack-lg">
+      <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg p-stack-lg">
         <h2 className="font-headline-md text-headline-md text-on-background dark:text-inverse-on-surface mb-stack-sm">
           Shipped to
         </h2>

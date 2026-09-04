@@ -21,7 +21,11 @@ export const useCartStore = create(
           set({
             items: get().items.map((i) =>
               lineKey(i) === key
-                ? { ...i, quantity: i.quantity + (item.quantity ?? 1) }
+                ? {
+                    ...i,
+                    ...item,
+                    quantity: i.quantity + (item.quantity ?? 1),
+                  }
                 : i,
             ),
           });

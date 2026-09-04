@@ -50,14 +50,6 @@ export function Navbar() {
         <div className="flex items-center gap-stack-md">
           <button
             type="button"
-            aria-label="Search"
-            className="text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-all scale-95 active:scale-90 duration-150"
-          >
-            <span className="material-symbols-outlined">search</span>
-          </button>
-
-          <button
-            type="button"
             aria-label="Open cart"
             onClick={openCart}
             className="relative text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-all scale-95 active:scale-90 duration-150"

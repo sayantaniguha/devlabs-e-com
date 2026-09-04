@@ -166,12 +166,15 @@ create trigger on_auth_user_created
   for each row execute procedure public.handle_new_user();
 
 -- =========================================================================
--- confirm_paid_order: the sole path that marks an order paid, decrements
--- stock, and grants course enrollments. Called by the Razorpay webhook
--- handler (via the service-role client) after signature verification.
--- Idempotent — re-running it on an already-paid order is a no-op, so a
--- duplicate webhook delivery can never double-decrement stock or
--- double-enroll a course.
+-- confirm_paid_order: the sole function that marks an order paid, decrements
+-- stock, and grants course enrollments. Called (via the service-role client,
+-- after signature verification) from two places: the Razorpay webhook
+-- handler, and the client-redirect confirmation path in
+-- lib/actions/checkout.js — the latter confirms immediately on checkout
+-- success without waiting on webhook delivery, with the webhook as a durable
+-- backstop. Idempotent — re-running it on an already-paid order is a no-op,
+-- so either path (or both) running for the same order can never
+-- double-decrement stock or double-enroll a course.
 -- =========================================================================
 
 create function public.confirm_paid_order(p_order_id uuid)

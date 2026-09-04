@@ -16,11 +16,11 @@ export default async function ProductPage({ params }) {
   return (
     <main className="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-lg">
       <div className="flex items-center space-x-stack-sm font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container mb-stack-lg">
-        <Link href="/" className="hover:text-primary transition-colors">
+        <Link href="/" className="hover:text-primary dark:hover:text-inverse-on-surface transition-colors">
           Home
         </Link>
         <span className="material-symbols-outlined text-sm">chevron_right</span>
-        <Link href="/shop" className="hover:text-primary transition-colors">
+        <Link href="/shop" className="hover:text-primary dark:hover:text-inverse-on-surface transition-colors">
           Shop
         </Link>
         {product.category && (

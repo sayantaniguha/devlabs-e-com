@@ -1,4 +1,5 @@
-import { createClient } from "@/lib/supabase/server";
+import { unstable_cache } from "next/cache";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 const SIZE_ORDER = ["S", "M", "L", "XL", "XXL"];
 
@@ -28,95 +29,117 @@ function decorate(product) {
   return { ...product, variants, images, totalStock, primaryImage };
 }
 
-export async function getCategories() {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("categories")
-    .select("id, name, slug")
-    .order("name");
-  if (error) throw error;
-  return data;
-}
+// These reads are public and identical for every caller (always scoped to
+// status = "active"), so they're cached indefinitely via the admin client
+// (unstable_cache can't wrap the cookie-scoped client — it disallows
+// dynamic APIs like cookies() inside) and invalidated on demand via
+// revalidateTag("products") / revalidateTag("categories") from the admin
+// product/category actions and from the checkout payment-confirmation path
+// (stock changes there too, not just in admin).
 
-export async function getProducts({
-  category,
-  search,
-  sort = "newest",
-  maxPrice,
-  size,
-  inStockOnly,
-} = {}) {
-  const supabase = await createClient();
-  let query = supabase
-    .from("products")
-    .select(PRODUCT_SELECT)
-    .eq("status", "active");
+export const getCategories = unstable_cache(
+  async function getCategories() {
+    const supabase = createAdminClient();
+    const { data, error } = await supabase
+      .from("categories")
+      .select("id, name, slug")
+      .order("name");
+    if (error) throw error;
+    return data;
+  },
+  ["categories"],
+  { tags: ["categories"] },
+);
 
-  if (search) {
-    query = query.ilike("name", `%${search}%`);
-  }
-  if (maxPrice != null) {
-    query = query.lte("base_price", maxPrice);
-  }
-  if (sort === "price-asc") {
-    query = query.order("base_price", { ascending: true });
-  } else if (sort === "price-desc") {
-    query = query.order("base_price", { ascending: false });
-  } else {
-    query = query.order("created_at", { ascending: false });
-  }
-  // Tiebreaker: rows with equal created_at/price (e.g. a batch-seeded
-  // catalog) would otherwise come back in a non-deterministic order.
-  query = query.order("id", { ascending: true });
+export const getProducts = unstable_cache(
+  async function getProducts({
+    category,
+    search,
+    sort = "newest",
+    maxPrice,
+    size,
+    inStockOnly,
+  } = {}) {
+    const supabase = createAdminClient();
+    let query = supabase
+      .from("products")
+      .select(PRODUCT_SELECT)
+      .eq("status", "active");
 
-  const { data, error } = await query;
-  if (error) throw error;
+    if (search) {
+      query = query.ilike("name", `%${search}%`);
+    }
+    if (maxPrice != null) {
+      query = query.lte("base_price", maxPrice);
+    }
+    if (sort === "price-asc") {
+      query = query.order("base_price", { ascending: true });
+    } else if (sort === "price-desc") {
+      query = query.order("base_price", { ascending: false });
+    } else {
+      query = query.order("created_at", { ascending: false });
+    }
+    // Tiebreaker: rows with equal created_at/price (e.g. a batch-seeded
+    // catalog) would otherwise come back in a non-deterministic order.
+    query = query.order("id", { ascending: true });
 
-  // Filtered in JS rather than via a joined-column `.eq()` — the catalog is
-  // small, and it sidesteps PostgREST's inner-join requirement for
-  // filtering on embedded resources.
-  let products = data.map(decorate);
+    const { data, error } = await query;
+    if (error) throw error;
 
-  if (category?.length) {
-    const categories = Array.isArray(category) ? category : [category];
-    products = products.filter((p) => categories.includes(p.category?.slug));
-  }
-  if (size) {
-    products = products.filter((p) => p.variants.some((v) => v.size === size));
-  }
-  if (inStockOnly) {
-    products = products.filter((p) => p.totalStock > 0);
-  }
+    // Filtered in JS rather than via a joined-column `.eq()` — the catalog is
+    // small, and it sidesteps PostgREST's inner-join requirement for
+    // filtering on embedded resources.
+    let products = data.map(decorate);
 
-  return products;
-}
+    if (category?.length) {
+      const categories = Array.isArray(category) ? category : [category];
+      products = products.filter((p) => categories.includes(p.category?.slug));
+    }
+    if (size) {
+      products = products.filter((p) =>
+        p.variants.some((v) => v.size === size),
+      );
+    }
+    if (inStockOnly) {
+      products = products.filter((p) => p.totalStock > 0);
+    }
 
-export async function getProductBySlug(slug) {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("products")
-    .select(PRODUCT_SELECT)
-    .eq("slug", slug)
-    .eq("status", "active")
-    .maybeSingle();
-  if (error) throw error;
-  if (!data) return null;
-  return decorate(data);
-}
+    return products;
+  },
+  ["products"],
+  { tags: ["products"] },
+);
 
-export async function getRelatedProducts(
-  categoryId,
-  excludeProductId,
-  limit = 4,
-) {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("products")
-    .select(PRODUCT_SELECT)
-    .eq("status", "active")
-    .eq("category_id", categoryId)
-    .neq("id", excludeProductId)
-    .limit(limit);
-  if (error) throw error;
-  return data.map(decorate);
-}
+export const getProductBySlug = unstable_cache(
+  async function getProductBySlug(slug) {
+    const supabase = createAdminClient();
+    const { data, error } = await supabase
+      .from("products")
+      .select(PRODUCT_SELECT)
+      .eq("slug", slug)
+      .eq("status", "active")
+      .maybeSingle();
+    if (error) throw error;
+    if (!data) return null;
+    return decorate(data);
+  },
+  ["product-by-slug"],
+  { tags: ["products"] },
+);
+
+export const getRelatedProducts = unstable_cache(
+  async function getRelatedProducts(categoryId, excludeProductId, limit = 4) {
+    const supabase = createAdminClient();
+    const { data, error } = await supabase
+      .from("products")
+      .select(PRODUCT_SELECT)
+      .eq("status", "active")
+      .eq("category_id", categoryId)
+      .neq("id", excludeProductId)
+      .limit(limit);
+    if (error) throw error;
+    return data.map(decorate);
+  },
+  ["related-products"],
+  { tags: ["products"] },
+);

@@ -45,7 +45,7 @@ export default async function AccountPage() {
       <div className="flex flex-col gap-stack-sm mb-stack-lg">
         <Link
           href="/account/orders"
-          className="flex items-center justify-between border border-outline-variant dark:border-outline rounded-lg px-stack-md py-stack-sm hover:bg-surface-container-low dark:hover:bg-surface-container-lowest transition-colors"
+          className="flex items-center justify-between border border-outline-variant dark:border-outline rounded-lg px-stack-md py-stack-sm hover:bg-surface-container-low dark:hover:bg-inverse-surface transition-colors"
         >
           <span className="flex items-center gap-2 font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface">
             <span className="material-symbols-outlined text-[18px]">
@@ -59,7 +59,7 @@ export default async function AccountPage() {
         </Link>
         <Link
           href="/account/addresses"
-          className="flex items-center justify-between border border-outline-variant dark:border-outline rounded-lg px-stack-md py-stack-sm hover:bg-surface-container-low dark:hover:bg-surface-container-lowest transition-colors"
+          className="flex items-center justify-between border border-outline-variant dark:border-outline rounded-lg px-stack-md py-stack-sm hover:bg-surface-container-low dark:hover:bg-inverse-surface transition-colors"
         >
           <span className="flex items-center gap-2 font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface">
             <span className="material-symbols-outlined text-[18px]">
@@ -73,7 +73,7 @@ export default async function AccountPage() {
         </Link>
         <Link
           href="/account/courses"
-          className="flex items-center justify-between border border-outline-variant dark:border-outline rounded-lg px-stack-md py-stack-sm hover:bg-surface-container-low dark:hover:bg-surface-container-lowest transition-colors"
+          className="flex items-center justify-between border border-outline-variant dark:border-outline rounded-lg px-stack-md py-stack-sm hover:bg-surface-container-low dark:hover:bg-inverse-surface transition-colors"
         >
           <span className="flex items-center gap-2 font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface">
             <span className="material-symbols-outlined text-[18px]">
@@ -90,7 +90,7 @@ export default async function AccountPage() {
       <form action={signOut}>
         <button
           type="submit"
-          className="border border-outline-variant dark:border-outline text-on-surface dark:text-inverse-on-surface px-6 py-2 rounded font-semibold hover:bg-surface-container dark:hover:bg-surface-container-low transition-colors"
+          className="border border-outline-variant dark:border-outline text-on-surface dark:text-inverse-on-surface px-6 py-2 rounded font-semibold hover:bg-surface-container dark:hover:bg-inverse-surface transition-colors"
         >
           Log out
         </button>

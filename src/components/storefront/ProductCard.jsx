@@ -10,7 +10,7 @@ export function ProductCard({ product, priority = false }) {
   return (
     <Link
       href={`/product/${product.slug}`}
-      className={`group flex flex-col bg-surface-container-lowest border border-outline-variant dark:border-outline rounded-lg overflow-hidden relative shadow-[0_4px_12px_rgba(0,0,0,0.05)] ${soldOut ? "opacity-60 grayscale pointer-events-none" : "cursor-pointer"}`}
+      className={`group flex flex-col bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg overflow-hidden relative shadow-[0_4px_12px_rgba(0,0,0,0.05)] ${soldOut ? "opacity-60 grayscale pointer-events-none" : "cursor-pointer"}`}
     >
       {soldOut && (
         <>

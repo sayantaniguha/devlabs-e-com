@@ -57,5 +57,6 @@ export const orderStatusSchema = z.object({
     "delivered",
     "cancelled",
     "refunded",
+    "payment_failed",
   ]),
 });

@@ -40,6 +40,7 @@ export function ProductDetail({ product }) {
       variantLabel: selectedVariant.size
         ? `Size ${selectedVariant.size}`
         : undefined,
+      maxQuantity: selectedVariant.stock_quantity,
       quantity,
     });
   }
@@ -144,11 +145,11 @@ export function ProductDetail({ product }) {
 
         <div className="flex flex-col space-y-stack-sm mb-stack-lg">
           <div className="flex space-x-stack-sm h-12">
-            <div className="flex items-center border border-outline-variant dark:border-outline rounded w-32 bg-surface">
+            <div className="flex items-center border border-outline-variant dark:border-outline rounded w-32 bg-surface dark:bg-inverse-surface">
               <button
                 type="button"
                 onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                className="px-3 text-on-surface-variant hover:text-primary"
+                className="px-3 text-on-surface-variant dark:text-on-primary-container hover:text-primary dark:hover:text-inverse-on-surface"
               >
                 <span className="material-symbols-outlined">remove</span>
               </button>
@@ -158,7 +159,7 @@ export function ProductDetail({ product }) {
               <button
                 type="button"
                 onClick={() => setQuantity((q) => Math.min(maxQuantity, q + 1))}
-                className="px-3 text-on-surface-variant hover:text-primary"
+                className="px-3 text-on-surface-variant dark:text-on-primary-container hover:text-primary dark:hover:text-inverse-on-surface"
               >
                 <span className="material-symbols-outlined">add</span>
               </button>

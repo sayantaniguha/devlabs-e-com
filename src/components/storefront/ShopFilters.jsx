@@ -136,7 +136,7 @@ export function ShopFilters({ categories, children }) {
                 className={
                   activeSize === s
                     ? "px-3 py-1 border border-secondary bg-secondary/10 rounded text-secondary transition-colors text-body-sm font-body-sm"
-                    : "px-3 py-1 border border-outline-variant dark:border-outline rounded hover:border-secondary hover:text-secondary transition-colors text-body-sm font-body-sm bg-surface-container-lowest text-on-surface-variant dark:text-on-primary-container"
+                    : "px-3 py-1 border border-outline-variant dark:border-outline rounded hover:border-secondary hover:text-secondary transition-colors text-body-sm font-body-sm bg-surface-container-lowest dark:bg-inverse-surface text-on-surface-variant dark:text-on-primary-container"
                 }
               >
                 {s}
@@ -200,20 +200,20 @@ export function ShopFilters({ categories, children }) {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search products..."
-              className="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant dark:border-outline rounded focus:border-secondary focus:ring-2 focus:ring-secondary/10 transition-all text-body-sm font-body-sm outline-none placeholder:text-on-surface-variant/50 text-on-surface"
+              className="w-full pl-10 pr-4 py-2 bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded focus:border-secondary focus:ring-2 focus:ring-secondary/10 transition-all text-body-sm font-body-sm outline-none placeholder:text-on-surface-variant/50 dark:placeholder:text-on-primary-container/50 text-on-surface dark:text-inverse-on-surface"
             />
           </div>
           <div className="relative w-full sm:w-48">
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value)}
-              className="w-full pl-3 pr-8 py-2 bg-surface-container-lowest border border-outline-variant dark:border-outline rounded focus:border-secondary focus:ring-2 focus:ring-secondary/10 transition-all text-body-sm font-body-sm appearance-none outline-none text-on-background cursor-pointer"
+              className="w-full pl-3 pr-8 py-2 bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded focus:border-secondary focus:ring-2 focus:ring-secondary/10 transition-all text-body-sm font-body-sm appearance-none outline-none text-on-background dark:text-inverse-on-surface cursor-pointer"
             >
               <option value="newest">Newest</option>
               <option value="price-asc">Price: Low to High</option>
               <option value="price-desc">Price: High to Low</option>
             </select>
-            <span className="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[20px]">
+            <span className="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant dark:text-on-primary-container pointer-events-none text-[20px]">
               expand_more
             </span>
           </div>

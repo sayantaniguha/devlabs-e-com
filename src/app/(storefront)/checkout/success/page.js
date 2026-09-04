@@ -22,25 +22,47 @@ export default async function CheckoutSuccessPage({ searchParams }) {
     );
   }
 
-  const isPaid = order.status !== "pending";
+  const isPaymentFailed = order.status === "payment_failed";
+  const isPaid = !isPaymentFailed && order.status !== "pending";
 
   return (
     <section className="max-w-2xl mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl">
       <div className="text-center mb-stack-xl">
-        <span className="material-symbols-outlined text-[48px] text-on-tertiary-container mb-stack-sm">
-          {isPaid ? "check_circle" : "hourglass_top"}
+        <span
+          className={`material-symbols-outlined text-[48px] mb-stack-sm ${isPaymentFailed ? "text-error" : "text-on-tertiary-container"}`}
+        >
+          {isPaymentFailed
+            ? "error"
+            : isPaid
+              ? "check_circle"
+              : "hourglass_top"}
         </span>
         <h1 className="font-headline-lg text-headline-lg text-on-background dark:text-inverse-on-surface">
-          {isPaid ? "Order confirmed" : "Confirming your payment…"}
+          {isPaymentFailed
+            ? "We couldn't complete this order"
+            : isPaid
+              ? "Order confirmed"
+              : "Confirming your payment…"}
         </h1>
         <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container mt-stack-xs">
           Order {order.order_number}
-          {!isPaid &&
+          {isPaymentFailed &&
+            " — your payment went through, but an item sold out before we could confirm it. Nothing was shipped. Contact us and we'll sort out a refund."}
+          {!isPaymentFailed &&
+            !isPaid &&
             " — this can take a few seconds to finalize. Refresh if it doesn't update."}
         </p>
+        {isPaymentFailed && (
+          <Link
+            href="/contact"
+            className="inline-block mt-stack-md bg-secondary text-on-primary px-6 py-2 rounded font-semibold hover:bg-secondary-container transition-colors"
+          >
+            Contact support
+          </Link>
+        )}
       </div>
 
-      <div className="bg-surface-container-lowest border border-outline-variant dark:border-outline rounded-lg p-stack-lg mb-stack-lg">
+      <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg p-stack-lg mb-stack-lg">
         <h2 className="font-headline-md text-headline-md text-on-background dark:text-inverse-on-surface mb-stack-md">
           Items
         </h2>
@@ -83,7 +105,7 @@ export default async function CheckoutSuccessPage({ searchParams }) {
         </div>
       </div>
 
-      <div className="bg-surface-container-lowest border border-outline-variant dark:border-outline rounded-lg p-stack-lg mb-stack-lg">
+      <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg p-stack-lg mb-stack-lg">
         <h2 className="font-headline-md text-headline-md text-on-background dark:text-inverse-on-surface mb-stack-sm">
           Shipping to
         </h2>

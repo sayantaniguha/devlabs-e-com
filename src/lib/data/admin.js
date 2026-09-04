@@ -42,7 +42,7 @@ export async function getDashboardStats() {
     { count: customersThisMonth },
     { count: customersLastMonth },
     { data: recentOrdersRaw },
-    { data: variants },
+    { data: lowStockProducts },
   ] = await Promise.all([
     supabase
       .from("orders")
@@ -91,9 +91,7 @@ export async function getDashboardStats() {
       )
       .order("created_at", { ascending: false })
       .limit(8),
-    supabase
-      .from("product_variants")
-      .select("stock_quantity, product:products(id, name)"),
+    supabase.rpc("get_low_stock_products", { p_limit: 4 }),
   ]);
 
   const totalSalesThisMonth = (salesThis ?? []).reduce(
@@ -107,20 +105,11 @@ export async function getDashboardStats() {
 
   const revenueLast7Days = await getRevenueLast7Days(supabase);
 
-  const stockByProduct = new Map();
-  for (const v of variants ?? []) {
-    if (!v.product) continue;
-    const entry = stockByProduct.get(v.product.id) ?? {
-      name: v.product.name,
-      totalStock: 0,
-    };
-    entry.totalStock += v.stock_quantity;
-    stockByProduct.set(v.product.id, entry);
-  }
-  const inventoryStatus = Array.from(stockByProduct.entries())
-    .map(([id, v]) => ({ id, ...v }))
-    .sort((a, b) => a.totalStock - b.totalStock)
-    .slice(0, 4);
+  const inventoryStatus = (lowStockProducts ?? []).map((p) => ({
+    id: p.id,
+    name: p.name,
+    totalStock: p.total_stock,
+  }));
 
   const recentOrders = (recentOrdersRaw ?? []).map((o) => {
     const firstItem = o.order_items?.[0];
