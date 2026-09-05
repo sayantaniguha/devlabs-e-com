@@ -4,30 +4,30 @@ const YEAR = new Date().getFullYear();
 
 export function Footer() {
   return (
-    <footer className="bg-surface-container-low dark:bg-primary-container w-full border-t border-outline-variant dark:border-outline mt-stack-xl">
+    <footer className="bg-dl-chalk w-full border-t border-dl-rule mt-stack-xl">
       <div className="max-w-container-max mx-auto px-margin-desktop py-stack-xl grid grid-cols-1 md:grid-cols-4 gap-gutter">
         <div>
-          <div className="font-headline-md text-headline-md font-bold text-on-surface dark:text-inverse-on-surface mb-6">
+          <div className="font-dl-sans text-lg font-bold text-dl-ink [font-stretch:110%] mb-6">
             DevLabs
           </div>
-          <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container opacity-80 mb-4">
+          <p className="font-dl-sans text-dl-body text-dl-charcoal mb-4">
             Building the tools and community for the next generation of
             engineers.
           </p>
-          <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container opacity-80">
+          <p className="font-dl-sans text-dl-body text-dl-charcoal">
             © {YEAR} DevLabs Infrastructure. All rights reserved.
           </p>
         </div>
 
         <div>
-          <h4 className="font-label-caps text-label-caps text-secondary dark:text-secondary-fixed mb-4 uppercase">
+          <h4 className="font-dl-sans text-dl-body font-semibold text-dl-ink mb-4 uppercase tracking-wide">
             Shop
           </h4>
           <ul className="space-y-3">
             <li>
               <Link
                 href="/shop?category=t-shirts&category=hoodies"
-                className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-colors opacity-80 hover:opacity-100"
+                className="font-dl-sans text-dl-body text-dl-charcoal hover:text-dl-ink hover:underline underline-offset-4 transition-colors"
               >
                 Apparel
               </Link>
@@ -35,7 +35,7 @@ export function Footer() {
             <li>
               <Link
                 href="/shop?category=bags&category=drinkware&category=stickers"
-                className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-colors opacity-80 hover:opacity-100"
+                className="font-dl-sans text-dl-body text-dl-charcoal hover:text-dl-ink hover:underline underline-offset-4 transition-colors"
               >
                 Accessories
               </Link>
@@ -43,7 +43,7 @@ export function Footer() {
             <li>
               <Link
                 href="/shop?category=desk"
-                className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-colors opacity-80 hover:opacity-100"
+                className="font-dl-sans text-dl-body text-dl-charcoal hover:text-dl-ink hover:underline underline-offset-4 transition-colors"
               >
                 Desk Setup
               </Link>
@@ -51,7 +51,7 @@ export function Footer() {
             <li>
               <Link
                 href="/courses"
-                className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-colors opacity-80 hover:opacity-100"
+                className="font-dl-sans text-dl-body text-dl-charcoal hover:text-dl-ink hover:underline underline-offset-4 transition-colors"
               >
                 Courses
               </Link>
@@ -60,14 +60,14 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="font-label-caps text-label-caps text-secondary dark:text-secondary-fixed mb-4 uppercase">
+          <h4 className="font-dl-sans text-dl-body font-semibold text-dl-ink mb-4 uppercase tracking-wide">
             Company
           </h4>
           <ul className="space-y-3">
             <li>
               <Link
                 href="/about"
-                className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-colors opacity-80 hover:opacity-100"
+                className="font-dl-sans text-dl-body text-dl-charcoal hover:text-dl-ink hover:underline underline-offset-4 transition-colors"
               >
                 About Us
               </Link>
@@ -75,7 +75,7 @@ export function Footer() {
             <li>
               <Link
                 href="/contact"
-                className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-colors opacity-80 hover:opacity-100"
+                className="font-dl-sans text-dl-body text-dl-charcoal hover:text-dl-ink hover:underline underline-offset-4 transition-colors"
               >
                 Contact
               </Link>
@@ -84,15 +84,15 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="font-label-caps text-label-caps text-secondary dark:text-secondary-fixed mb-4 uppercase">
+          <h4 className="font-dl-sans text-dl-body font-semibold text-dl-ink mb-4 uppercase tracking-wide">
             Newsletter
           </h4>
-          <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container opacity-80 mb-4">
+          <p className="font-dl-sans text-dl-body text-dl-charcoal mb-4">
             Subscribe for updates on new drops and course releases.
           </p>
           <form className="flex">
             <input
-              className="w-full px-4 py-2 border border-outline-variant rounded-l focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/10 bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface placeholder:text-on-surface-variant/50 dark:placeholder:text-on-primary-container/50 font-body-sm text-body-sm"
+              className="w-full px-4 py-2 border border-dl-rule bg-dl-sheet text-dl-ink placeholder:text-dl-charcoal font-dl-sans text-dl-body focus:outline-none focus:border-dl-signal focus:ring-1 focus:ring-dl-signal/20"
               placeholder="Email address"
               type="email"
               name="email"
@@ -101,11 +101,9 @@ export function Footer() {
             <button
               type="submit"
               aria-label="Subscribe"
-              className="bg-secondary text-on-primary px-4 py-2 rounded-r hover:bg-secondary-container transition-colors"
+              className="bg-dl-ink text-dl-chalk px-4 font-dl-sans hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2"
             >
-              <span className="material-symbols-outlined text-sm" aria-hidden="true">
-                arrow_forward
-              </span>
+              →
             </button>
           </form>
         </div>

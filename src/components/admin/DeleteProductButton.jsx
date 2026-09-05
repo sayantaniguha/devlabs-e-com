@@ -25,12 +25,10 @@ export function DeleteProductButton({ productId, productName }) {
       type="button"
       onClick={handleDelete}
       disabled={deleting}
-      className="text-on-error-container hover:opacity-70 disabled:opacity-40"
       aria-label={`Delete ${productName}`}
+      className="font-dl-sans text-dl-body text-dl-signal-ink hover:underline underline-offset-4 disabled:opacity-40 disabled:no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2"
     >
-      <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
-        delete
-      </span>
+      {deleting ? "Deleting…" : "Delete"}
     </button>
   );
 }

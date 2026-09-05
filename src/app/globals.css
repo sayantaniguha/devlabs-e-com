@@ -127,6 +127,102 @@
   --text-price-sm--font-weight: 500;
 }
 
+/*
+ * DevLabs redesign — token layer only.
+ * Namespaced "dl-" so nothing above this line is touched and no existing
+ * component (which still reads the Material-derived tokens above) changes
+ * appearance. Only the landing hero is built on these for now.
+ */
+:root {
+  --dl-chalk: #EDEEEF; /* page ground */
+  --dl-sheet: #DCDFE1; /* goods plane — sampled from the product photography seamless */
+  --dl-ink: #15181B; /* primary text + primary fill */
+  --dl-charcoal: #3A4045; /* secondary text */
+  --dl-rule: #C7CBCD; /* hairlines */
+  --dl-signal: #E0350C; /* reserved: focus states, live/interactive affordances only — not decoration */
+  --dl-signal-ink: #B02A08; /* signal hover/active */
+
+  /* Admin (Operate mode) only — status-badge semantic vocabulary. Never
+     used on storefront/Persuade surfaces, which stay achromatic-plus-signal. */
+  --dl-success: #166840;
+  --dl-warning: #7A4E00;
+}
+
+.dark {
+  --dl-chalk: #0E1113;
+  --dl-sheet: #191D20;
+  --dl-ink: #E8EBED;
+  --dl-charcoal: #8A9298;
+  --dl-rule: #2A3034;
+  --dl-signal: #FF4A1F;
+  --dl-signal-ink: #FF6A42;
+  --dl-success: #34C77E;
+  --dl-warning: #E3A73D;
+}
+
+@theme inline {
+  /* "inline" keeps these as live var() references instead of Tailwind
+     folding them to their :root value at build time — required for the
+     .dark override above to actually take effect. */
+  --color-dl-chalk: var(--dl-chalk);
+  --color-dl-sheet: var(--dl-sheet);
+  --color-dl-ink: var(--dl-ink);
+  --color-dl-charcoal: var(--dl-charcoal);
+  --color-dl-rule: var(--dl-rule);
+  --color-dl-signal: var(--dl-signal);
+  --color-dl-signal-ink: var(--dl-signal-ink);
+  --color-dl-success: var(--dl-success);
+  --color-dl-warning: var(--dl-warning);
+}
+
+@theme {
+  /* Fonts (self-hosted via next/font in layout.js) */
+  --font-dl-sans: var(--font-archivo);
+  --font-dl-mono: var(--font-martian-mono);
+
+  /* Type scale. Mono is reserved for identifiers/data (codes, SKUs, specs) —
+     never for prices or section labels; see hero for the one real example. */
+  --text-dl-nameplate: 72px;
+  --text-dl-nameplate--line-height: 0.98;
+  --text-dl-nameplate--letter-spacing: -0.01em;
+  --text-dl-nameplate--font-weight: 800;
+
+  --text-dl-headline: 28px;
+  --text-dl-headline--line-height: 1.2;
+  --text-dl-headline--letter-spacing: -0.005em;
+  --text-dl-headline--font-weight: 600;
+
+  --text-dl-body-lg: 18px;
+  --text-dl-body-lg--line-height: 1.6;
+  --text-dl-body-lg--letter-spacing: 0;
+  --text-dl-body-lg--font-weight: 400;
+
+  --text-dl-body: 15px;
+  --text-dl-body--line-height: 1.6;
+  --text-dl-body--letter-spacing: 0;
+  --text-dl-body--font-weight: 400;
+
+  --text-dl-spec: 13px;
+  --text-dl-spec--line-height: 1.4;
+  --text-dl-spec--letter-spacing: 0.02em;
+  --text-dl-spec--font-weight: 500;
+
+  /* Rule thickness — the base unit of the plates-and-rules system */
+  --spacing-dl-hairline: 1px;
+
+  /* Reserved for functional overlays (dropdowns, modals) only — never on
+     product tiles or cards; the redesign's surfaces carry no elevation. */
+  --shadow-dl-overlay: 0 8px 24px -8px rgb(21 24 27 / 0.18);
+}
+
+/* Themed browser default: text selection uses the signal-ink pairing (not
+   plain --dl-signal), which is the one that clears 4.5:1 against chalk in
+   both themes — verified, not assumed. */
+::selection {
+  background-color: var(--dl-signal-ink);
+  color: var(--dl-chalk);
+}
+
 .material-symbols-outlined {
   font-family: "Material Symbols Outlined", sans-serif;
   font-weight: normal;
@@ -156,5 +252,102 @@
   }
   100% {
     transform: translateX(-100%);
+  }
+}
+
+/* Sticky headers (storefront Navbar, admin AdminTopbar) sit on top of page
+   content — without this, keyboard focus can land on an element that's
+   technically in-viewport but visually hidden under the sticky bar.
+   Sized to the larger of the two (AdminTopbar h-[72px]); a little extra
+   headroom on the storefront (~61px measured) is harmless. */
+html {
+  scroll-padding-top: 96px;
+}
+
+/* Motion values. Deliberately few: the built-in CSS easings are too weak to
+   read as intentional, and a single shared pair keeps every animated moment
+   on the same rhythm. These are motion tokens, not design tokens — the
+   palette/type/spacing system above is untouched. */
+:root {
+  --dl-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --dl-ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* ── Cart drawer ──────────────────────────────────────────────────────
+   Scoped to .dl-motion so the admin product drawer (same <dialog> pattern,
+   deliberately not animated) is untouched. The panel slides from the right
+   edge it already lives on — translateX(100%) so it adapts to the full-width
+   mobile panel and the 480px desktop one without hardcoding either.
+   display/overlay need allow-discrete or the browser yanks the dialog out of
+   the top layer before the exit transition can run. */
+dialog.dl-motion::backdrop {
+  background-color: var(--dl-ink);
+  opacity: 0;
+  transition:
+    opacity 200ms var(--dl-ease-out),
+    display 200ms allow-discrete,
+    overlay 200ms allow-discrete;
+}
+
+dialog.dl-motion[open]::backdrop {
+  opacity: 0.5;
+  transition-duration: 280ms;
+}
+
+@starting-style {
+  dialog.dl-motion[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+dialog.dl-motion {
+  transition:
+    display 200ms allow-discrete,
+    overlay 200ms allow-discrete;
+}
+
+.dl-drawer-panel {
+  transform: translateX(100%);
+  /* Exit is shorter than enter — the system responding should feel quicker
+     than the system arriving. */
+  transition: transform 200ms var(--dl-ease-drawer);
+}
+
+dialog.dl-motion[open] .dl-drawer-panel {
+  transform: translateX(0);
+  transition-duration: 280ms;
+}
+
+@starting-style {
+  dialog.dl-motion[open] .dl-drawer-panel {
+    transform: translateX(100%);
+  }
+}
+
+/* Respect the OS-level motion preference everywhere, in one place, rather
+   than threading a check through every transition/animation individually. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Reduced motion means less movement, not no feedback. The three
+     deliberate animations keep their opacity/colour transitions — which
+     carry the meaning — and drop the travel, which is what actually causes
+     motion discomfort. */
+  .dl-motion,
+  .dl-motion::backdrop,
+  .dl-motion-child {
+    transition-property: opacity, background-color, color, display, overlay !important;
+    transition-duration: 200ms !important;
+    /* Both, because the drawer moves via `transform` (own CSS) and the toast
+       moves via `translate` (Tailwind v4's transform architecture). */
+    transform: none !important;
+    translate: none !important;
   }
 }

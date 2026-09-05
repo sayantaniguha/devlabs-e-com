@@ -10,9 +10,13 @@ export const useCartStore = create(
     (set, get) => ({
       items: [],
       isOpen: false,
+      // Which line the last add touched, so the drawer can confirm *what*
+      // landed rather than just that something did. Not persisted.
+      lastAddedKey: null,
 
       openCart: () => set({ isOpen: true }),
       closeCart: () => set({ isOpen: false }),
+      clearLastAdded: () => set({ lastAddedKey: null }),
 
       addItem: (item) => {
         const key = lineKey(item);
@@ -34,7 +38,7 @@ export const useCartStore = create(
             items: [...get().items, { ...item, quantity: item.quantity ?? 1 }],
           });
         }
-        set({ isOpen: true });
+        set({ isOpen: true, lastAddedKey: key });
       },
 
       removeItem: (item) => {

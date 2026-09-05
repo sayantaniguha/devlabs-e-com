@@ -2,8 +2,12 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
+import { ChevronIcon } from "@/components/ui/icons";
 import { useCartStore } from "@/lib/cart-store";
 import { formatPrice } from "@/lib/utils/format";
+
+const FOCUS_RING =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2";
 
 export function ProductDetail({ product }) {
   const addItem = useCartStore((s) => s.addItem);
@@ -58,7 +62,7 @@ export function ProductDetail({ product }) {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-xl mb-stack-xl">
       {/* Imagery */}
       <div className="flex flex-col space-y-stack-md">
-        <div className="aspect-square bg-surface-container-low rounded-lg border border-outline-variant dark:border-outline overflow-hidden relative">
+        <div className="aspect-square bg-dl-sheet border border-dl-rule overflow-hidden relative">
           {images[selectedImage]?.url && (
             <Image
               src={images[selectedImage].url}
@@ -71,53 +75,56 @@ export function ProductDetail({ product }) {
           )}
         </div>
         {images.length > 1 && (
-          <div className="grid grid-cols-4 gap-stack-sm">
-            {images.map((img, i) => (
-              <button
-                key={img.url ?? i}
-                type="button"
-                onClick={() => setSelectedImage(i)}
-                className={`aspect-square bg-surface-container-low rounded overflow-hidden cursor-pointer relative ${
-                  i === selectedImage
-                    ? "border-2 border-secondary"
-                    : "border border-outline-variant dark:border-outline opacity-70 hover:opacity-100 hover:border-secondary transition-colors"
-                }`}
-              >
-                {img.url && (
-                  <Image
-                    src={img.url}
-                    alt={`${product.name} thumbnail ${i + 1}`}
-                    fill
-                    sizes="120px"
-                    className="object-contain"
-                  />
-                )}
-              </button>
-            ))}
+          <div className="grid grid-cols-4 gap-stack-sm" aria-label="Product images">
+            {images.map((img, i) => {
+              const active = i === selectedImage;
+              return (
+                <button
+                  key={img.url ?? i}
+                  type="button"
+                  aria-current={active ? "true" : undefined}
+                  aria-label={`View image ${i + 1} of ${images.length}`}
+                  onClick={() => setSelectedImage(i)}
+                  className={`aspect-square bg-dl-sheet overflow-hidden cursor-pointer relative transition-colors ${FOCUS_RING} ${
+                    active
+                      ? "border-2 border-dl-ink"
+                      : "border border-dl-rule opacity-70 hover:opacity-100 hover:border-dl-ink"
+                  }`}
+                >
+                  {img.url && (
+                    <Image
+                      src={img.url}
+                      alt=""
+                      fill
+                      sizes="120px"
+                      className="object-contain"
+                    />
+                  )}
+                </button>
+              );
+            })}
           </div>
         )}
       </div>
 
       {/* Details */}
       <div className="flex flex-col">
-        <h1 className="font-headline-lg text-headline-lg md:text-[32px] text-primary dark:text-inverse-on-surface mb-stack-xs">
+        <h1 className="font-dl-sans text-dl-headline text-dl-ink">
           {product.name}
         </h1>
-        <div className="font-price-lg text-price-lg text-primary dark:text-inverse-on-surface mb-stack-md">
+        <div className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink tabular-nums mt-2">
           {formatPrice(product.base_price)}
         </div>
-        <p className="font-body-lg text-body-lg text-on-surface-variant dark:text-on-primary-container mb-stack-lg border-b border-outline-variant dark:border-outline pb-stack-md">
+        <p className="font-dl-sans text-dl-body text-dl-charcoal border-b border-dl-rule mt-4 pb-stack-md">
           {product.description}
         </p>
 
         {hasSizes && (
-          <div className="mb-stack-lg">
-            <div className="flex justify-between items-center mb-stack-xs">
-              <span className="font-label-caps text-label-caps text-on-surface-variant dark:text-on-primary-container">
-                SIZE
-              </span>
-            </div>
-            <div className="flex flex-wrap gap-stack-sm">
+          <div className="mt-stack-lg">
+            <span className="block font-dl-sans text-dl-spec text-dl-charcoal uppercase tracking-wide mb-stack-sm">
+              Size
+            </span>
+            <div className="flex flex-wrap gap-stack-sm" aria-label="Size">
               {product.variants.map((v) => {
                 const outOfStock = v.stock_quantity <= 0;
                 const active = v.size === selectedSize;
@@ -125,15 +132,17 @@ export function ProductDetail({ product }) {
                   <button
                     key={v.id}
                     type="button"
+                    aria-current={active ? "true" : undefined}
+                    aria-label={`Size ${v.size}${outOfStock ? ", out of stock" : ""}`}
                     disabled={outOfStock}
                     onClick={() => handleSelectSize(v)}
-                    className={
+                    className={`px-4 py-2 font-dl-mono text-dl-body transition-colors active:scale-[0.98] ${FOCUS_RING} ${
                       outOfStock
-                        ? "px-4 py-2 border border-outline-variant dark:border-outline rounded font-body-sm text-body-sm text-outline-variant opacity-50 cursor-not-allowed line-through"
+                        ? "border border-dl-rule text-dl-charcoal opacity-50 line-through cursor-not-allowed"
                         : active
-                          ? "px-4 py-2 bg-secondary text-on-secondary rounded font-body-sm text-body-sm font-medium transition-colors shadow-[0_4px_12px_rgba(79,70,229,0.2)]"
-                          : "px-4 py-2 border border-outline-variant dark:border-outline rounded font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface hover:border-secondary transition-colors"
-                    }
+                          ? "bg-dl-ink text-dl-chalk"
+                          : "border border-dl-rule text-dl-ink hover:border-dl-ink"
+                    }`}
                   >
                     {v.size}
                   </button>
@@ -143,105 +152,81 @@ export function ProductDetail({ product }) {
           </div>
         )}
 
-        <div className="flex flex-col space-y-stack-sm mb-stack-lg">
+        <div className="flex flex-col space-y-stack-sm mt-stack-lg">
           <div className="flex space-x-stack-sm h-12">
-            <div className="flex items-center border border-outline-variant dark:border-outline rounded w-32 bg-surface dark:bg-inverse-surface">
+            <div className="flex items-center border border-dl-rule w-32 bg-dl-chalk">
               <button
                 type="button"
                 onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                disabled={quantity <= 1}
                 aria-label="Decrease quantity"
-                className="px-3 text-on-surface-variant dark:text-on-primary-container hover:text-primary dark:hover:text-inverse-on-surface"
+                className={`px-3 h-full font-dl-sans text-lg text-dl-charcoal hover:text-dl-ink transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:text-dl-charcoal ${FOCUS_RING}`}
               >
-                <span className="material-symbols-outlined" aria-hidden="true">
-                  remove
-                </span>
+                −
               </button>
-              <span className="flex-grow text-center font-body-lg text-body-lg text-primary dark:text-inverse-on-surface">
+              <span className="flex-grow text-center font-dl-sans text-dl-body-lg text-dl-ink tabular-nums">
                 {quantity}
               </span>
               <button
                 type="button"
-                onClick={() => setQuantity((q) => Math.min(maxQuantity, q + 1))}
+                onClick={() =>
+                  setQuantity((q) => Math.min(maxQuantity, q + 1))
+                }
+                disabled={quantity >= maxQuantity}
                 aria-label="Increase quantity"
-                className="px-3 text-on-surface-variant dark:text-on-primary-container hover:text-primary dark:hover:text-inverse-on-surface"
+                className={`px-3 h-full font-dl-sans text-lg text-dl-charcoal hover:text-dl-ink transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:text-dl-charcoal ${FOCUS_RING}`}
               >
-                <span className="material-symbols-outlined" aria-hidden="true">
-                  add
-                </span>
+                +
               </button>
             </div>
             <button
               type="button"
               disabled={!canAdd}
               onClick={handleAdd}
-              className="flex-grow border border-outline-variant dark:border-outline rounded font-body-lg text-body-lg font-medium text-primary dark:text-inverse-on-surface hover:border-primary dark:hover:border-inverse-on-surface transition-colors flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className={`flex-grow border border-dl-rule font-dl-sans text-dl-body-lg font-semibold text-dl-ink hover:border-dl-ink transition-colors active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100 ${FOCUS_RING}`}
             >
-              <span className="material-symbols-outlined" aria-hidden="true">
-                shopping_cart
-              </span>
-              <span>Add to Cart</span>
+              Add to Cart
             </button>
           </div>
           <button
             type="button"
             disabled={!canAdd}
             onClick={handleBuyNow}
-            className="w-full h-12 bg-secondary text-on-secondary rounded font-body-lg text-body-lg font-medium shadow-[0_4px_12px_rgba(79,70,229,0.2)] disabled:opacity-50 disabled:cursor-not-allowed"
+            className={`w-full h-12 bg-dl-ink text-dl-chalk font-dl-sans text-dl-body-lg font-semibold hover:opacity-90 transition active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100 ${FOCUS_RING}`}
           >
             Buy Now
           </button>
         </div>
 
-        <div className="flex flex-col space-y-stack-xs font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container mb-stack-lg border-b border-outline-variant dark:border-outline pb-stack-md">
+        <div className="flex flex-col space-y-stack-xs font-dl-sans text-dl-body border-b border-dl-rule mt-stack-lg pb-stack-md">
           {canAdd ? (
-            <div className="flex items-center space-x-2 text-[#059669]">
-              <span className="material-symbols-outlined text-sm" aria-hidden="true">
-                check_circle
-              </span>
-              <span>In stock and ready to ship</span>
-            </div>
+            <span className="text-dl-charcoal">In stock and ready to ship</span>
           ) : (
-            <div className="flex items-center space-x-2 text-error">
-              <span className="material-symbols-outlined text-sm" aria-hidden="true">
-                cancel
-              </span>
-              <span>Out of stock</span>
-            </div>
+            <span className="text-dl-signal-ink">Out of stock</span>
           )}
-          <div className="flex items-center space-x-2">
-            <span className="material-symbols-outlined text-sm" aria-hidden="true">
-              local_shipping
-            </span>
-            <span>Ships in 2-3 business days</span>
-          </div>
+          <span className="text-dl-charcoal">Ships in 2-3 business days</span>
         </div>
 
-        <div className="border-t border-outline-variant dark:border-outline border-x-0 border-b-0 divide-y divide-outline-variant dark:divide-outline">
+        <div className="divide-y divide-dl-rule">
           <details className="group py-4" open>
-            <summary className="flex justify-between items-center font-headline-md text-headline-md text-primary dark:text-inverse-on-surface cursor-pointer list-none">
+            <summary
+              className={`flex justify-between items-center font-dl-sans text-dl-body-lg font-semibold text-dl-ink cursor-pointer list-none rounded-sm ${FOCUS_RING}`}
+            >
               Description
-              <span
-                className="material-symbols-outlined transition group-open:rotate-180"
-                aria-hidden="true"
-              >
-                expand_more
-              </span>
+              <ChevronIcon className="w-4 h-4 shrink-0 transition-transform group-open:rotate-180" />
             </summary>
-            <div className="pt-4 font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container">
+            <div className="pt-4 font-dl-sans text-dl-body text-dl-charcoal">
               {product.description}
             </div>
           </details>
           <details className="group py-4">
-            <summary className="flex justify-between items-center font-headline-md text-headline-md text-primary dark:text-inverse-on-surface cursor-pointer list-none">
+            <summary
+              className={`flex justify-between items-center font-dl-sans text-dl-body-lg font-semibold text-dl-ink cursor-pointer list-none rounded-sm ${FOCUS_RING}`}
+            >
               Shipping &amp; Returns
-              <span
-                className="material-symbols-outlined transition group-open:rotate-180"
-                aria-hidden="true"
-              >
-                expand_more
-              </span>
+              <ChevronIcon className="w-4 h-4 shrink-0 transition-transform group-open:rotate-180" />
             </summary>
-            <div className="pt-4 font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container">
+            <div className="pt-4 font-dl-sans text-dl-body text-dl-charcoal">
               Free shipping on orders over ₹1,499. 7-day return policy for
               unworn/unused items with tags attached.
             </div>

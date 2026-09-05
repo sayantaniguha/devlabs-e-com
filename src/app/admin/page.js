@@ -9,15 +9,8 @@ function ChangeBadge({ percent }) {
   const positive = percent >= 0;
   return (
     <span
-      className={`px-2 py-0.5 rounded text-xs font-semibold flex items-center gap-1 ${
-        positive
-          ? "text-on-tertiary-container bg-tertiary-fixed-dim/20"
-          : "text-on-error-container bg-error-container/50"
-      }`}
+      className={`font-dl-mono text-dl-spec tabular-nums ${positive ? "text-dl-success" : "text-dl-warning"}`}
     >
-      <span className="material-symbols-outlined text-[14px]" aria-hidden="true">
-        {positive ? "trending_up" : "trending_down"}
-      </span>
       {positive ? "+" : ""}
       {percent.toFixed(1)}%
     </span>
@@ -55,73 +48,46 @@ export default async function AdminDashboardPage() {
       />
       <div className="p-margin-desktop space-y-stack-xl max-w-container-max mx-auto w-full">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-          <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg p-stack-lg shadow-sm">
-            <div className="flex justify-between items-start mb-4">
-              <div>
-                <p className="font-label-caps text-label-caps text-on-surface-variant dark:text-on-primary-container uppercase tracking-wider mb-1">
-                  Total Sales
-                </p>
-                <p className="font-price-lg text-price-lg font-bold text-on-surface dark:text-inverse-on-surface">
-                  {formatPrice(stats.totalSalesThisMonth)}
-                </p>
-              </div>
-              <div className="w-10 h-10 rounded-md bg-secondary/10 flex items-center justify-center text-secondary">
-                <span className="material-symbols-outlined" aria-hidden="true">
-                  payments
-                </span>
-              </div>
-            </div>
+          <div className="bg-dl-chalk border border-dl-rule p-stack-lg">
+            <p className="font-dl-sans text-dl-spec text-dl-charcoal uppercase tracking-wide mb-1">
+              Total Sales
+            </p>
+            <p className="font-dl-sans text-dl-headline font-bold text-dl-ink tabular-nums mb-3">
+              {formatPrice(stats.totalSalesThisMonth)}
+            </p>
             <div className="flex items-center gap-2">
               <ChangeBadge percent={stats.salesChangePercent} />
-              <span className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container text-xs">
+              <span className="font-dl-sans text-dl-spec text-dl-charcoal">
                 vs last month
               </span>
             </div>
           </div>
 
-          <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg p-stack-lg shadow-sm">
-            <div className="flex justify-between items-start mb-4">
-              <div>
-                <p className="font-label-caps text-label-caps text-on-surface-variant dark:text-on-primary-container uppercase tracking-wider mb-1">
-                  Active Orders
-                </p>
-                <p className="font-headline-md text-headline-md font-bold text-on-surface dark:text-inverse-on-surface">
-                  {stats.activeOrdersCount.toLocaleString("en-IN")}
-                </p>
-              </div>
-              <div className="w-10 h-10 rounded-md bg-secondary/10 flex items-center justify-center text-secondary">
-                <span className="material-symbols-outlined" aria-hidden="true">
-                  local_shipping
-                </span>
-              </div>
-            </div>
+          <div className="bg-dl-chalk border border-dl-rule p-stack-lg">
+            <p className="font-dl-sans text-dl-spec text-dl-charcoal uppercase tracking-wide mb-1">
+              Active Orders
+            </p>
+            <p className="font-dl-sans text-dl-headline font-bold text-dl-ink tabular-nums mb-3">
+              {stats.activeOrdersCount.toLocaleString("en-IN")}
+            </p>
             <div className="flex items-center gap-2">
               <ChangeBadge percent={stats.activeOrdersChangePercent} />
-              <span className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container text-xs">
+              <span className="font-dl-sans text-dl-spec text-dl-charcoal">
                 vs last month
               </span>
             </div>
           </div>
 
-          <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg p-stack-lg shadow-sm">
-            <div className="flex justify-between items-start mb-4">
-              <div>
-                <p className="font-label-caps text-label-caps text-on-surface-variant dark:text-on-primary-container uppercase tracking-wider mb-1">
-                  New Customers
-                </p>
-                <p className="font-headline-md text-headline-md font-bold text-on-surface dark:text-inverse-on-surface">
-                  {stats.newCustomersThisMonth.toLocaleString("en-IN")}
-                </p>
-              </div>
-              <div className="w-10 h-10 rounded-md bg-secondary/10 flex items-center justify-center text-secondary">
-                <span className="material-symbols-outlined" aria-hidden="true">
-                  group
-                </span>
-              </div>
-            </div>
+          <div className="bg-dl-chalk border border-dl-rule p-stack-lg">
+            <p className="font-dl-sans text-dl-spec text-dl-charcoal uppercase tracking-wide mb-1">
+              New Customers
+            </p>
+            <p className="font-dl-sans text-dl-headline font-bold text-dl-ink tabular-nums mb-3">
+              {stats.newCustomersThisMonth.toLocaleString("en-IN")}
+            </p>
             <div className="flex items-center gap-2">
               <ChangeBadge percent={stats.customersChangePercent} />
-              <span className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container text-xs">
+              <span className="font-dl-sans text-dl-spec text-dl-charcoal">
                 vs last month
               </span>
             </div>
@@ -129,11 +95,11 @@ export default async function AdminDashboardPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
-          <div className="lg:col-span-2 bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg p-stack-lg shadow-sm flex flex-col">
-            <h2 className="font-headline-md text-headline-md font-semibold text-on-surface dark:text-inverse-on-surface mb-stack-lg tracking-tight">
+          <div className="lg:col-span-2 bg-dl-chalk border border-dl-rule p-stack-lg flex flex-col">
+            <h2 className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink mb-stack-lg">
               Revenue Overview
             </h2>
-            <div className="flex-1 flex items-end justify-between gap-2 h-48 pb-4">
+            <div className="flex-1 flex justify-between gap-2 h-48 pb-4">
               {stats.revenueLast7Days.map((day, i) => {
                 const isLast = i === stats.revenueLast7Days.length - 1;
                 const heightPercent = Math.max(
@@ -143,15 +109,15 @@ export default async function AdminDashboardPage() {
                 return (
                   <div
                     key={`${day.label}-${i}`}
-                    className="w-full flex flex-col items-center gap-2"
+                    className="w-full h-full flex flex-col justify-end items-center gap-2"
                     title={formatPrice(day.total)}
                   >
                     <div
-                      className={`w-8 md:w-12 rounded-t-sm ${isLast ? "bg-secondary" : "bg-secondary-fixed/50"}`}
+                      className={isLast ? "w-8 md:w-12 bg-dl-ink" : "w-8 md:w-12 bg-dl-rule"}
                       style={{ height: `${heightPercent}%` }}
                     />
                     <span
-                      className={`font-label-caps text-label-caps ${isLast ? "font-bold text-on-surface dark:text-inverse-on-surface" : "text-on-surface-variant dark:text-on-primary-container"}`}
+                      className={`font-dl-mono text-dl-spec ${isLast ? "font-semibold text-dl-ink" : "text-dl-charcoal"}`}
                     >
                       {day.label}
                     </span>
@@ -161,21 +127,21 @@ export default async function AdminDashboardPage() {
             </div>
           </div>
 
-          <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg p-stack-lg shadow-sm">
-            <h2 className="font-headline-md text-headline-md font-semibold text-on-surface dark:text-inverse-on-surface mb-stack-md tracking-tight">
+          <div className="bg-dl-chalk border border-dl-rule p-stack-lg">
+            <h2 className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink mb-stack-md">
               Inventory Status
             </h2>
-            <ul className="divide-y divide-outline-variant/30 dark:divide-outline/30">
+            <ul className="divide-y divide-dl-rule">
               {stats.inventoryStatus.map((p) => (
                 <li
                   key={p.id}
-                  className="py-3 flex justify-between items-center"
+                  className="py-3 flex justify-between items-center gap-2"
                 >
                   <div>
-                    <p className="font-body-sm text-body-sm font-semibold text-on-surface dark:text-inverse-on-surface">
+                    <p className="font-dl-sans text-dl-body font-semibold text-dl-ink">
                       {p.name}
                     </p>
-                    <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container text-xs">
+                    <p className="font-dl-mono text-dl-spec text-dl-charcoal tabular-nums">
                       {p.totalStock} units
                     </p>
                   </div>
@@ -186,16 +152,16 @@ export default async function AdminDashboardPage() {
           </div>
         </div>
 
-        <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg shadow-sm overflow-hidden">
-          <div className="px-stack-lg py-stack-md border-b border-outline-variant/50 dark:border-outline/50">
-            <h2 className="font-headline-md text-headline-md font-semibold text-on-surface dark:text-inverse-on-surface tracking-tight">
+        <div className="bg-dl-chalk border border-dl-rule overflow-hidden">
+          <div className="px-stack-lg py-stack-md border-b border-dl-rule">
+            <h2 className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink">
               Recent Orders
             </h2>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-surface-container-low dark:bg-primary-container border-b border-outline-variant/50 dark:border-outline/50 font-label-caps text-label-caps text-on-surface-variant dark:text-on-primary-container uppercase tracking-wider">
+                <tr className="bg-dl-sheet border-b border-dl-rule font-dl-sans text-dl-spec text-dl-charcoal uppercase tracking-wide">
                   <th className="px-stack-lg py-3 font-semibold">Order #</th>
                   <th className="px-stack-lg py-3 font-semibold">Customer</th>
                   <th className="px-stack-lg py-3 font-semibold">Product</th>
@@ -206,30 +172,30 @@ export default async function AdminDashboardPage() {
                   <th className="px-stack-lg py-3 font-semibold">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-outline-variant/30 dark:divide-outline/30 font-body-sm text-body-sm">
+              <tbody className="divide-y divide-dl-rule font-dl-sans text-dl-body">
                 {stats.recentOrders.map((order) => (
-                  <tr key={order.id}>
-                    <td className="px-stack-lg py-4 font-price-sm text-price-sm">
+                  <tr key={order.id} className="hover:bg-dl-sheet/50 transition-colors">
+                    <td className="px-stack-lg py-3 font-dl-mono text-dl-spec whitespace-nowrap">
                       <Link
                         href={`/admin/orders/${order.id}`}
-                        className="hover:text-secondary"
+                        className="text-dl-ink hover:underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2"
                       >
                         {order.order_number}
                       </Link>
                     </td>
-                    <td className="px-stack-lg py-4 font-semibold text-on-surface dark:text-inverse-on-surface">
+                    <td className="px-stack-lg py-3 font-semibold text-dl-ink">
                       {order.customerName}
                     </td>
-                    <td className="px-stack-lg py-4 text-on-surface-variant dark:text-on-primary-container">
+                    <td className="px-stack-lg py-3 text-dl-charcoal">
                       {order.productLabel}
                     </td>
-                    <td className="px-stack-lg py-4 text-on-surface-variant dark:text-on-primary-container">
+                    <td className="px-stack-lg py-3 text-dl-charcoal tabular-nums whitespace-nowrap">
                       {formatOrderDate(order.created_at)}
                     </td>
-                    <td className="px-stack-lg py-4 font-price-sm text-price-sm text-right">
+                    <td className="px-stack-lg py-3 font-semibold text-dl-ink text-right tabular-nums">
                       {formatPrice(order.total)}
                     </td>
-                    <td className="px-stack-lg py-4">
+                    <td className="px-stack-lg py-3">
                       <OrderStatusBadge status={order.status} />
                     </td>
                   </tr>
@@ -238,7 +204,7 @@ export default async function AdminDashboardPage() {
                   <tr>
                     <td
                       colSpan={6}
-                      className="px-stack-lg py-8 text-center text-on-surface-variant dark:text-on-primary-container"
+                      className="px-stack-lg py-8 text-center text-dl-charcoal"
                     >
                       No orders yet.
                     </td>

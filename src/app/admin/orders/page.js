@@ -34,10 +34,11 @@ export default async function AdminOrdersPage({ searchParams }) {
               <Link
                 key={filter.label}
                 href={href}
-                className={`px-3 py-1.5 rounded-full text-body-sm font-body-sm transition-colors ${
+                aria-current={active ? "page" : undefined}
+                className={`px-3 py-1.5 font-dl-sans text-dl-body transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2 ${
                   active
-                    ? "bg-secondary text-on-secondary font-semibold"
-                    : "bg-surface-container-low dark:bg-primary-container text-on-surface-variant dark:text-on-primary-container hover:bg-surface-container-high"
+                    ? "bg-dl-ink text-dl-chalk font-semibold"
+                    : "border border-dl-rule text-dl-charcoal hover:border-dl-ink hover:text-dl-ink"
                 }`}
               >
                 {filter.label}
@@ -46,11 +47,11 @@ export default async function AdminOrdersPage({ searchParams }) {
           })}
         </div>
 
-        <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg shadow-sm overflow-hidden">
+        <div className="bg-dl-chalk border border-dl-rule overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-surface-container-low dark:bg-primary-container border-b border-outline-variant/50 dark:border-outline/50 font-label-caps text-label-caps text-on-surface-variant dark:text-on-primary-container uppercase tracking-wider">
+                <tr className="bg-dl-sheet border-b border-dl-rule font-dl-sans text-dl-spec text-dl-charcoal uppercase tracking-wide">
                   <th className="px-stack-lg py-3 font-semibold">Order #</th>
                   <th className="px-stack-lg py-3 font-semibold">Customer</th>
                   <th className="px-stack-lg py-3 font-semibold">Date</th>
@@ -60,34 +61,34 @@ export default async function AdminOrdersPage({ searchParams }) {
                   <th className="px-stack-lg py-3 font-semibold">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-outline-variant/30 dark:divide-outline/30 font-body-sm text-body-sm">
+              <tbody className="divide-y divide-dl-rule font-dl-sans text-dl-body">
                 {orders.map((order) => (
                   <tr
                     key={order.id}
-                    className="hover:bg-surface-container-low/50 dark:hover:bg-primary-container/50 transition-colors"
+                    className="hover:bg-dl-sheet/50 transition-colors"
                   >
-                    <td className="px-stack-lg py-4 font-price-sm text-price-sm">
+                    <td className="px-stack-lg py-3 font-dl-mono text-dl-spec whitespace-nowrap">
                       <Link
                         href={`/admin/orders/${order.id}`}
-                        className="hover:text-secondary"
+                        className="text-dl-ink hover:underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2"
                       >
                         {order.order_number}
                       </Link>
                     </td>
-                    <td className="px-stack-lg py-4 font-semibold text-on-surface dark:text-inverse-on-surface">
+                    <td className="px-stack-lg py-3 font-semibold text-dl-ink">
                       {order.profile?.full_name ?? order.guest_email ?? "Guest"}
                     </td>
-                    <td className="px-stack-lg py-4 text-on-surface-variant dark:text-on-primary-container">
+                    <td className="px-stack-lg py-3 text-dl-charcoal tabular-nums whitespace-nowrap">
                       {new Date(order.created_at).toLocaleDateString("en-IN", {
                         day: "numeric",
                         month: "short",
                         year: "numeric",
                       })}
                     </td>
-                    <td className="px-stack-lg py-4 font-price-sm text-price-sm text-right">
+                    <td className="px-stack-lg py-3 font-semibold text-dl-ink text-right tabular-nums">
                       {formatPrice(order.total)}
                     </td>
-                    <td className="px-stack-lg py-4">
+                    <td className="px-stack-lg py-3">
                       <OrderStatusBadge status={order.status} />
                     </td>
                   </tr>
@@ -96,7 +97,7 @@ export default async function AdminOrdersPage({ searchParams }) {
                   <tr>
                     <td
                       colSpan={5}
-                      className="px-stack-lg py-8 text-center text-on-surface-variant dark:text-on-primary-container"
+                      className="px-stack-lg py-8 text-center text-dl-charcoal"
                     >
                       No orders found.
                     </td>

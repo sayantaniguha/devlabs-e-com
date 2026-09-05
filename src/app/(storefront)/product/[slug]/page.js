@@ -15,22 +15,24 @@ export default async function ProductPage({ params }) {
 
   return (
     <main className="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-lg">
-      <div className="flex items-center space-x-stack-sm font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container mb-stack-lg">
-        <Link href="/" className="hover:text-primary dark:hover:text-inverse-on-surface transition-colors">
+      <div className="flex items-center gap-stack-sm font-dl-sans text-dl-body text-dl-charcoal mb-stack-lg">
+        <Link
+          href="/"
+          className="hover:text-dl-ink hover:underline underline-offset-4 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2"
+        >
           Home
         </Link>
-        <span className="material-symbols-outlined text-sm" aria-hidden="true">
-          chevron_right
-        </span>
-        <Link href="/shop" className="hover:text-primary dark:hover:text-inverse-on-surface transition-colors">
+        <span aria-hidden="true">/</span>
+        <Link
+          href="/shop"
+          className="hover:text-dl-ink hover:underline underline-offset-4 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2"
+        >
           Shop
         </Link>
         {product.category && (
           <>
-            <span className="material-symbols-outlined text-sm" aria-hidden="true">
-              chevron_right
-            </span>
-            <span className="text-primary dark:text-inverse-on-surface font-medium">
+            <span aria-hidden="true">/</span>
+            <span className="text-dl-ink font-semibold">
               {product.category.name}
             </span>
           </>
@@ -40,9 +42,9 @@ export default async function ProductPage({ params }) {
       <ProductDetail product={product} />
 
       {related.length > 0 && (
-        <section className="mt-stack-xl pt-stack-xl border-t border-outline-variant dark:border-outline">
+        <section className="mt-stack-xl pt-stack-xl border-t border-dl-rule">
           <div className="flex justify-between items-end mb-stack-lg">
-            <h2 className="font-headline-lg text-headline-lg md:text-[32px] text-primary dark:text-inverse-on-surface">
+            <h2 className="font-dl-sans text-dl-headline text-dl-ink">
               You may also like
             </h2>
           </div>

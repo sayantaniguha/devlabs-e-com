@@ -1,12 +1,23 @@
-const STYLES = {
-  delivered: "bg-tertiary-fixed-dim/20 text-on-tertiary-fixed-variant dark:text-tertiary-fixed",
-  shipped: "bg-tertiary-fixed-dim/20 text-on-tertiary-fixed-variant dark:text-tertiary-fixed",
-  paid: "bg-tertiary-fixed-dim/20 text-on-tertiary-fixed-variant dark:text-tertiary-fixed",
-  processing: "bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300",
-  pending: "bg-surface-variant text-on-surface-variant dark:bg-inverse-surface dark:text-inverse-on-surface",
-  cancelled: "bg-error-container/50 text-on-error-container dark:bg-error/20 dark:text-red-300",
-  refunded: "bg-error-container/50 text-on-error-container dark:bg-error/20 dark:text-red-300",
-  payment_failed: "bg-error-container/50 text-on-error-container dark:bg-error/20 dark:text-red-300",
+// Semantic mapping: success = money secured / fulfilled without issue;
+// warning = actively being worked, worth watching so it doesn't stall;
+// danger (reuses the storefront's dl-signal-ink) = needs attention;
+// neutral = just waiting, nothing to flag yet.
+const TONE = {
+  paid: "success",
+  shipped: "success",
+  delivered: "success",
+  processing: "warning",
+  pending: "neutral",
+  cancelled: "danger",
+  refunded: "danger",
+  payment_failed: "danger",
+};
+
+const TONE_CLASSES = {
+  success: "border-dl-success text-dl-success",
+  warning: "border-dl-warning text-dl-warning",
+  danger: "border-dl-signal-ink text-dl-signal-ink",
+  neutral: "border-dl-rule text-dl-charcoal",
 };
 
 const LABELS = {
@@ -14,9 +25,10 @@ const LABELS = {
 };
 
 export function OrderStatusBadge({ status }) {
+  const tone = TONE[status] ?? "neutral";
   return (
     <span
-      className={`px-2 py-1 text-[10px] font-bold uppercase tracking-wider rounded inline-block ${STYLES[status] ?? "bg-surface-variant text-on-surface-variant dark:bg-inverse-surface dark:text-inverse-on-surface"}`}
+      className={`px-2 py-0.5 border font-dl-mono text-dl-spec uppercase tracking-wide whitespace-nowrap inline-block ${TONE_CLASSES[tone]}`}
     >
       {LABELS[status] ?? status}
     </span>

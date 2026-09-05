@@ -5,15 +5,6 @@ import { ProductCard } from "@/components/storefront/ProductCard";
 import { getCourses } from "@/lib/data/courses";
 import { getCategories, getProducts } from "@/lib/data/products";
 
-const CATEGORY_ICONS = {
-  "t-shirts": "checkroom",
-  hoodies: "dry_cleaning",
-  desk: "desktop_windows",
-  bags: "backpack",
-  drinkware: "local_cafe",
-  stickers: "sticky_note_2",
-};
-
 export default async function Home() {
   const [categories, products, courses] = await Promise.all([
     getCategories(),
@@ -26,111 +17,112 @@ export default async function Home() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl flex flex-col md:flex-row items-center gap-gutter">
-        <div className="flex-1 space-y-6">
-          <h1 className="font-display text-display text-on-background dark:text-inverse-on-surface">
-            Engineered for Innovation.
-            <br />
-            Styled for You.
-          </h1>
-          <p className="font-body-lg text-body-lg text-on-surface-variant dark:text-on-primary-container max-w-lg">
-            Official DevLabs merchandise and courses. High-quality apparel and
-            gear, taught by the team building the product. Comfortable,
-            functional, and minimal.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <Link
-              href="/shop"
-              className="bg-secondary text-on-primary px-8 py-3 rounded font-semibold hover:bg-secondary-container transition-colors text-center"
-            >
-              Shop the Collection
-            </Link>
-            <Link
-              href="/courses"
-              className="border border-outline-variant dark:border-outline text-on-surface dark:text-inverse-on-surface px-8 py-3 rounded font-semibold hover:bg-surface-container dark:hover:bg-inverse-surface transition-colors text-center"
-            >
-              Browse Courses
-            </Link>
+      {/* Hero — DevLabs redesign token layer (dl-*). Everything below this
+          section still renders on the previous system; see globals.css. */}
+      <section className="bg-dl-chalk">
+        <div className="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl flex flex-col md:flex-row items-center gap-gutter">
+          <div className="flex-1">
+            <h1 className="font-dl-sans font-extrabold text-dl-ink [font-stretch:125%] text-[clamp(2.25rem,5vw+1rem,4.5rem)] leading-[0.98] tracking-[-0.01em]">
+              Engineered for Innovation.
+              <br />
+              Styled for You.
+            </h1>
+            <p className="font-dl-sans text-dl-body-lg text-dl-charcoal max-w-prose mt-4">
+              Official DevLabs merchandise and courses. High-quality apparel
+              and gear, taught by the team building the product. Comfortable,
+              functional, and minimal.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 mt-8">
+              <Link
+                href="/shop"
+                className="bg-dl-ink text-dl-chalk px-8 py-3 font-dl-sans font-semibold text-center hover:opacity-90 active:scale-[0.98] transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2"
+              >
+                Shop the Collection
+              </Link>
+              <Link
+                href="/courses"
+                className="border border-dl-rule text-dl-ink px-8 py-3 font-dl-sans font-semibold text-center hover:border-dl-ink active:scale-[0.98] transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2"
+              >
+                Browse Courses
+              </Link>
+            </div>
+            <p className="font-dl-sans text-dl-spec text-dl-charcoal tabular-nums mt-3">
+              <span className="font-dl-mono">{products.length}</span> products
+              · <span className="font-dl-mono">{courses.length}</span> courses
+            </p>
+          </div>
+          <div className="flex-1 w-full aspect-square md:aspect-[6/5] border border-dl-rule overflow-hidden relative bg-dl-sheet">
+            <Image
+              src="/hero/hero.jpg"
+              alt="DevLabs apparel and gear"
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover"
+              priority
+            />
           </div>
         </div>
-        <div className="flex-1 w-full aspect-square md:aspect-[6/5] rounded-xl border border-outline-variant dark:border-outline overflow-hidden relative shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
-          <Image
-            src="/hero/hero.jpg"
-            alt="DevLabs apparel and gear"
-            fill
-            sizes="(min-width: 768px) 50vw, 100vw"
-            className="object-cover"
-            priority
-          />
-        </div>
       </section>
 
-      {/* Trust bar */}
-      <section className="bg-surface-container-low dark:bg-primary-container border-y border-outline-variant dark:border-outline">
-        <div className="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-lg grid grid-cols-1 sm:grid-cols-3 gap-stack-md">
+      {/* Trust bar — dl tokens, no icons: words carry it instead */}
+      <section className="bg-dl-chalk border-b border-dl-rule">
+        <ul className="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop divide-y divide-dl-rule sm:divide-y-0 sm:flex">
           {[
-            { icon: "local_shipping", text: "Free shipping over ₹1,499" },
-            { icon: "autorenew", text: "7-day returns on unworn apparel" },
-            { icon: "code", text: "Built by developers, for developers" },
-          ].map((item) => (
-            <div
-              key={item.icon}
-              className="flex items-center gap-3 justify-center sm:justify-start"
+            "Free shipping over ₹1,499",
+            "7-day returns on unworn apparel",
+            "Built by developers, for developers",
+          ].map((text) => (
+            <li
+              key={text}
+              className="flex-1 py-stack-sm sm:py-stack-md sm:px-6 sm:border-l sm:first:border-l-0 border-dl-rule font-dl-sans text-dl-body text-dl-charcoal text-center sm:text-left"
             >
-              <span
-                className="material-symbols-outlined text-secondary dark:text-secondary-fixed-dim"
-                aria-hidden="true"
-              >
-                {item.icon}
-              </span>
-              <span className="font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface">
-                {item.text}
-              </span>
-            </div>
+              {text}
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
-      {/* Shop by category */}
+      {/* Shop by category — indexed spec list, not icon tiles */}
       <section className="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl">
-        <h2 className="font-headline-lg text-headline-lg text-on-background dark:text-inverse-on-surface mb-stack-lg">
+        <h2 className="font-dl-sans text-dl-headline text-dl-ink mb-stack-lg">
           Shop by Category
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-stack-md">
-          {categories.map((category) => (
-            <Link
-              key={category.id}
-              href={`/shop?category=${category.slug}`}
-              className="flex flex-col items-center gap-2 p-stack-lg rounded-lg border border-outline-variant dark:border-outline bg-surface-container-lowest dark:bg-inverse-surface hover:border-secondary hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] transition-all"
-            >
-              <span
-                className="material-symbols-outlined text-[32px] text-secondary dark:text-secondary-fixed-dim"
-                aria-hidden="true"
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 border-l border-t border-dl-rule">
+          {categories.map((category) => {
+            const count = products.filter(
+              (p) => p.category?.slug === category.slug,
+            ).length;
+            return (
+              <Link
+                key={category.id}
+                href={`/shop?category=${category.slug}`}
+                className="group flex flex-col justify-between gap-8 p-stack-lg border-r border-b border-dl-rule bg-dl-chalk hover:bg-dl-sheet transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:-outline-offset-2"
               >
-                {CATEGORY_ICONS[category.slug] ?? "category"}
-              </span>
-              <span className="font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface text-center">
-                {category.name}
-              </span>
-            </Link>
-          ))}
+                <span className="font-dl-mono text-dl-spec text-dl-charcoal tabular-nums">
+                  {count} {count === 1 ? "product" : "products"}
+                </span>
+                <span className="font-dl-sans text-dl-body text-dl-ink group-hover:underline underline-offset-4">
+                  {category.name}
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
       {/* Featured products */}
       {featuredProducts.length > 0 && (
-        <section className="bg-surface-container-low dark:bg-primary-container">
+        <section className="bg-dl-chalk border-t border-dl-rule">
           <div className="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl">
             <div className="flex items-center justify-between mb-stack-lg">
-              <h2 className="font-headline-lg text-headline-lg text-on-background dark:text-inverse-on-surface">
+              <h2 className="font-dl-sans text-dl-headline text-dl-ink">
                 Featured Merch
               </h2>
               <Link
                 href="/shop"
-                className="font-body-sm text-body-sm text-secondary hover:underline whitespace-nowrap"
+                className="font-dl-sans text-dl-body text-dl-ink hover:underline underline-offset-4 whitespace-nowrap focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2"
               >
-                Shop all →
+                Shop all <span aria-hidden="true">→</span>
               </Link>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-gutter">
@@ -148,27 +140,29 @@ export default async function Home() {
 
       {/* Explore our collection */}
       {featuredCourses.length > 0 && (
-        <section className="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl">
-          <div className="flex items-center justify-between mb-stack-lg">
-            <div>
-              <h2 className="font-headline-lg text-headline-lg text-on-background dark:text-inverse-on-surface">
-                Explore Our Courses
-              </h2>
-              <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container mt-1">
-                Learn from the team building DevLabs.
-              </p>
+        <section className="bg-dl-chalk border-t border-dl-rule">
+          <div className="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl">
+            <div className="flex items-center justify-between mb-stack-lg">
+              <div>
+                <h2 className="font-dl-sans text-dl-headline text-dl-ink">
+                  Explore Our Courses
+                </h2>
+                <p className="font-dl-sans text-dl-body text-dl-charcoal mt-1">
+                  Learn from the team building DevLabs.
+                </p>
+              </div>
+              <Link
+                href="/courses"
+                className="font-dl-sans text-dl-body text-dl-ink hover:underline underline-offset-4 whitespace-nowrap focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2"
+              >
+                Browse all <span aria-hidden="true">→</span>
+              </Link>
             </div>
-            <Link
-              href="/courses"
-              className="font-body-sm text-body-sm text-secondary hover:underline whitespace-nowrap"
-            >
-              Browse all →
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-gutter">
-            {featuredCourses.map((course) => (
-              <CourseCard key={course.id} course={course} />
-            ))}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-gutter">
+              {featuredCourses.map((course) => (
+                <CourseCard key={course.id} course={course} />
+              ))}
+            </div>
           </div>
         </section>
       )}

@@ -28,11 +28,11 @@ export default async function AdminProductsPage({ searchParams }) {
         subtitle="Manage products, variants, and stock."
       />
       <div className="p-margin-desktop space-y-stack-lg max-w-container-max mx-auto w-full">
-        <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg shadow-sm overflow-hidden">
+        <div className="bg-dl-chalk border border-dl-rule overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-surface-container-low dark:bg-primary-container border-b border-outline-variant/50 dark:border-outline/50 font-label-caps text-label-caps text-on-surface-variant dark:text-on-primary-container uppercase tracking-wider">
+                <tr className="bg-dl-sheet border-b border-dl-rule font-dl-sans text-dl-spec text-dl-charcoal uppercase tracking-wide">
                   <th className="px-stack-lg py-3 font-semibold">Product</th>
                   <th className="px-stack-lg py-3 font-semibold">Category</th>
                   <th className="px-stack-lg py-3 font-semibold text-right">
@@ -45,46 +45,44 @@ export default async function AdminProductsPage({ searchParams }) {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-outline-variant/30 dark:divide-outline/30 font-body-sm text-body-sm">
+              <tbody className="divide-y divide-dl-rule font-dl-sans text-dl-body">
                 {products.map((product) => {
                   const totalStock = (product.variants ?? []).reduce(
                     (sum, v) => sum + v.stock_quantity,
                     0,
                   );
                   return (
-                    <tr key={product.id}>
-                      <td className="px-stack-lg py-4 font-semibold text-on-surface dark:text-inverse-on-surface">
+                    <tr key={product.id} className="hover:bg-dl-sheet/50 transition-colors">
+                      <td className="px-stack-lg py-3 font-semibold text-dl-ink">
                         {product.name}
                       </td>
-                      <td className="px-stack-lg py-4 text-on-surface-variant dark:text-on-primary-container">
+                      <td className="px-stack-lg py-3 text-dl-charcoal">
                         {product.category?.name ?? "—"}
                       </td>
-                      <td className="px-stack-lg py-4 font-price-sm text-price-sm text-right">
+                      <td className="px-stack-lg py-3 font-semibold text-dl-ink text-right tabular-nums">
                         {formatPrice(product.base_price)}
                       </td>
-                      <td className="px-stack-lg py-4 text-on-surface-variant dark:text-on-primary-container">
+                      <td className="px-stack-lg py-3 font-dl-mono text-dl-spec text-dl-charcoal tabular-nums">
                         {totalStock} units
                       </td>
-                      <td className="px-stack-lg py-4">
+                      <td className="px-stack-lg py-3">
                         <div className="flex items-center gap-2">
                           <StockStatusBadge totalStock={totalStock} />
                           {product.status === "draft" && (
-                            <span className="px-2 py-1 bg-surface-variant text-on-surface-variant dark:bg-inverse-surface dark:text-inverse-on-surface text-[10px] font-bold uppercase tracking-wider rounded">
+                            <span className="px-2 py-0.5 border border-dl-rule font-dl-mono text-dl-spec text-dl-charcoal uppercase tracking-wide">
                               Draft
                             </span>
                           )}
                         </div>
                       </td>
-                      <td className="px-stack-lg py-4 text-right">
-                        <div className="flex items-center justify-end gap-3">
+                      <td className="px-stack-lg py-3 text-right">
+                        <div className="flex items-center justify-end gap-4">
                           <Link
                             href={`/admin/products?edit=${product.id}`}
                             aria-label={`Edit ${product.name}`}
-                            className="text-on-surface-variant dark:text-on-primary-container hover:text-secondary"
+                            className="font-dl-sans text-dl-body text-dl-ink hover:underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2"
                           >
-                            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
-                              edit
-                            </span>
+                            Edit
                           </Link>
                           <DeleteProductButton
                             productId={product.id}
@@ -99,7 +97,7 @@ export default async function AdminProductsPage({ searchParams }) {
                   <tr>
                     <td
                       colSpan={6}
-                      className="px-stack-lg py-8 text-center text-on-surface-variant dark:text-on-primary-container"
+                      className="px-stack-lg py-8 text-center text-dl-charcoal"
                     >
                       No products yet.
                     </td>

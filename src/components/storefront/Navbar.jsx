@@ -19,11 +19,11 @@ export function Navbar() {
   const count = cartItemCount(items);
 
   return (
-    <header className="sticky top-0 w-full z-40 bg-surface dark:bg-primary-container border-b border-outline-variant dark:border-outline">
+    <header className="sticky top-0 w-full z-40 bg-dl-chalk border-b border-dl-rule">
       <div className="flex justify-between items-center max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-4">
         <Link
           href="/"
-          className="text-headline-lg font-headline-lg font-bold text-on-background dark:text-inverse-on-surface tracking-tight"
+          className="font-dl-sans text-xl font-bold text-dl-ink [font-stretch:110%]"
         >
           DevLabs
         </Link>
@@ -35,11 +35,11 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={
+                className={`font-dl-sans text-dl-body uppercase tracking-wide pb-1 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2 ${
                   active
-                    ? "text-secondary dark:text-secondary-fixed-dim font-bold border-b-2 border-secondary dark:border-secondary-fixed-dim font-label-caps text-label-caps uppercase pb-1"
-                    : "text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-colors font-label-caps text-label-caps uppercase pb-1"
-                }
+                    ? "text-dl-ink font-semibold border-b-2 border-dl-ink"
+                    : "text-dl-charcoal hover:text-dl-ink"
+                }`}
               >
                 {link.label}
               </Link>
@@ -50,16 +50,14 @@ export function Navbar() {
         <div className="flex items-center gap-stack-md">
           <button
             type="button"
-            aria-label="Open cart"
+            aria-label={`Open cart${count > 0 ? `, ${count} items` : ""}`}
             onClick={openCart}
-            className="relative text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-all scale-95 active:scale-90 duration-150"
+            className="font-dl-sans text-dl-body text-dl-ink hover:opacity-70 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2"
           >
-            <span className="material-symbols-outlined" aria-hidden="true">
-              shopping_cart
-            </span>
+            Cart
             {count > 0 && (
-              <span className="absolute -top-2 -right-2 bg-secondary text-on-primary text-[10px] font-bold px-1.5 py-0.5 rounded-full">
-                {count}
+              <span className="ml-1 font-dl-mono text-dl-spec text-dl-signal-ink tabular-nums">
+                ({count})
               </span>
             )}
           </button>
@@ -68,12 +66,9 @@ export function Navbar() {
 
           <Link
             href="/account"
-            aria-label="Account"
-            className="text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-all scale-95 active:scale-90 duration-150"
+            className="font-dl-sans text-dl-body text-dl-ink hover:opacity-70 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2"
           >
-            <span className="material-symbols-outlined" aria-hidden="true">
-              account_circle
-            </span>
+            Account
           </Link>
         </div>
       </div>
