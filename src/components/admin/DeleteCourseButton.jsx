@@ -28,7 +28,9 @@ export function DeleteCourseButton({ courseId, courseName }) {
       className="text-on-error-container hover:opacity-70 disabled:opacity-40"
       aria-label={`Delete ${courseName}`}
     >
-      <span className="material-symbols-outlined text-[20px]">delete</span>
+      <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+        delete
+      </span>
     </button>
   );
 }

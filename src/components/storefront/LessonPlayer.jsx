@@ -42,7 +42,7 @@ export function LessonPlayer({ lessons }) {
                 : "bg-surface-container-lowest dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface hover:bg-surface-container-low dark:hover:bg-primary-container"
             }`}
           >
-            <span className="material-symbols-outlined text-[18px]">
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               {lesson.video_url ? "play_circle" : "lock"}
             </span>
             <span className="font-body-sm text-body-sm">

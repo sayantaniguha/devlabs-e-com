@@ -31,7 +31,9 @@ export function DeleteCategoryButton({ categoryId, categoryName }) {
         className="text-on-error-container hover:opacity-70 disabled:opacity-40"
         aria-label={`Delete ${categoryName}`}
       >
-        <span className="material-symbols-outlined text-[20px]">delete</span>
+        <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+          delete
+        </span>
       </button>
       {error && <p className="text-error text-xs">{error}</p>}
     </div>

@@ -56,7 +56,7 @@ export default async function Home() {
         </div>
         <div className="flex-1 w-full aspect-square md:aspect-[6/5] rounded-xl border border-outline-variant dark:border-outline overflow-hidden relative shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
           <Image
-            src="/hero/hero.svg"
+            src="/hero/hero.jpg"
             alt="DevLabs apparel and gear"
             fill
             sizes="(min-width: 768px) 50vw, 100vw"
@@ -78,7 +78,10 @@ export default async function Home() {
               key={item.icon}
               className="flex items-center gap-3 justify-center sm:justify-start"
             >
-              <span className="material-symbols-outlined text-secondary dark:text-secondary-fixed-dim">
+              <span
+                className="material-symbols-outlined text-secondary dark:text-secondary-fixed-dim"
+                aria-hidden="true"
+              >
                 {item.icon}
               </span>
               <span className="font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface">
@@ -101,7 +104,10 @@ export default async function Home() {
               href={`/shop?category=${category.slug}`}
               className="flex flex-col items-center gap-2 p-stack-lg rounded-lg border border-outline-variant dark:border-outline bg-surface-container-lowest dark:bg-inverse-surface hover:border-secondary hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] transition-all"
             >
-              <span className="material-symbols-outlined text-[32px] text-secondary dark:text-secondary-fixed-dim">
+              <span
+                className="material-symbols-outlined text-[32px] text-secondary dark:text-secondary-fixed-dim"
+                aria-hidden="true"
+              >
                 {CATEGORY_ICONS[category.slug] ?? "category"}
               </span>
               <span className="font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface text-center">

@@ -26,7 +26,7 @@ export function Footer() {
           <ul className="space-y-3">
             <li>
               <Link
-                href="/shop"
+                href="/shop?category=t-shirts&category=hoodies"
                 className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-colors opacity-80 hover:opacity-100"
               >
                 Apparel
@@ -34,7 +34,7 @@ export function Footer() {
             </li>
             <li>
               <Link
-                href="/shop"
+                href="/shop?category=bags&category=drinkware&category=stickers"
                 className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-colors opacity-80 hover:opacity-100"
               >
                 Accessories
@@ -42,7 +42,7 @@ export function Footer() {
             </li>
             <li>
               <Link
-                href="/shop"
+                href="/shop?category=desk"
                 className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-colors opacity-80 hover:opacity-100"
               >
                 Desk Setup
@@ -103,7 +103,7 @@ export function Footer() {
               aria-label="Subscribe"
               className="bg-secondary text-on-primary px-4 py-2 rounded-r hover:bg-secondary-container transition-colors"
             >
-              <span className="material-symbols-outlined text-sm">
+              <span className="material-symbols-outlined text-sm" aria-hidden="true">
                 arrow_forward
               </span>
             </button>

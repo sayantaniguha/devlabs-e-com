@@ -1,6 +1,10 @@
 export function StarRating({ average, size = 16 }) {
   return (
-    <span className="flex text-amber-500" style={{ fontSize: size }}>
+    <span
+      className="flex text-amber-500"
+      style={{ fontSize: size }}
+      aria-hidden="true"
+    >
       {[0, 1, 2, 3, 4].map((i) => {
         const filled = i < Math.round(average);
         return (

@@ -35,7 +35,7 @@ export default async function AccountPage() {
           href="/admin"
           className="inline-flex items-center gap-2 bg-secondary text-on-secondary px-6 py-2 rounded font-semibold hover:opacity-90 transition-opacity mb-stack-lg"
         >
-          <span className="material-symbols-outlined text-[18px]">
+          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
             admin_panel_settings
           </span>
           Admin Panel
@@ -48,12 +48,15 @@ export default async function AccountPage() {
           className="flex items-center justify-between border border-outline-variant dark:border-outline rounded-lg px-stack-md py-stack-sm hover:bg-surface-container-low dark:hover:bg-inverse-surface transition-colors"
         >
           <span className="flex items-center gap-2 font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface">
-            <span className="material-symbols-outlined text-[18px]">
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               receipt_long
             </span>
             Order History
           </span>
-          <span className="material-symbols-outlined text-[18px] text-on-surface-variant dark:text-on-primary-container">
+          <span
+            className="material-symbols-outlined text-[18px] text-on-surface-variant dark:text-on-primary-container"
+            aria-hidden="true"
+          >
             chevron_right
           </span>
         </Link>
@@ -62,12 +65,15 @@ export default async function AccountPage() {
           className="flex items-center justify-between border border-outline-variant dark:border-outline rounded-lg px-stack-md py-stack-sm hover:bg-surface-container-low dark:hover:bg-inverse-surface transition-colors"
         >
           <span className="flex items-center gap-2 font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface">
-            <span className="material-symbols-outlined text-[18px]">
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               location_on
             </span>
             Addresses
           </span>
-          <span className="material-symbols-outlined text-[18px] text-on-surface-variant dark:text-on-primary-container">
+          <span
+            className="material-symbols-outlined text-[18px] text-on-surface-variant dark:text-on-primary-container"
+            aria-hidden="true"
+          >
             chevron_right
           </span>
         </Link>
@@ -76,12 +82,15 @@ export default async function AccountPage() {
           className="flex items-center justify-between border border-outline-variant dark:border-outline rounded-lg px-stack-md py-stack-sm hover:bg-surface-container-low dark:hover:bg-inverse-surface transition-colors"
         >
           <span className="flex items-center gap-2 font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface">
-            <span className="material-symbols-outlined text-[18px]">
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               school
             </span>
             My Courses
           </span>
-          <span className="material-symbols-outlined text-[18px] text-on-surface-variant dark:text-on-primary-container">
+          <span
+            className="material-symbols-outlined text-[18px] text-on-surface-variant dark:text-on-primary-container"
+            aria-hidden="true"
+          >
             chevron_right
           </span>
         </Link>

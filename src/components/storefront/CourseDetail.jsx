@@ -84,7 +84,7 @@ export function CourseDetail({ course, isEnrolled, isAdminPreview, myReview }) {
           <div className="flex flex-wrap items-center gap-stack-sm font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container">
             {course.rating.count > 0 ? (
               <span className="flex items-center gap-1.5">
-                <span className="text-amber-600 dark:text-amber-400 font-semibold">
+                <span className="text-amber-700 dark:text-amber-400 font-semibold">
                   {course.rating.average.toFixed(1)}
                 </span>
                 <StarRating average={course.rating.average} />
@@ -115,7 +115,10 @@ export function CourseDetail({ course, isEnrolled, isAdminPreview, myReview }) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-stack-lg gap-y-2">
                 {learningOutcomes.map((title) => (
                   <div key={title} className="flex items-start gap-2">
-                    <span className="material-symbols-outlined text-[18px] text-on-tertiary-container mt-0.5 shrink-0">
+                    <span
+                      className="material-symbols-outlined text-[18px] text-on-tertiary-container mt-0.5 shrink-0"
+                      aria-hidden="true"
+                    >
                       check
                     </span>
                     <span className="font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface">
@@ -146,7 +149,10 @@ export function CourseDetail({ course, isEnrolled, isAdminPreview, myReview }) {
                     ` · ${previewLessons.length} free preview${previewLessons.length > 1 ? "s" : ""}`}
                 </p>
               </div>
-              <span className="material-symbols-outlined transition-transform shrink-0 ml-stack-sm">
+              <span
+                className="material-symbols-outlined transition-transform shrink-0 ml-stack-sm"
+                aria-hidden="true"
+              >
                 {contentOpen ? "expand_less" : "expand_more"}
               </span>
             </button>
@@ -169,7 +175,10 @@ export function CourseDetail({ course, isEnrolled, isAdminPreview, myReview }) {
                         Preview
                       </button>
                     ) : (
-                      <span className="material-symbols-outlined text-[18px] text-on-surface-variant dark:text-on-primary-container shrink-0 ml-stack-sm">
+                      <span
+                        className="material-symbols-outlined text-[18px] text-on-surface-variant dark:text-on-primary-container shrink-0 ml-stack-sm"
+                        aria-hidden="true"
+                      >
                         lock
                       </span>
                     )}
@@ -204,7 +213,7 @@ export function CourseDetail({ course, isEnrolled, isAdminPreview, myReview }) {
               </h2>
               {course.rating.count > 0 && (
                 <span className="flex items-center gap-1.5 font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container">
-                  <span className="text-amber-600 dark:text-amber-400 font-semibold">
+                  <span className="text-amber-700 dark:text-amber-400 font-semibold">
                     {course.rating.average.toFixed(1)}
                   </span>
                   <StarRating average={course.rating.average} />
@@ -289,6 +298,7 @@ export function CourseDetail({ course, isEnrolled, isAdminPreview, myReview }) {
                 previewLessons[0] && openPreview(previewLessons[0])
               }
               disabled={previewLessons.length === 0}
+              aria-label={`Preview ${course.title}`}
               className="relative aspect-video w-full bg-primary group"
             >
               {course.thumbnail_url && (
@@ -304,7 +314,10 @@ export function CourseDetail({ course, isEnrolled, isAdminPreview, myReview }) {
               {previewLessons.length > 0 && (
                 <span className="absolute inset-0 flex items-center justify-center bg-on-surface/20 group-hover:bg-on-surface/30 transition-colors">
                   <span className="w-14 h-14 rounded-full bg-surface-container-lowest/95 flex items-center justify-center">
-                    <span className="material-symbols-outlined text-[32px] text-on-background">
+                    <span
+                      className="material-symbols-outlined text-[32px] text-on-background"
+                      aria-hidden="true"
+                    >
                       play_arrow
                     </span>
                   </span>
@@ -357,7 +370,7 @@ export function CourseDetail({ course, isEnrolled, isAdminPreview, myReview }) {
                     onClick={handleAdd}
                     className="h-12 border border-outline-variant dark:border-outline rounded font-body-lg text-body-lg font-medium text-on-background dark:text-inverse-on-surface hover:border-secondary transition-colors flex items-center justify-center gap-2"
                   >
-                    <span className="material-symbols-outlined">
+                    <span className="material-symbols-outlined" aria-hidden="true">
                       shopping_cart
                     </span>
                     Add to Cart
@@ -372,32 +385,32 @@ export function CourseDetail({ course, isEnrolled, isAdminPreview, myReview }) {
                 <ul className="flex flex-col gap-1.5 font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container">
                   {course.duration_hours && (
                     <li className="flex items-center gap-2">
-                      <span className="material-symbols-outlined text-[18px]">
+                      <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
                         play_circle
                       </span>
                       {course.duration_hours} hours on-demand video
                     </li>
                   )}
                   <li className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-[18px]">
+                    <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
                       menu_book
                     </span>
                     {course.lessons.length} lectures
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-[18px]">
+                    <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
                       all_inclusive
                     </span>
                     Full lifetime access
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-[18px]">
+                    <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
                       devices
                     </span>
                     Access on mobile and desktop
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-[18px]">
+                    <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
                       lock
                     </span>
                     Secure checkout via Razorpay
@@ -428,7 +441,9 @@ export function CourseDetail({ course, isEnrolled, isAdminPreview, myReview }) {
               aria-label="Close preview"
               className="absolute top-2 right-2 z-10 bg-on-surface/50 text-white rounded-full p-1"
             >
-              <span className="material-symbols-outlined">close</span>
+              <span className="material-symbols-outlined" aria-hidden="true">
+                close
+              </span>
             </button>
             {/* biome-ignore lint/a11y/useMediaCaption: instructor-uploaded preview clips have no caption track */}
             <video

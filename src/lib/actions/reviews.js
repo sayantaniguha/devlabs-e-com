@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { getCurrentProfile } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { reviewSchema } from "@/lib/validations/reviews";
@@ -41,5 +41,9 @@ export async function createReview(_prevState, formData) {
 
   revalidatePath("/courses");
   revalidatePath(`/courses/${parsed.data.courseSlug}`);
+  // getCourses/getCourseBySlug are wrapped in unstable_cache tagged
+  // "courses" — revalidatePath alone doesn't invalidate that, so without
+  // this a new review would never actually move the displayed rating.
+  revalidateTag("courses");
   return { success: true };
 }

@@ -16,7 +16,7 @@ export function ThemeToggle({ className = "" }) {
       className={`text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-all scale-95 active:scale-90 duration-150 flex items-center ${className}`}
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
     >
-      <span className="material-symbols-outlined text-[20px]">
+      <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
         {mounted && resolvedTheme === "dark" ? "light_mode" : "dark_mode"}
       </span>
     </button>

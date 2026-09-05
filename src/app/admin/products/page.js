@@ -79,9 +79,10 @@ export default async function AdminProductsPage({ searchParams }) {
                         <div className="flex items-center justify-end gap-3">
                           <Link
                             href={`/admin/products?edit=${product.id}`}
+                            aria-label={`Edit ${product.name}`}
                             className="text-on-surface-variant dark:text-on-primary-container hover:text-secondary"
                           >
-                            <span className="material-symbols-outlined text-[20px]">
+                            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
                               edit
                             </span>
                           </Link>

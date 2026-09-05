@@ -40,7 +40,10 @@ export default function AboutPage() {
             key={value.title}
             className="border border-outline-variant dark:border-outline rounded-lg p-stack-lg"
           >
-            <span className="material-symbols-outlined text-secondary dark:text-secondary-fixed-dim text-[28px] mb-stack-sm block">
+            <span
+              className="material-symbols-outlined text-secondary dark:text-secondary-fixed-dim text-[28px] mb-stack-sm block"
+              aria-hidden="true"
+            >
               {value.icon}
             </span>
             <h2 className="font-headline-md text-headline-md text-on-background dark:text-inverse-on-surface mb-stack-xs">

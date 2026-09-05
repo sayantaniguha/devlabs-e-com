@@ -54,7 +54,9 @@ export function Navbar() {
             onClick={openCart}
             className="relative text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-all scale-95 active:scale-90 duration-150"
           >
-            <span className="material-symbols-outlined">shopping_cart</span>
+            <span className="material-symbols-outlined" aria-hidden="true">
+              shopping_cart
+            </span>
             {count > 0 && (
               <span className="absolute -top-2 -right-2 bg-secondary text-on-primary text-[10px] font-bold px-1.5 py-0.5 rounded-full">
                 {count}
@@ -69,7 +71,9 @@ export function Navbar() {
             aria-label="Account"
             className="text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-secondary-fixed transition-all scale-95 active:scale-90 duration-150"
           >
-            <span className="material-symbols-outlined">account_circle</span>
+            <span className="material-symbols-outlined" aria-hidden="true">
+              account_circle
+            </span>
           </Link>
         </div>
       </div>

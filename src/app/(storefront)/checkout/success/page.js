@@ -30,6 +30,7 @@ export default async function CheckoutSuccessPage({ searchParams }) {
       <div className="text-center mb-stack-xl">
         <span
           className={`material-symbols-outlined text-[48px] mb-stack-sm ${isPaymentFailed ? "text-error" : "text-on-tertiary-container"}`}
+          aria-hidden="true"
         >
           {isPaymentFailed
             ? "error"

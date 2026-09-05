@@ -44,7 +44,9 @@ export function AdminSidebar({ profile }) {
         href="/admin/products?new=1"
         className="w-full bg-secondary text-on-secondary py-2 px-4 rounded-md font-body-sm text-body-sm font-semibold mb-stack-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
       >
-        <span className="material-symbols-outlined text-[18px]">add</span>
+        <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
+          add
+        </span>
         New Product
       </Link>
 
@@ -64,7 +66,7 @@ export function AdminSidebar({ profile }) {
                   : "text-on-surface-variant dark:text-on-primary-container hover:bg-surface-container-low dark:hover:bg-primary-container"
               }`}
             >
-              <span className="material-symbols-outlined text-[20px]">
+              <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
                 {item.icon}
               </span>
               {item.label}
@@ -78,7 +80,9 @@ export function AdminSidebar({ profile }) {
           type="submit"
           className="w-full flex items-center gap-3 px-3 py-2 rounded-md text-on-surface-variant dark:text-on-primary-container hover:bg-surface-container-low dark:hover:bg-primary-container transition-colors font-body-sm text-body-sm"
         >
-          <span className="material-symbols-outlined text-[20px]">logout</span>
+          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+            logout
+          </span>
           Logout
         </button>
       </form>

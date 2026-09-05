@@ -15,7 +15,7 @@ function ChangeBadge({ percent }) {
           : "text-on-error-container bg-error-container/50"
       }`}
     >
-      <span className="material-symbols-outlined text-[14px]">
+      <span className="material-symbols-outlined text-[14px]" aria-hidden="true">
         {positive ? "trending_up" : "trending_down"}
       </span>
       {positive ? "+" : ""}
@@ -66,7 +66,9 @@ export default async function AdminDashboardPage() {
                 </p>
               </div>
               <div className="w-10 h-10 rounded-md bg-secondary/10 flex items-center justify-center text-secondary">
-                <span className="material-symbols-outlined">payments</span>
+                <span className="material-symbols-outlined" aria-hidden="true">
+                  payments
+                </span>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -88,7 +90,7 @@ export default async function AdminDashboardPage() {
                 </p>
               </div>
               <div className="w-10 h-10 rounded-md bg-secondary/10 flex items-center justify-center text-secondary">
-                <span className="material-symbols-outlined">
+                <span className="material-symbols-outlined" aria-hidden="true">
                   local_shipping
                 </span>
               </div>
@@ -112,7 +114,9 @@ export default async function AdminDashboardPage() {
                 </p>
               </div>
               <div className="w-10 h-10 rounded-md bg-secondary/10 flex items-center justify-center text-secondary">
-                <span className="material-symbols-outlined">group</span>
+                <span className="material-symbols-outlined" aria-hidden="true">
+                  group
+                </span>
               </div>
             </div>
             <div className="flex items-center gap-2">

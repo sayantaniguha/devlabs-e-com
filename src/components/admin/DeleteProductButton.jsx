@@ -28,7 +28,9 @@ export function DeleteProductButton({ productId, productName }) {
       className="text-on-error-container hover:opacity-70 disabled:opacity-40"
       aria-label={`Delete ${productName}`}
     >
-      <span className="material-symbols-outlined text-[20px]">delete</span>
+      <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+        delete
+      </span>
     </button>
   );
 }

@@ -46,6 +46,7 @@ export function ReviewForm({ courseId, courseSlug }) {
           >
             <span
               className="material-symbols-outlined text-[28px]"
+              aria-hidden="true"
               style={{
                 fontVariationSettings:
                   n <= (hoverRating || rating) ? "'FILL' 1" : "'FILL' 0",

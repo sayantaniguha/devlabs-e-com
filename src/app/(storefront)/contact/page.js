@@ -36,7 +36,10 @@ export default function ContactPage() {
             href={channel.href}
             className="flex items-center gap-stack-md border border-outline-variant dark:border-outline rounded-lg p-stack-md hover:border-secondary transition-colors"
           >
-            <span className="material-symbols-outlined text-secondary dark:text-secondary-fixed-dim text-[24px]">
+            <span
+              className="material-symbols-outlined text-secondary dark:text-secondary-fixed-dim text-[24px]"
+              aria-hidden="true"
+            >
               {channel.icon}
             </span>
             <div>

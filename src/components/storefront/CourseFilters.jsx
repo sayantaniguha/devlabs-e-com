@@ -155,6 +155,7 @@ export function CourseFilters({ categories, children }) {
               onTouchEnd={() =>
                 pushParams((params) => params.set("maxPrice", String(maxPrice)))
               }
+              aria-label="Maximum price"
               className="w-full h-1 bg-surface-variant rounded-lg appearance-none cursor-pointer"
             />
           </div>
@@ -168,7 +169,10 @@ export function CourseFilters({ categories, children }) {
       <div className="flex-grow flex flex-col gap-stack-lg">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-stack-md">
           <div className="relative w-full sm:w-64 group">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant dark:text-on-primary-container group-focus-within:text-secondary transition-colors">
+            <span
+              className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant dark:text-on-primary-container group-focus-within:text-secondary transition-colors"
+              aria-hidden="true"
+            >
               search
             </span>
             <input
@@ -176,6 +180,7 @@ export function CourseFilters({ categories, children }) {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search courses..."
+              aria-label="Search courses"
               className="w-full pl-10 pr-4 py-2 bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded focus:border-secondary focus:ring-2 focus:ring-secondary/10 transition-all text-body-sm font-body-sm outline-none placeholder:text-on-surface-variant/50 dark:placeholder:text-on-primary-container/50 text-on-surface dark:text-inverse-on-surface"
             />
           </div>
@@ -183,6 +188,7 @@ export function CourseFilters({ categories, children }) {
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value)}
+              aria-label="Sort by"
               className="w-full pl-3 pr-8 py-2 bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded focus:border-secondary focus:ring-2 focus:ring-secondary/10 transition-all text-body-sm font-body-sm appearance-none outline-none text-on-background dark:text-inverse-on-surface cursor-pointer"
             >
               <option value="newest">Newest</option>
@@ -190,7 +196,10 @@ export function CourseFilters({ categories, children }) {
               <option value="price-asc">Price: Low to High</option>
               <option value="price-desc">Price: High to Low</option>
             </select>
-            <span className="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant dark:text-on-primary-container pointer-events-none text-[20px]">
+            <span
+              className="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant dark:text-on-primary-container pointer-events-none text-[20px]"
+              aria-hidden="true"
+            >
               expand_more
             </span>
           </div>

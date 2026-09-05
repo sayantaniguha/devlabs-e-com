@@ -25,7 +25,9 @@ export default async function AdminCoursesPage({ searchParams }) {
             href="/admin/courses?new=1"
             className="bg-secondary text-on-secondary py-2 px-4 rounded-md font-body-sm text-body-sm font-semibold flex items-center gap-2 hover:opacity-90 transition-opacity"
           >
-            <span className="material-symbols-outlined text-[18px]">add</span>
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
+              add
+            </span>
             New Course
           </Link>
         </div>
@@ -73,9 +75,10 @@ export default async function AdminCoursesPage({ searchParams }) {
                       <div className="flex items-center justify-end gap-3">
                         <Link
                           href={`/admin/courses?edit=${course.id}`}
+                          aria-label={`Edit ${course.title}`}
                           className="text-on-surface-variant dark:text-on-primary-container hover:text-secondary"
                         >
-                          <span className="material-symbols-outlined text-[20px]">
+                          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
                             edit
                           </span>
                         </Link>

@@ -167,9 +167,12 @@ export function ProductDrawer({ product, categories }) {
               <button
                 type="button"
                 onClick={close}
+                aria-label="Close"
                 className="rounded-md text-on-surface-variant dark:text-on-primary-container hover:text-on-surface dark:hover:text-inverse-on-surface"
               >
-                <span className="material-symbols-outlined">close</span>
+                <span className="material-symbols-outlined" aria-hidden="true">
+                  close
+                </span>
               </button>
             </div>
 
@@ -290,9 +293,10 @@ export function ProductDrawer({ product, categories }) {
                       <button
                         type="button"
                         onClick={() => removeVariantRow(v.key)}
+                        aria-label="Remove variant"
                         className="text-on-error-container"
                       >
-                        <span className="material-symbols-outlined text-[18px]">
+                        <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
                           delete
                         </span>
                       </button>
@@ -315,7 +319,7 @@ export function ProductDrawer({ product, categories }) {
                 {isEditing ? (
                   <>
                     <label className="border-2 border-dashed border-outline-variant dark:border-outline rounded-lg p-6 flex flex-col items-center justify-center text-on-surface-variant dark:text-on-primary-container hover:bg-surface-container-low dark:hover:bg-primary-container transition-colors cursor-pointer">
-                      <span className="material-symbols-outlined text-[32px] mb-2">
+                      <span className="material-symbols-outlined text-[32px] mb-2" aria-hidden="true">
                         cloud_upload
                       </span>
                       <p className="text-xs">
@@ -361,9 +365,10 @@ export function ProductDrawer({ product, categories }) {
                           <button
                             type="button"
                             onClick={() => handleRemoveImage(img.id)}
+                            aria-label="Remove image"
                             className="absolute top-1 right-1 bg-on-surface/50 text-white rounded-full p-0.5"
                           >
-                            <span className="material-symbols-outlined text-[12px]">
+                            <span className="material-symbols-outlined text-[12px]" aria-hidden="true">
                               close
                             </span>
                           </button>

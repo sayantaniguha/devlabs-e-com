@@ -160,9 +160,12 @@ export function CourseDrawer({ course }) {
               <button
                 type="button"
                 onClick={close}
+                aria-label="Close"
                 className="rounded-md text-on-surface-variant dark:text-on-primary-container hover:text-on-surface dark:hover:text-inverse-on-surface"
               >
-                <span className="material-symbols-outlined">close</span>
+                <span className="material-symbols-outlined" aria-hidden="true">
+                  close
+                </span>
               </button>
             </div>
 
@@ -289,7 +292,7 @@ export function CourseDrawer({ course }) {
                     </div>
                   )}
                   <label className="flex-1 border-2 border-dashed border-outline-variant dark:border-outline rounded-lg p-4 flex flex-col items-center justify-center text-on-surface-variant dark:text-on-primary-container hover:bg-surface-container-low dark:hover:bg-primary-container transition-colors cursor-pointer">
-                    <span className="material-symbols-outlined text-[24px] mb-1">
+                    <span className="material-symbols-outlined text-[24px] mb-1" aria-hidden="true">
                       cloud_upload
                     </span>
                     <p className="text-xs">
@@ -329,9 +332,10 @@ export function CourseDrawer({ course }) {
                         <button
                           type="button"
                           onClick={() => removeLessonRow(l.key)}
+                          aria-label="Remove lesson"
                           className="text-on-error-container"
                         >
-                          <span className="material-symbols-outlined text-[18px]">
+                          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
                             delete
                           </span>
                         </button>

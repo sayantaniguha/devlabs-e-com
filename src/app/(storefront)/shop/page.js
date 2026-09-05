@@ -38,7 +38,10 @@ export default async function ShopPage({ searchParams }) {
                 </Link>
               </li>
               <li className="flex items-center">
-                <span className="material-symbols-outlined text-[16px] mx-1">
+                <span
+                  className="material-symbols-outlined text-[16px] mx-1"
+                  aria-hidden="true"
+                >
                   chevron_right
                 </span>
                 <span className="text-on-background dark:text-inverse-on-surface">

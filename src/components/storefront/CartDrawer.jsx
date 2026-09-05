@@ -39,16 +39,19 @@ export function CartDrawer() {
           <button
             type="button"
             onClick={closeCart}
+            aria-label="Close cart"
             className="p-2 -mr-2 text-on-surface-variant dark:text-on-primary-container hover:text-primary dark:hover:text-inverse-on-surface transition-colors rounded hover:bg-surface-container dark:hover:bg-inverse-surface"
           >
-            <span className="material-symbols-outlined">close</span>
+            <span className="material-symbols-outlined" aria-hidden="true">
+              close
+            </span>
           </button>
         </div>
 
         <div className="flex-1 overflow-y-auto p-stack-lg flex flex-col gap-stack-lg no-scrollbar">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center flex-1 gap-stack-sm text-on-surface-variant dark:text-on-primary-container">
-              <span className="material-symbols-outlined text-[40px]">
+              <span className="material-symbols-outlined text-[40px]" aria-hidden="true">
                 shopping_cart
               </span>
               <p className="font-body-sm text-body-sm">Your cart is empty.</p>
@@ -90,7 +93,7 @@ export function CartDrawer() {
                         aria-label="Remove item"
                         className="text-on-surface-variant dark:text-on-primary-container hover:text-error transition-colors p-1 -mr-1 -mt-1"
                       >
-                        <span className="material-symbols-outlined text-[20px]">
+                        <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
                           close
                         </span>
                       </button>
@@ -110,9 +113,10 @@ export function CartDrawer() {
                           <button
                             type="button"
                             onClick={() => setQuantity(item, item.quantity - 1)}
+                            aria-label="Decrease quantity"
                             className="w-8 h-full flex items-center justify-center text-on-surface-variant dark:text-on-primary-container hover:text-primary dark:hover:text-inverse-on-surface transition-colors"
                           >
-                            <span className="material-symbols-outlined text-[16px]">
+                            <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
                               remove
                             </span>
                           </button>
@@ -126,9 +130,10 @@ export function CartDrawer() {
                               item.maxQuantity != null &&
                               item.quantity >= item.maxQuantity
                             }
+                            aria-label="Increase quantity"
                             className="w-8 h-full flex items-center justify-center text-on-surface-variant dark:text-on-primary-container hover:text-primary dark:hover:text-inverse-on-surface transition-colors disabled:opacity-40 disabled:pointer-events-none"
                           >
-                            <span className="material-symbols-outlined text-[16px]">
+                            <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
                               add
                             </span>
                           </button>
@@ -157,7 +162,7 @@ export function CartDrawer() {
             </div>
             {subtotal >= FREE_SHIPPING_THRESHOLD ? (
               <div className="flex items-center gap-2 text-on-tertiary-container bg-tertiary-fixed-dim/20 px-3 py-2 rounded mb-stack-md">
-                <span className="material-symbols-outlined text-[18px]">
+                <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
                   check_circle
                 </span>
                 <span className="font-body-sm text-body-sm font-medium">

@@ -19,13 +19,15 @@ export default async function ProductPage({ params }) {
         <Link href="/" className="hover:text-primary dark:hover:text-inverse-on-surface transition-colors">
           Home
         </Link>
-        <span className="material-symbols-outlined text-sm">chevron_right</span>
+        <span className="material-symbols-outlined text-sm" aria-hidden="true">
+          chevron_right
+        </span>
         <Link href="/shop" className="hover:text-primary dark:hover:text-inverse-on-surface transition-colors">
           Shop
         </Link>
         {product.category && (
           <>
-            <span className="material-symbols-outlined text-sm">
+            <span className="material-symbols-outlined text-sm" aria-hidden="true">
               chevron_right
             </span>
             <span className="text-primary dark:text-inverse-on-surface font-medium">

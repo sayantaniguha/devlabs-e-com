@@ -149,9 +149,12 @@ export function ProductDetail({ product }) {
               <button
                 type="button"
                 onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                aria-label="Decrease quantity"
                 className="px-3 text-on-surface-variant dark:text-on-primary-container hover:text-primary dark:hover:text-inverse-on-surface"
               >
-                <span className="material-symbols-outlined">remove</span>
+                <span className="material-symbols-outlined" aria-hidden="true">
+                  remove
+                </span>
               </button>
               <span className="flex-grow text-center font-body-lg text-body-lg text-primary dark:text-inverse-on-surface">
                 {quantity}
@@ -159,9 +162,12 @@ export function ProductDetail({ product }) {
               <button
                 type="button"
                 onClick={() => setQuantity((q) => Math.min(maxQuantity, q + 1))}
+                aria-label="Increase quantity"
                 className="px-3 text-on-surface-variant dark:text-on-primary-container hover:text-primary dark:hover:text-inverse-on-surface"
               >
-                <span className="material-symbols-outlined">add</span>
+                <span className="material-symbols-outlined" aria-hidden="true">
+                  add
+                </span>
               </button>
             </div>
             <button
@@ -170,7 +176,9 @@ export function ProductDetail({ product }) {
               onClick={handleAdd}
               className="flex-grow border border-outline-variant dark:border-outline rounded font-body-lg text-body-lg font-medium text-primary dark:text-inverse-on-surface hover:border-primary dark:hover:border-inverse-on-surface transition-colors flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <span className="material-symbols-outlined">shopping_cart</span>
+              <span className="material-symbols-outlined" aria-hidden="true">
+                shopping_cart
+              </span>
               <span>Add to Cart</span>
             </button>
           </div>
@@ -187,19 +195,21 @@ export function ProductDetail({ product }) {
         <div className="flex flex-col space-y-stack-xs font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container mb-stack-lg border-b border-outline-variant dark:border-outline pb-stack-md">
           {canAdd ? (
             <div className="flex items-center space-x-2 text-[#059669]">
-              <span className="material-symbols-outlined text-sm">
+              <span className="material-symbols-outlined text-sm" aria-hidden="true">
                 check_circle
               </span>
               <span>In stock and ready to ship</span>
             </div>
           ) : (
             <div className="flex items-center space-x-2 text-error">
-              <span className="material-symbols-outlined text-sm">cancel</span>
+              <span className="material-symbols-outlined text-sm" aria-hidden="true">
+                cancel
+              </span>
               <span>Out of stock</span>
             </div>
           )}
           <div className="flex items-center space-x-2">
-            <span className="material-symbols-outlined text-sm">
+            <span className="material-symbols-outlined text-sm" aria-hidden="true">
               local_shipping
             </span>
             <span>Ships in 2-3 business days</span>
@@ -210,7 +220,10 @@ export function ProductDetail({ product }) {
           <details className="group py-4" open>
             <summary className="flex justify-between items-center font-headline-md text-headline-md text-primary dark:text-inverse-on-surface cursor-pointer list-none">
               Description
-              <span className="material-symbols-outlined transition group-open:rotate-180">
+              <span
+                className="material-symbols-outlined transition group-open:rotate-180"
+                aria-hidden="true"
+              >
                 expand_more
               </span>
             </summary>
@@ -221,7 +234,10 @@ export function ProductDetail({ product }) {
           <details className="group py-4">
             <summary className="flex justify-between items-center font-headline-md text-headline-md text-primary dark:text-inverse-on-surface cursor-pointer list-none">
               Shipping &amp; Returns
-              <span className="material-symbols-outlined transition group-open:rotate-180">
+              <span
+                className="material-symbols-outlined transition group-open:rotate-180"
+                aria-hidden="true"
+              >
                 expand_more
               </span>
             </summary>

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { StarRating } from "@/components/storefront/StarRating";
 import { formatPrice } from "@/lib/utils/format";
 
 export function CourseCard({ course, priority = false }) {
@@ -30,18 +29,6 @@ export function CourseCard({ course, priority = false }) {
         <h3 className="font-body-lg text-body-lg font-semibold text-on-surface dark:text-inverse-on-surface line-clamp-2">
           {course.title}
         </h3>
-
-        {course.rating?.count > 0 && (
-          <div className="flex items-center gap-1.5">
-            <span className="font-price-sm text-price-sm text-amber-600 dark:text-amber-400">
-              {course.rating.average.toFixed(1)}
-            </span>
-            <StarRating average={course.rating.average} size={14} />
-            <span className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container">
-              ({course.rating.count})
-            </span>
-          </div>
-        )}
 
         <div className="flex items-center justify-between mt-1">
           <div className="flex items-center gap-2">
