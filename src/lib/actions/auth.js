@@ -10,6 +10,16 @@ const credentialsSchema = z.object({
   password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
+// Only same-origin relative paths. A bare "/" prefix is not enough: "//evil.com"
+// and "/\evil.com" are both protocol-relative and would send the user off-site
+// after a successful login.
+function safeNext(value) {
+  if (typeof value !== "string") return null;
+  if (!value.startsWith("/")) return null;
+  if (value.startsWith("//") || value.startsWith("/\\")) return null;
+  return value;
+}
+
 export async function signIn(formData) {
   const parsed = credentialsSchema.safeParse({
     email: formData.get("email"),
@@ -25,7 +35,9 @@ export async function signIn(formData) {
     return { error: error.message };
   }
 
-  redirect("/account");
+  // ?next= was being passed by the account pages and /learn, but this action
+  // always redirected to /account, so it never did anything.
+  redirect(safeNext(formData.get("next")) ?? "/account");
 }
 
 const signUpSchema = credentialsSchema.extend({
