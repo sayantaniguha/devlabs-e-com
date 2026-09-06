@@ -286,13 +286,13 @@ export function ShopFilters({
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search products..."
             aria-label="Search products"
-            className={`w-full sm:w-64 px-4 py-2 bg-dl-chalk border border-dl-rule font-dl-sans text-dl-body text-dl-ink placeholder:text-dl-charcoal outline-none focus:border-dl-signal transition-colors ${FOCUS_RING}`}
+            className={`w-full sm:w-64 px-4 py-2 bg-dl-chalk border border-dl-rule font-dl-sans text-dl-body text-dl-ink placeholder:text-dl-charcoal focus:border-dl-signal transition-colors ${FOCUS_RING}`}
           />
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value)}
             aria-label="Sort by"
-            className={`w-full sm:w-48 px-3 py-2 bg-dl-chalk border border-dl-rule font-dl-sans text-dl-body text-dl-ink outline-none focus:border-dl-signal transition-colors cursor-pointer ${FOCUS_RING}`}
+            className={`w-full sm:w-48 px-3 py-2 bg-dl-chalk border border-dl-rule font-dl-sans text-dl-body text-dl-ink focus:border-dl-signal transition-colors cursor-pointer ${FOCUS_RING}`}
           >
             <option value="newest">Newest</option>
             <option value="price-asc">Price: Low to High</option>

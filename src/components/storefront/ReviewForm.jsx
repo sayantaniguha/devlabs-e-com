@@ -72,7 +72,7 @@ export function ReviewForm({ courseId, courseSlug }) {
         rows={3}
         aria-label="Review comment"
         placeholder="What did you think of this course? (optional)"
-        className={`w-full border border-dl-rule bg-dl-chalk text-dl-ink placeholder:text-dl-charcoal font-dl-sans text-dl-body py-2 px-3 outline-none focus:border-dl-signal transition-colors ${FOCUS_RING}`}
+        className={`w-full border border-dl-rule bg-dl-chalk text-dl-ink placeholder:text-dl-charcoal font-dl-sans text-dl-body py-2 px-3 focus:border-dl-signal transition-colors ${FOCUS_RING}`}
       />
 
       {state?.error && (

@@ -17,7 +17,7 @@ import { toast } from "@/lib/toast-store";
 const FOCUS_RING =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2";
 const INPUT =
-  "border border-dl-rule bg-dl-chalk text-dl-ink placeholder:text-dl-charcoal outline-none focus:border-dl-signal transition-colors py-2 px-3 font-dl-sans text-dl-body disabled:opacity-50 disabled:cursor-not-allowed";
+  "border border-dl-rule bg-dl-chalk text-dl-ink placeholder:text-dl-charcoal focus:border-dl-signal transition-colors py-2 px-3 font-dl-sans text-dl-body disabled:opacity-50 disabled:cursor-not-allowed";
 const LABEL = "block font-dl-sans text-dl-body font-semibold text-dl-ink mb-1";
 
 function emptyVariant() {

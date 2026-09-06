@@ -92,7 +92,7 @@ export function Footer() {
           </p>
           <form className="flex">
             <input
-              className="w-full px-4 py-2 border border-dl-rule bg-dl-sheet text-dl-ink placeholder:text-dl-charcoal font-dl-sans text-dl-body focus:outline-none focus:border-dl-signal focus:ring-1 focus:ring-dl-signal/20"
+              className="w-full px-4 py-2 border border-dl-rule bg-dl-sheet text-dl-ink placeholder:text-dl-charcoal font-dl-sans text-dl-body focus:focus:border-dl-signal focus:ring-1 focus:ring-dl-signal/20"
               placeholder="Email address"
               type="email"
               name="email"

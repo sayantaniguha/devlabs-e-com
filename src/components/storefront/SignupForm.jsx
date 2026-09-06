@@ -13,7 +13,7 @@ const FOCUS_RING =
 const LABEL =
   "font-dl-sans text-dl-spec text-dl-charcoal uppercase tracking-wide";
 const INPUT =
-  "px-4 py-2 border border-dl-rule bg-dl-chalk font-dl-sans text-dl-body text-dl-ink placeholder:text-dl-charcoal outline-none focus:border-dl-signal transition-colors";
+  "px-4 py-2 border border-dl-rule bg-dl-chalk font-dl-sans text-dl-body text-dl-ink placeholder:text-dl-charcoal focus:border-dl-signal transition-colors";
 
 export function SignupForm() {
   const searchParams = useSearchParams();
