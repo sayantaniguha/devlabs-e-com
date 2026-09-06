@@ -240,7 +240,10 @@ export function CheckoutForm({ profile }) {
           </label>
 
           {error && (
-            <p role="alert" className="font-dl-sans text-dl-body text-dl-signal-ink">
+            <p
+              role="alert"
+              className="font-dl-sans text-dl-body text-dl-signal-ink"
+            >
               {error}
             </p>
           )}

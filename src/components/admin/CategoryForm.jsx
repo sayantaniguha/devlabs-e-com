@@ -18,17 +18,19 @@ export function CategoryForm({ action, category, onSuccess }) {
         defaultValue={category?.name ?? ""}
         placeholder="Category name"
         required
-        className="flex-1 rounded-md border border-outline-variant dark:border-outline bg-surface dark:bg-primary-container text-on-surface dark:text-inverse-on-surface py-2 px-3 text-body-sm"
+        className="flex-1 border border-dl-rule bg-dl-chalk text-dl-ink py-2 px-3 font-dl-sans text-dl-body"
       />
       <button
         type="submit"
         disabled={pending}
-        className="bg-secondary text-on-secondary font-semibold py-2 px-4 rounded-md hover:opacity-90 transition-opacity disabled:opacity-60 whitespace-nowrap"
+        className="bg-dl-ink text-dl-chalk font-semibold py-2 px-4 hover:opacity-90 transition-opacity disabled:opacity-60 whitespace-nowrap"
       >
         {pending ? "Saving…" : category?.id ? "Save" : "Add"}
       </button>
       {state?.error && (
-        <p className="text-error text-xs whitespace-nowrap">{state.error}</p>
+        <p className="text-dl-signal-ink text-xs whitespace-nowrap">
+          {state.error}
+        </p>
       )}
     </form>
   );

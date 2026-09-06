@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { CloseIcon } from "@/components/ui/icons";
 import { useState } from "react";
 import { createCourse, updateCourse } from "@/lib/actions/admin/courses";
 import { createClient } from "@/lib/supabase/client";
@@ -144,35 +145,33 @@ export function CourseDrawer({ course }) {
       <button
         type="button"
         aria-label="Close"
-        className="absolute inset-0 bg-on-surface/30 backdrop-blur-sm"
+        className="absolute inset-0 bg-dl-ink/50"
         onClick={close}
       />
       <div className="fixed inset-y-0 right-0 flex max-w-full pl-10">
         <div className="w-screen max-w-[520px]">
           <form
             onSubmit={handleSave}
-            className="flex h-full flex-col overflow-y-scroll bg-surface-container-lowest dark:bg-inverse-surface shadow-xl"
+            className="flex h-full flex-col overflow-y-scroll bg-dl-chalk"
           >
-            <div className="px-stack-lg py-stack-md border-b border-outline-variant dark:border-outline flex items-center justify-between sticky top-0 bg-surface-container-lowest dark:bg-inverse-surface z-10">
-              <h2 className="text-headline-md font-headline-md font-semibold text-on-surface dark:text-inverse-on-surface">
+            <div className="px-stack-lg py-stack-md border-b border-dl-rule flex items-center justify-between sticky top-0 bg-dl-chalk z-10">
+              <h2 className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink">
                 {isEditing ? "Edit Course" : "Add New Course"}
               </h2>
               <button
                 type="button"
                 onClick={close}
                 aria-label="Close"
-                className="rounded-md text-on-surface-variant dark:text-on-primary-container hover:text-on-surface dark:hover:text-inverse-on-surface"
+                className="text-dl-charcoal hover:text-dl-ink transition-colors"
               >
-                <span className="material-symbols-outlined" aria-hidden="true">
-                  close
-                </span>
+                <CloseIcon className="w-4 h-4" />
               </button>
             </div>
 
             <div className="relative flex-1 px-stack-lg py-stack-lg space-y-stack-lg">
               <div className="space-y-4">
                 <label className="block">
-                  <span className="block text-body-sm font-semibold text-on-surface dark:text-inverse-on-surface mb-1">
+                  <span className="block font-dl-sans text-dl-body font-semibold text-dl-ink mb-1">
                     Course Title
                   </span>
                   <input
@@ -181,11 +180,11 @@ export function CourseDrawer({ course }) {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="e.g. React Fundamentals"
-                    className="w-full rounded-md border border-outline-variant dark:border-outline bg-surface dark:bg-primary-container text-on-surface dark:text-inverse-on-surface focus:ring-2 focus:ring-secondary focus:border-transparent py-2 px-3 text-body-sm"
+                    className="w-full border border-dl-rule bg-dl-chalk text-dl-ink focus:border-dl-signal py-2 px-3 font-dl-sans text-dl-body"
                   />
                 </label>
                 <label className="block">
-                  <span className="block text-body-sm font-semibold text-on-surface dark:text-inverse-on-surface mb-1">
+                  <span className="block font-dl-sans text-dl-body font-semibold text-dl-ink mb-1">
                     Description
                   </span>
                   <textarea
@@ -193,12 +192,12 @@ export function CourseDrawer({ course }) {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Describe the course..."
-                    className="w-full rounded-md border border-outline-variant dark:border-outline bg-surface dark:bg-primary-container text-on-surface dark:text-inverse-on-surface focus:ring-2 focus:ring-secondary focus:border-transparent py-2 px-3 text-body-sm"
+                    className="w-full border border-dl-rule bg-dl-chalk text-dl-ink focus:border-dl-signal py-2 px-3 font-dl-sans text-dl-body"
                   />
                 </label>
                 <div className="grid grid-cols-2 gap-4">
                   <label className="block">
-                    <span className="block text-body-sm font-semibold text-on-surface dark:text-inverse-on-surface mb-1">
+                    <span className="block font-dl-sans text-dl-body font-semibold text-dl-ink mb-1">
                       Category
                     </span>
                     <input
@@ -206,17 +205,17 @@ export function CourseDrawer({ course }) {
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
                       placeholder="e.g. Web Development"
-                      className="w-full rounded-md border border-outline-variant dark:border-outline bg-surface dark:bg-primary-container text-on-surface dark:text-inverse-on-surface focus:ring-2 focus:ring-secondary focus:border-transparent py-2 px-3 text-body-sm"
+                      className="w-full border border-dl-rule bg-dl-chalk text-dl-ink focus:border-dl-signal py-2 px-3 font-dl-sans text-dl-body"
                     />
                   </label>
                   <label className="block">
-                    <span className="block text-body-sm font-semibold text-on-surface dark:text-inverse-on-surface mb-1">
+                    <span className="block font-dl-sans text-dl-body font-semibold text-dl-ink mb-1">
                       Level
                     </span>
                     <select
                       value={level}
                       onChange={(e) => setLevel(e.target.value)}
-                      className="w-full rounded-md border border-outline-variant dark:border-outline bg-surface dark:bg-primary-container text-on-surface dark:text-inverse-on-surface focus:ring-2 focus:ring-secondary focus:border-transparent py-2 px-3 text-body-sm"
+                      className="w-full border border-dl-rule bg-dl-chalk text-dl-ink focus:border-dl-signal py-2 px-3 font-dl-sans text-dl-body"
                     >
                       <option value="">—</option>
                       <option value="Beginner">Beginner</option>
@@ -229,7 +228,7 @@ export function CourseDrawer({ course }) {
                   </label>
                 </div>
                 <label className="block">
-                  <span className="block text-body-sm font-semibold text-on-surface dark:text-inverse-on-surface mb-1">
+                  <span className="block font-dl-sans text-dl-body font-semibold text-dl-ink mb-1">
                     Duration (hours)
                   </span>
                   <input
@@ -239,12 +238,12 @@ export function CourseDrawer({ course }) {
                     value={durationHours}
                     onChange={(e) => setDurationHours(e.target.value)}
                     placeholder="e.g. 22"
-                    className="w-full rounded-md border border-outline-variant dark:border-outline bg-surface dark:bg-primary-container text-on-surface dark:text-inverse-on-surface focus:ring-2 focus:ring-secondary focus:border-transparent py-2 px-3 text-body-sm"
+                    className="w-full border border-dl-rule bg-dl-chalk text-dl-ink focus:border-dl-signal py-2 px-3 font-dl-sans text-dl-body"
                   />
                 </label>
                 <div className="grid grid-cols-2 gap-4">
                   <label className="block">
-                    <span className="block text-body-sm font-semibold text-on-surface dark:text-inverse-on-surface mb-1">
+                    <span className="block font-dl-sans text-dl-body font-semibold text-dl-ink mb-1">
                       Price (₹)
                     </span>
                     <input
@@ -255,11 +254,11 @@ export function CourseDrawer({ course }) {
                       value={price}
                       onChange={(e) => setPrice(e.target.value)}
                       placeholder="0.00"
-                      className="w-full rounded-md border border-outline-variant dark:border-outline bg-surface dark:bg-primary-container text-on-surface dark:text-inverse-on-surface focus:ring-2 focus:ring-secondary focus:border-transparent py-2 px-3 text-body-sm"
+                      className="w-full border border-dl-rule bg-dl-chalk text-dl-ink focus:border-dl-signal py-2 px-3 font-dl-sans text-dl-body"
                     />
                   </label>
                   <label className="block">
-                    <span className="block text-body-sm font-semibold text-on-surface dark:text-inverse-on-surface mb-1">
+                    <span className="block font-dl-sans text-dl-body font-semibold text-dl-ink mb-1">
                       Compare-at Price (₹)
                     </span>
                     <input
@@ -269,19 +268,19 @@ export function CourseDrawer({ course }) {
                       value={compareAtPrice}
                       onChange={(e) => setCompareAtPrice(e.target.value)}
                       placeholder="0.00"
-                      className="w-full rounded-md border border-outline-variant dark:border-outline bg-surface dark:bg-primary-container text-on-surface dark:text-inverse-on-surface focus:ring-2 focus:ring-secondary focus:border-transparent py-2 px-3 text-body-sm"
+                      className="w-full border border-dl-rule bg-dl-chalk text-dl-ink focus:border-dl-signal py-2 px-3 font-dl-sans text-dl-body"
                     />
                   </label>
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-outline-variant/50 dark:border-outline/50">
-                <p className="block text-body-sm font-semibold text-on-surface dark:text-inverse-on-surface mb-2">
+              <div className="pt-4 border-t border-dl-rule">
+                <p className="block font-dl-sans text-dl-body font-semibold text-dl-ink mb-2">
                   Thumbnail
                 </p>
                 <div className="flex items-center gap-4">
                   {thumbnailUrl && (
-                    <div className="relative w-24 aspect-video rounded-md overflow-hidden border border-outline-variant dark:border-outline shrink-0">
+                    <div className="relative w-24 aspect-video overflow-hidden border border-dl-rule shrink-0">
                       <Image
                         src={thumbnailUrl}
                         alt=""
@@ -291,10 +290,7 @@ export function CourseDrawer({ course }) {
                       />
                     </div>
                   )}
-                  <label className="flex-1 border-2 border-dashed border-outline-variant dark:border-outline rounded-lg p-4 flex flex-col items-center justify-center text-on-surface-variant dark:text-on-primary-container hover:bg-surface-container-low dark:hover:bg-primary-container transition-colors cursor-pointer">
-                    <span className="material-symbols-outlined text-[24px] mb-1" aria-hidden="true">
-                      cloud_upload
-                    </span>
+                  <label className="flex-1 border-2 border-dashed border-dl-rule p-4 flex flex-col items-center justify-center text-dl-charcoal hover:bg-dl-sheet transition-colors cursor-pointer">
                     <p className="text-xs">
                       {uploading ? "Uploading…" : "Click to upload"}
                     </p>
@@ -309,15 +305,15 @@ export function CourseDrawer({ course }) {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-outline-variant/50 dark:border-outline/50">
-                <h3 className="text-body-sm font-semibold text-on-surface dark:text-inverse-on-surface mb-3">
+              <div className="pt-4 border-t border-dl-rule">
+                <h3 className="font-dl-sans text-dl-body font-semibold text-dl-ink mb-3">
                   Lessons
                 </h3>
                 <div className="space-y-2">
                   {lessons.map((l) => (
                     <div
                       key={l.key}
-                      className="flex flex-col gap-2 p-2 bg-surface-container-low dark:bg-primary-container rounded-md"
+                      className="flex flex-col gap-2 p-2 bg-dl-sheet"
                     >
                       <div className="flex items-center gap-2">
                         <input
@@ -327,18 +323,14 @@ export function CourseDrawer({ course }) {
                             updateLesson(l.key, "title", e.target.value)
                           }
                           placeholder="Lesson title"
-                          className="flex-1 rounded border border-outline-variant dark:border-outline bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface py-1 px-2 text-xs"
+                          className="flex-1 border border-dl-rule bg-dl-chalk text-dl-ink py-1 px-2 text-xs"
                         />
                         <button
                           type="button"
                           onClick={() => removeLessonRow(l.key)}
                           aria-label="Remove lesson"
-                          className="text-on-error-container"
-                        >
-                          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
-                            delete
-                          </span>
-                        </button>
+                          className="text-dl-signal-ink"
+                        ></button>
                       </div>
                       <div className="flex items-center gap-2">
                         <input
@@ -348,9 +340,9 @@ export function CourseDrawer({ course }) {
                             updateLesson(l.key, "video_url", e.target.value)
                           }
                           placeholder="Video URL"
-                          className="flex-1 rounded border border-outline-variant dark:border-outline bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface py-1 px-2 text-xs"
+                          className="flex-1 border border-dl-rule bg-dl-chalk text-dl-ink py-1 px-2 text-xs"
                         />
-                        <label className="flex items-center gap-1 text-xs text-on-surface-variant dark:text-on-primary-container shrink-0">
+                        <label className="flex items-center gap-1 text-xs text-dl-charcoal shrink-0">
                           <input
                             type="checkbox"
                             checked={l.is_preview}
@@ -371,13 +363,13 @@ export function CourseDrawer({ course }) {
                 <button
                   type="button"
                   onClick={addLessonRow}
-                  className="mt-2 text-body-sm text-secondary font-semibold"
+                  className="mt-2 font-dl-sans text-dl-body text-dl-ink font-semibold"
                 >
                   + Add lesson
                 </button>
               </div>
 
-              <div className="pt-4 border-t border-outline-variant/50 dark:border-outline/50 flex items-start gap-3">
+              <div className="pt-4 border-t border-dl-rule flex items-start gap-3">
                 <button
                   type="button"
                   role="switch"
@@ -385,39 +377,41 @@ export function CourseDrawer({ course }) {
                   onClick={() =>
                     setStatus(status === "active" ? "draft" : "active")
                   }
-                  className={`relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:${status === "active" ? "bg-secondary" : "bg-surface-variant dark:bg-outline"}`}
+                  className={`relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer border-2 border-transparent transition-colors duration-200 ease-in-out ${status === "active" ? "bg-dl-ink" : "bg-dl-rule"}`}
                 >
                   <span
-                    className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${status === "active" ? "translate-x-5" : "translate-x-0"}`}
+                    className={`pointer-events-none inline-block h-4 w-4 transform bg-dl-chalk transition duration-200 ease-in-out ${status === "active" ? "translate-x-5" : "translate-x-0"}`}
                   />
                 </button>
                 <div>
-                  <p className="text-body-sm font-semibold text-on-surface dark:text-inverse-on-surface">
+                  <p className="font-dl-sans text-dl-body font-semibold text-dl-ink">
                     {status === "active" ? "Active" : "Draft"}
                   </p>
-                  <p className="text-xs text-on-surface-variant dark:text-on-primary-container">
+                  <p className="text-xs text-dl-charcoal">
                     Drafts are hidden from the storefront.
                   </p>
                 </div>
               </div>
 
               {error && (
-                <p className="text-error text-body-sm font-body-sm">{error}</p>
+                <p className="text-dl-signal-ink font-dl-sans text-dl-body">
+                  {error}
+                </p>
               )}
             </div>
 
-            <div className="px-stack-lg py-stack-md border-t border-outline-variant dark:border-outline flex items-center justify-between sticky bottom-0 bg-surface-container-lowest dark:bg-inverse-surface">
+            <div className="px-stack-lg py-stack-md border-t border-dl-rule flex items-center justify-between sticky bottom-0 bg-dl-chalk">
               <button
                 type="button"
                 onClick={close}
-                className="text-on-surface-variant dark:text-on-primary-container hover:text-on-surface dark:hover:text-inverse-on-surface font-semibold py-2 px-4 rounded-md transition-colors"
+                className="text-dl-charcoal hover:text-dl-ink font-semibold py-2 px-4 transition-colors"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={saving}
-                className="bg-secondary text-on-secondary font-semibold py-2 px-6 rounded-md hover:opacity-90 transition-opacity disabled:opacity-60"
+                className="bg-dl-ink text-dl-chalk font-semibold py-2 px-6 hover:opacity-90 transition-opacity disabled:opacity-60"
               >
                 {saving ? "Saving…" : "Save Course"}
               </button>

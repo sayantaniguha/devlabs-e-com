@@ -113,7 +113,11 @@ export default async function AdminDashboardPage() {
                     title={formatPrice(day.total)}
                   >
                     <div
-                      className={isLast ? "w-8 md:w-12 bg-dl-ink" : "w-8 md:w-12 bg-dl-rule"}
+                      className={
+                        isLast
+                          ? "w-8 md:w-12 bg-dl-ink"
+                          : "w-8 md:w-12 bg-dl-rule"
+                      }
                       style={{ height: `${heightPercent}%` }}
                     />
                     <span
@@ -174,7 +178,10 @@ export default async function AdminDashboardPage() {
               </thead>
               <tbody className="divide-y divide-dl-rule font-dl-sans text-dl-body">
                 {stats.recentOrders.map((order) => (
-                  <tr key={order.id} className="hover:bg-dl-sheet/50 transition-colors">
+                  <tr
+                    key={order.id}
+                    className="hover:bg-dl-sheet/50 transition-colors"
+                  >
                     <td className="px-stack-lg py-3 font-dl-mono text-dl-spec whitespace-nowrap">
                       <Link
                         href={`/admin/orders/${order.id}`}
@@ -202,7 +209,10 @@ export default async function AdminDashboardPage() {
                 ))}
                 {stats.recentOrders.length === 0 && (
                   <tr>
-                    <td colSpan={6} className="px-stack-lg py-stack-xl text-center">
+                    <td
+                      colSpan={6}
+                      className="px-stack-lg py-stack-xl text-center"
+                    >
                       <p className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink">
                         No orders yet.
                       </p>

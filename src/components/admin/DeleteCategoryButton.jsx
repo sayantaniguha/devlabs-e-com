@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { deleteCategory } from "@/lib/actions/admin/categories";
 
+// Text, not an icon, matching DeleteProductButton. The icon here was one of
+// the last consumers of the Material Symbols webfont.
 export function DeleteCategoryButton({ categoryId, categoryName }) {
   const router = useRouter();
   const [error, setError] = useState(null);
@@ -28,14 +30,19 @@ export function DeleteCategoryButton({ categoryId, categoryName }) {
         type="button"
         onClick={handleDelete}
         disabled={deleting}
-        className="text-on-error-container hover:opacity-70 disabled:opacity-40"
         aria-label={`Delete ${categoryName}`}
+        className="font-dl-sans text-dl-body text-dl-signal-ink hover:underline underline-offset-4 disabled:opacity-40 disabled:no-underline whitespace-nowrap focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2"
       >
-        <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
-          delete
-        </span>
+        {deleting ? "Deleting..." : "Delete"}
       </button>
-      {error && <p className="text-error text-xs">{error}</p>}
+      {error && (
+        <p
+          role="alert"
+          className="font-dl-sans text-dl-spec text-dl-signal-ink"
+        >
+          {error}
+        </p>
+      )}
     </div>
   );
 }

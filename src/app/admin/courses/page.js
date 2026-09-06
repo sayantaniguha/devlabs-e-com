@@ -23,20 +23,17 @@ export default async function AdminCoursesPage({ searchParams }) {
         <div className="flex justify-end">
           <Link
             href="/admin/courses?new=1"
-            className="bg-secondary text-on-secondary py-2 px-4 rounded-md font-body-sm text-body-sm font-semibold flex items-center gap-2 hover:opacity-90 transition-opacity"
+            className="bg-dl-ink text-dl-chalk py-2 px-4 font-dl-sans text-dl-body font-semibold flex items-center gap-2 hover:opacity-90 transition-opacity"
           >
-            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
-              add
-            </span>
             New Course
           </Link>
         </div>
 
-        <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg shadow-sm overflow-hidden">
+        <div className="bg-dl-chalk border border-dl-rule overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-surface-container-low dark:bg-primary-container border-b border-outline-variant/50 dark:border-outline/50 font-label-caps text-label-caps text-on-surface-variant dark:text-on-primary-container uppercase tracking-wider">
+                <tr className="bg-dl-sheet border-b border-dl-rule font-dl-sans text-dl-spec text-dl-charcoal uppercase tracking-wider">
                   <th className="px-stack-lg py-3 font-semibold">Course</th>
                   <th className="px-stack-lg py-3 font-semibold text-right">
                     Price
@@ -48,24 +45,24 @@ export default async function AdminCoursesPage({ searchParams }) {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-outline-variant/30 dark:divide-outline/30 font-body-sm text-body-sm">
+              <tbody className="divide-y divide-dl-rule font-dl-sans text-dl-body">
                 {courses.map((course) => (
                   <tr key={course.id}>
-                    <td className="px-stack-lg py-4 font-semibold text-on-surface dark:text-inverse-on-surface">
+                    <td className="px-stack-lg py-4 font-semibold text-dl-ink">
                       {course.title}
                     </td>
-                    <td className="px-stack-lg py-4 font-price-sm text-price-sm text-right">
+                    <td className="px-stack-lg py-4 font-dl-sans text-dl-body tabular-nums text-right">
                       {formatPrice(course.price)}
                     </td>
-                    <td className="px-stack-lg py-4 text-on-surface-variant dark:text-on-primary-container">
+                    <td className="px-stack-lg py-4 text-dl-charcoal">
                       {course.lessons?.length ?? 0}
                     </td>
                     <td className="px-stack-lg py-4">
                       <span
-                        className={`px-2 py-1 text-[10px] font-bold uppercase tracking-wider rounded ${
+                        className={`px-2 py-0.5 font-dl-sans text-dl-spec uppercase tracking-wide ${
                           course.status === "active"
-                            ? "bg-tertiary-fixed-dim/20 text-on-tertiary-fixed-variant"
-                            : "bg-surface-variant text-on-surface-variant dark:bg-inverse-surface dark:text-inverse-on-surface"
+                            ? "border border-dl-rule text-dl-ink"
+                            : "border border-dl-rule text-dl-charcoal"
                         }`}
                       >
                         {course.status}
@@ -76,11 +73,9 @@ export default async function AdminCoursesPage({ searchParams }) {
                         <Link
                           href={`/admin/courses?edit=${course.id}`}
                           aria-label={`Edit ${course.title}`}
-                          className="text-on-surface-variant dark:text-on-primary-container hover:text-secondary"
+                          className="text-dl-charcoal hover:text-dl-signal-ink"
                         >
-                          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
-                            edit
-                          </span>
+                          Edit
                         </Link>
                         <DeleteCourseButton
                           courseId={course.id}
@@ -94,7 +89,7 @@ export default async function AdminCoursesPage({ searchParams }) {
                   <tr>
                     <td
                       colSpan={5}
-                      className="px-stack-lg py-8 text-center text-on-surface-variant dark:text-on-primary-container"
+                      className="px-stack-lg py-8 text-center text-dl-charcoal"
                     >
                       No courses yet.
                     </td>

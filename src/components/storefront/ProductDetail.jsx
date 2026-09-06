@@ -81,7 +81,10 @@ export function ProductDetail({ product }) {
           )}
         </div>
         {images.length > 1 && (
-          <div className="grid grid-cols-4 gap-stack-sm" aria-label="Product images">
+          <div
+            className="grid grid-cols-4 gap-stack-sm"
+            aria-label="Product images"
+          >
             {images.map((img, i) => {
               const active = i === selectedImage;
               return (
@@ -173,9 +176,7 @@ export function ProductDetail({ product }) {
               </span>
               <button
                 type="button"
-                onClick={() =>
-                  setQuantity((q) => Math.min(maxQuantity, q + 1))
-                }
+                onClick={() => setQuantity((q) => Math.min(maxQuantity, q + 1))}
                 disabled={quantity >= maxQuantity}
                 aria-label="Increase quantity"
                 className={`px-3 h-full font-dl-sans text-lg text-dl-charcoal hover:text-dl-ink transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:text-dl-charcoal ${FOCUS_RING}`}

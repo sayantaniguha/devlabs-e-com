@@ -159,9 +159,7 @@ export function CartDrawer() {
                         <div className="flex items-center border border-dl-rule h-8">
                           <button
                             type="button"
-                            onClick={() =>
-                              setQuantity(item, item.quantity - 1)
-                            }
+                            onClick={() => setQuantity(item, item.quantity - 1)}
                             aria-label={`Decrease quantity of ${item.name}`}
                             className={`w-8 h-full flex items-center justify-center font-dl-sans text-dl-charcoal hover:text-dl-ink transition-colors ${FOCUS_RING}`}
                           >
@@ -172,9 +170,7 @@ export function CartDrawer() {
                           </span>
                           <button
                             type="button"
-                            onClick={() =>
-                              setQuantity(item, item.quantity + 1)
-                            }
+                            onClick={() => setQuantity(item, item.quantity + 1)}
                             disabled={
                               item.maxQuantity != null &&
                               item.quantity >= item.maxQuantity

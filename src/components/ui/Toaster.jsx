@@ -102,7 +102,5 @@ function Toast({ id, message }) {
 
 export function Toaster() {
   const toasts = useToastStore((s) => s.toasts);
-  return toasts.map((t) => (
-    <Toast key={t.id} id={t.id} message={t.message} />
-  ));
+  return toasts.map((t) => <Toast key={t.id} id={t.id} message={t.message} />);
 }

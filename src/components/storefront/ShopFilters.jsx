@@ -240,14 +240,10 @@ export function ShopFilters({
               value={maxPrice}
               onChange={(e) => setMaxPrice(Number(e.target.value))}
               onMouseUp={() =>
-                pushParams((params) =>
-                  params.set("maxPrice", String(maxPrice)),
-                )
+                pushParams((params) => params.set("maxPrice", String(maxPrice)))
               }
               onTouchEnd={() =>
-                pushParams((params) =>
-                  params.set("maxPrice", String(maxPrice)),
-                )
+                pushParams((params) => params.set("maxPrice", String(maxPrice)))
               }
               aria-label="Maximum price"
               className={`w-full accent-dl-ink cursor-pointer ${FOCUS_RING}`}

@@ -52,7 +52,10 @@ export default async function AdminProductsPage({ searchParams }) {
                     0,
                   );
                   return (
-                    <tr key={product.id} className="hover:bg-dl-sheet/50 transition-colors">
+                    <tr
+                      key={product.id}
+                      className="hover:bg-dl-sheet/50 transition-colors"
+                    >
                       <td className="px-stack-lg py-3 font-semibold text-dl-ink">
                         {product.name}
                       </td>
@@ -95,7 +98,10 @@ export default async function AdminProductsPage({ searchParams }) {
                 })}
                 {products.length === 0 && (
                   <tr>
-                    <td colSpan={6} className="px-stack-lg py-stack-xl text-center">
+                    <td
+                      colSpan={6}
+                      className="px-stack-lg py-stack-xl text-center"
+                    >
                       <p className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink">
                         No products yet.
                       </p>

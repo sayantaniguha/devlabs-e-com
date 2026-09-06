@@ -19,8 +19,6 @@ export function StockStatusBadge({ totalStock }) {
     );
   }
   return (
-    <span className={`${TAG} border-dl-success text-dl-success`}>
-      In Stock
-    </span>
+    <span className={`${TAG} border-dl-success text-dl-success`}>In Stock</span>
   );
 }

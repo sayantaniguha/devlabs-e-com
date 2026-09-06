@@ -17,9 +17,9 @@ export default async function AdminOrderDetailPage({ params }) {
         subtitle={`Placed ${new Date(order.created_at).toLocaleString("en-IN")}`}
       />
       <div className="p-margin-desktop space-y-stack-lg max-w-3xl mx-auto w-full">
-        <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg shadow-sm p-stack-lg flex flex-wrap items-center justify-between gap-4">
+        <div className="bg-dl-chalk border border-dl-rule p-stack-lg flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <span className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container">
+            <span className="font-dl-sans text-dl-body text-dl-charcoal">
               Current status:
             </span>
             <OrderStatusBadge status={order.status} />
@@ -27,23 +27,23 @@ export default async function AdminOrderDetailPage({ params }) {
           <OrderStatusForm orderId={order.id} status={order.status} />
         </div>
 
-        <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg shadow-sm p-stack-lg">
-          <h2 className="font-headline-md text-headline-md font-semibold text-on-surface dark:text-inverse-on-surface mb-stack-md">
+        <div className="bg-dl-chalk border border-dl-rule p-stack-lg">
+          <h2 className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink mb-stack-md">
             Customer
           </h2>
-          <p className="font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface">
+          <p className="font-dl-sans text-dl-body text-dl-ink">
             {order.profile?.full_name ?? order.shipping_name}
           </p>
-          <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container">
+          <p className="font-dl-sans text-dl-body text-dl-charcoal">
             {order.profile?.email ?? order.guest_email}
           </p>
         </div>
 
-        <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg shadow-sm p-stack-lg">
-          <h2 className="font-headline-md text-headline-md font-semibold text-on-surface dark:text-inverse-on-surface mb-stack-md">
+        <div className="bg-dl-chalk border border-dl-rule p-stack-lg">
+          <h2 className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink mb-stack-md">
             Shipping Address
           </h2>
-          <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container">
+          <p className="font-dl-sans text-dl-body text-dl-charcoal">
             {order.shipping_name}
             <br />
             {order.shipping_phone}
@@ -56,35 +56,35 @@ export default async function AdminOrderDetailPage({ params }) {
           </p>
         </div>
 
-        <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg shadow-sm p-stack-lg">
-          <h2 className="font-headline-md text-headline-md font-semibold text-on-surface dark:text-inverse-on-surface mb-stack-md">
+        <div className="bg-dl-chalk border border-dl-rule p-stack-lg">
+          <h2 className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink mb-stack-md">
             Items
           </h2>
           <div className="flex flex-col gap-stack-sm mb-stack-md">
             {order.order_items.map((item) => (
               <div
                 key={item.id}
-                className="flex justify-between text-body-sm font-body-sm"
+                className="flex justify-between font-dl-sans text-dl-body"
               >
-                <span className="text-on-surface-variant dark:text-on-primary-container">
+                <span className="text-dl-charcoal">
                   {item.name_snapshot}
                   {item.variant_label_snapshot
                     ? ` (${item.variant_label_snapshot})`
                     : ""}{" "}
                   × {item.quantity}
                 </span>
-                <span className="text-on-surface dark:text-inverse-on-surface">
+                <span className="text-dl-ink">
                   {formatPrice(item.unit_price_snapshot * item.quantity)}
                 </span>
               </div>
             ))}
           </div>
-          <div className="border-t border-outline-variant dark:border-outline pt-stack-sm flex flex-col gap-1">
-            <div className="flex justify-between text-body-sm font-body-sm text-on-surface-variant dark:text-on-primary-container">
+          <div className="border-t border-dl-rule pt-stack-sm flex flex-col gap-1">
+            <div className="flex justify-between font-dl-sans text-dl-body text-dl-charcoal">
               <span>Subtotal</span>
               <span>{formatPrice(order.subtotal)}</span>
             </div>
-            <div className="flex justify-between text-body-sm font-body-sm text-on-surface-variant dark:text-on-primary-container">
+            <div className="flex justify-between font-dl-sans text-dl-body text-dl-charcoal">
               <span>Shipping</span>
               <span>
                 {order.shipping_total === 0
@@ -92,7 +92,7 @@ export default async function AdminOrderDetailPage({ params }) {
                   : formatPrice(order.shipping_total)}
               </span>
             </div>
-            <div className="flex justify-between font-price-lg text-price-lg text-on-background dark:text-inverse-on-surface font-bold pt-1">
+            <div className="flex justify-between font-dl-sans text-dl-body-lg tabular-nums text-dl-ink font-bold pt-1">
               <span>Total</span>
               <span>{formatPrice(order.total)}</span>
             </div>
@@ -100,15 +100,15 @@ export default async function AdminOrderDetailPage({ params }) {
         </div>
 
         {order.payments?.length > 0 && (
-          <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg shadow-sm p-stack-lg">
-            <h2 className="font-headline-md text-headline-md font-semibold text-on-surface dark:text-inverse-on-surface mb-stack-md">
+          <div className="bg-dl-chalk border border-dl-rule p-stack-lg">
+            <h2 className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink mb-stack-md">
               Payments
             </h2>
             <div className="space-y-2">
               {order.payments.map((payment) => (
                 <div
                   key={payment.id}
-                  className="flex justify-between text-body-sm font-body-sm text-on-surface-variant dark:text-on-primary-container"
+                  className="flex justify-between font-dl-sans text-dl-body text-dl-charcoal"
                 >
                   <span>
                     {payment.gateway} ·{" "}

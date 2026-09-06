@@ -14,15 +14,15 @@ export default async function AdminCategoriesPage() {
         subtitle="Organize products into shop categories."
       />
       <div className="p-margin-desktop space-y-stack-lg max-w-2xl mx-auto w-full">
-        <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg shadow-sm p-stack-lg">
-          <h2 className="font-headline-md text-headline-md font-semibold text-on-surface dark:text-inverse-on-surface mb-stack-md">
+        <div className="bg-dl-chalk border border-dl-rule p-stack-lg">
+          <h2 className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink mb-stack-md">
             Add Category
           </h2>
           <CategoryForm action={createCategory} />
         </div>
 
-        <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg shadow-sm p-stack-lg space-y-stack-md">
-          <h2 className="font-headline-md text-headline-md font-semibold text-on-surface dark:text-inverse-on-surface">
+        <div className="bg-dl-chalk border border-dl-rule p-stack-lg space-y-stack-md">
+          <h2 className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink">
             Categories
           </h2>
           {categories.map((category) => (
@@ -37,7 +37,7 @@ export default async function AdminCategoriesPage() {
             </div>
           ))}
           {categories.length === 0 && (
-            <p className="text-body-sm text-on-surface-variant dark:text-on-primary-container">
+            <p className="font-dl-sans text-dl-body text-dl-charcoal">
               No categories yet.
             </p>
           )}
