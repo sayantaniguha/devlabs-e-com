@@ -38,7 +38,9 @@ function timeAgo(iso) {
 
 function Panel({ title, children, className = "" }) {
   return (
-    <section className={`border border-dl-rule bg-dl-chalk p-stack-lg ${className}`}>
+    <section
+      className={`border border-dl-rule bg-dl-chalk p-stack-lg ${className}`}
+    >
       <h2 className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink mb-stack-md">
         {title}
       </h2>
@@ -102,7 +104,10 @@ export function CourseDetail({ course, isEnrolled, isAdminPreview, myReview }) {
   }
 
   const includes = [
-    course.duration_hours && ["Video", `${course.duration_hours} hours on demand`],
+    course.duration_hours && [
+      "Video",
+      `${course.duration_hours} hours on demand`,
+    ],
     ["Lectures", String(course.lessons.length)],
     ["Access", "Full lifetime"],
     ["Devices", "Mobile and desktop"],
@@ -320,7 +325,9 @@ export function CourseDetail({ course, isEnrolled, isAdminPreview, myReview }) {
           <div className="border border-dl-rule bg-dl-chalk">
             <button
               type="button"
-              onClick={() => previewLessons[0] && openPreview(previewLessons[0])}
+              onClick={() =>
+                previewLessons[0] && openPreview(previewLessons[0])
+              }
               disabled={previewLessons.length === 0}
               aria-label={
                 previewLessons.length > 0
@@ -421,6 +428,9 @@ export function CourseDetail({ course, isEnrolled, isAdminPreview, myReview }) {
         </div>
       </div>
 
+      {/* biome-ignore lint/a11y/useKeyWithClickEvents: backdrop click is a
+          pointer convenience only. The keyboard path is Escape, which the
+          native <dialog> handles and which fires onClose below. Verified. */}
       <dialog
         ref={dialogRef}
         onClose={() => setModalLesson(null)}
