@@ -134,30 +134,30 @@
  * appearance. Only the landing hero is built on these for now.
  */
 :root {
-  --dl-chalk: #EDEEEF; /* page ground */
-  --dl-sheet: #DCDFE1; /* goods plane — sampled from the product photography seamless */
-  --dl-ink: #15181B; /* primary text + primary fill */
-  --dl-charcoal: #3A4045; /* secondary text */
-  --dl-rule: #C7CBCD; /* hairlines */
-  --dl-signal: #E0350C; /* reserved: focus states, live/interactive affordances only — not decoration */
-  --dl-signal-ink: #B02A08; /* signal hover/active */
+  --dl-chalk: #edeeef; /* page ground */
+  --dl-sheet: #dcdfe1; /* goods plane — sampled from the product photography seamless */
+  --dl-ink: #15181b; /* primary text + primary fill */
+  --dl-charcoal: #3a4045; /* secondary text */
+  --dl-rule: #c7cbcd; /* hairlines */
+  --dl-signal: #e0350c; /* reserved: focus states, live/interactive affordances only — not decoration */
+  --dl-signal-ink: #b02a08; /* signal hover/active */
 
   /* Admin (Operate mode) only — status-badge semantic vocabulary. Never
      used on storefront/Persuade surfaces, which stay achromatic-plus-signal. */
   --dl-success: #166840;
-  --dl-warning: #7A4E00;
+  --dl-warning: #7a4e00;
 }
 
 .dark {
-  --dl-chalk: #0E1113;
-  --dl-sheet: #191D20;
-  --dl-ink: #E8EBED;
-  --dl-charcoal: #8A9298;
-  --dl-rule: #2A3034;
-  --dl-signal: #FF4A1F;
-  --dl-signal-ink: #FF6A42;
-  --dl-success: #34C77E;
-  --dl-warning: #E3A73D;
+  --dl-chalk: #0e1113;
+  --dl-sheet: #191d20;
+  --dl-ink: #e8ebed;
+  --dl-charcoal: #8a9298;
+  --dl-rule: #2a3034;
+  --dl-signal: #ff4a1f;
+  --dl-signal-ink: #ff6a42;
+  --dl-success: #34c77e;
+  --dl-warning: #e3a73d;
 }
 
 @theme inline {
@@ -326,13 +326,20 @@ dialog.dl-motion[open] .dl-drawer-panel {
 
 /* Respect the OS-level motion preference everywhere, in one place, rather
    than threading a check through every transition/animation individually. */
+/* A reduced-motion override has to beat every author rule on the page,
+   including utility classes it cannot know about. !important is the
+   mechanism this accessibility feature is built on, not a shortcut. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
+    /* biome-ignore lint/complexity/noImportantStyles: reduced-motion must override all author rules */
     animation-duration: 0.01ms !important;
+    /* biome-ignore lint/complexity/noImportantStyles: reduced-motion must override all author rules */
     animation-iteration-count: 1 !important;
+    /* biome-ignore lint/complexity/noImportantStyles: reduced-motion must override all author rules */
     transition-duration: 0.01ms !important;
+    /* biome-ignore lint/complexity/noImportantStyles: reduced-motion must override all author rules */
     scroll-behavior: auto !important;
   }
 
@@ -343,11 +350,16 @@ dialog.dl-motion[open] .dl-drawer-panel {
   .dl-motion,
   .dl-motion::backdrop,
   .dl-motion-child {
-    transition-property: opacity, background-color, color, display, overlay !important;
+    /* biome-ignore lint/complexity/noImportantStyles: reduced-motion must override all author rules */
+    transition-property:
+      opacity, background-color, color, display, overlay !important;
+    /* biome-ignore lint/complexity/noImportantStyles: reduced-motion must override all author rules */
     transition-duration: 200ms !important;
     /* Both, because the drawer moves via `transform` (own CSS) and the toast
        moves via `translate` (Tailwind v4's transform architecture). */
+    /* biome-ignore lint/complexity/noImportantStyles: reduced-motion must override all author rules */
     transform: none !important;
+    /* biome-ignore lint/complexity/noImportantStyles: reduced-motion must override all author rules */
     translate: none !important;
   }
 }
