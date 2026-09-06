@@ -20,9 +20,9 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="font-dl-sans text-dl-body font-semibold text-dl-ink mb-4 uppercase tracking-wide">
+          <h2 className="font-dl-sans text-dl-body font-semibold text-dl-ink mb-4 uppercase tracking-wide">
             Shop
-          </h4>
+          </h2>
           <ul className="space-y-3">
             <li>
               <Link
@@ -60,9 +60,9 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="font-dl-sans text-dl-body font-semibold text-dl-ink mb-4 uppercase tracking-wide">
+          <h2 className="font-dl-sans text-dl-body font-semibold text-dl-ink mb-4 uppercase tracking-wide">
             Company
-          </h4>
+          </h2>
           <ul className="space-y-3">
             <li>
               <Link
@@ -84,9 +84,9 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="font-dl-sans text-dl-body font-semibold text-dl-ink mb-4 uppercase tracking-wide">
+          <h2 className="font-dl-sans text-dl-body font-semibold text-dl-ink mb-4 uppercase tracking-wide">
             Newsletter
-          </h4>
+          </h2>
           <p className="font-dl-sans text-dl-body text-dl-charcoal mb-4">
             Subscribe for updates on new drops and course releases.
           </p>
