@@ -1,105 +1,67 @@
 import Link from "next/link";
+import { LoggedOut } from "@/components/account/LoggedOut";
+import { ChevronIcon } from "@/components/ui/icons";
 import { signOut } from "@/lib/actions/auth";
 import { getCurrentProfile } from "@/lib/auth";
 
+const FOCUS_RING =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2";
+
+// Words and rules rather than an icon per row. The leading Material Symbols
+// glyphs here were the site's second icon family and carried no information
+// the label did not already give.
+const NAV = [
+  { href: "/account/courses", label: "My courses" },
+  { href: "/account/orders", label: "Order history" },
+  { href: "/account/addresses", label: "Addresses" },
+];
+
 export default async function AccountPage() {
   const profile = await getCurrentProfile();
-
-  if (!profile) {
-    return (
-      <section className="max-w-md mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl text-center">
-        <h1 className="font-headline-lg text-headline-lg text-on-background dark:text-inverse-on-surface mb-stack-md">
-          You're not logged in
-        </h1>
-        <Link
-          href="/login"
-          className="inline-block bg-secondary text-on-primary px-8 py-3 rounded font-semibold hover:bg-secondary-container transition-colors"
-        >
-          Log in
-        </Link>
-      </section>
-    );
-  }
+  if (!profile) return <LoggedOut next="/account" />;
 
   return (
     <section className="max-w-md mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl">
-      <h1 className="font-headline-lg text-headline-lg text-on-background dark:text-inverse-on-surface mb-stack-sm">
-        Hi, {profile.full_name || profile.email}
-      </h1>
-      <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container mb-stack-lg">
-        {profile.email}
-      </p>
+      <div className="border-b border-dl-rule pb-stack-md mb-stack-lg">
+        <h1 className="font-dl-sans text-dl-headline text-dl-ink">
+          {profile.full_name || profile.email}
+        </h1>
+        <p className="font-dl-sans text-dl-body text-dl-charcoal mt-1">
+          {profile.email}
+        </p>
+      </div>
 
       {profile.role === "admin" && (
         <Link
           href="/admin"
-          className="inline-flex items-center gap-2 bg-secondary text-on-secondary px-6 py-2 rounded font-semibold hover:opacity-90 transition-opacity mb-stack-lg"
+          className={`inline-block mb-stack-lg bg-dl-ink text-dl-chalk px-6 py-2 font-dl-sans text-dl-body font-semibold hover:opacity-90 active:scale-[0.98] transition ${FOCUS_RING}`}
         >
-          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
-            admin_panel_settings
-          </span>
-          Admin Panel
+          Admin panel
         </Link>
       )}
 
-      <div className="flex flex-col gap-stack-sm mb-stack-lg">
-        <Link
-          href="/account/orders"
-          className="flex items-center justify-between border border-outline-variant dark:border-outline rounded-lg px-stack-md py-stack-sm hover:bg-surface-container-low dark:hover:bg-inverse-surface transition-colors"
-        >
-          <span className="flex items-center gap-2 font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface">
-            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
-              receipt_long
-            </span>
-            Order History
-          </span>
-          <span
-            className="material-symbols-outlined text-[18px] text-on-surface-variant dark:text-on-primary-container"
-            aria-hidden="true"
-          >
-            chevron_right
-          </span>
-        </Link>
-        <Link
-          href="/account/addresses"
-          className="flex items-center justify-between border border-outline-variant dark:border-outline rounded-lg px-stack-md py-stack-sm hover:bg-surface-container-low dark:hover:bg-inverse-surface transition-colors"
-        >
-          <span className="flex items-center gap-2 font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface">
-            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
-              location_on
-            </span>
-            Addresses
-          </span>
-          <span
-            className="material-symbols-outlined text-[18px] text-on-surface-variant dark:text-on-primary-container"
-            aria-hidden="true"
-          >
-            chevron_right
-          </span>
-        </Link>
-        <Link
-          href="/account/courses"
-          className="flex items-center justify-between border border-outline-variant dark:border-outline rounded-lg px-stack-md py-stack-sm hover:bg-surface-container-low dark:hover:bg-inverse-surface transition-colors"
-        >
-          <span className="flex items-center gap-2 font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface">
-            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
-              school
-            </span>
-            My Courses
-          </span>
-          <span
-            className="material-symbols-outlined text-[18px] text-on-surface-variant dark:text-on-primary-container"
-            aria-hidden="true"
-          >
-            chevron_right
-          </span>
-        </Link>
-      </div>
+      <nav aria-label="Account" className="border-t border-dl-rule mb-stack-lg">
+        <ul className="divide-y divide-dl-rule">
+          {NAV.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                className={`group flex items-center justify-between gap-stack-sm px-1 py-stack-md font-dl-sans text-dl-body text-dl-ink hover:bg-dl-sheet transition-colors ${FOCUS_RING}`}
+              >
+                <span className="group-hover:underline underline-offset-4">
+                  {item.label}
+                </span>
+                <ChevronIcon className="w-4 h-4 shrink-0 text-dl-charcoal -rotate-90" />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
       <form action={signOut}>
         <button
           type="submit"
-          className="border border-outline-variant dark:border-outline text-on-surface dark:text-inverse-on-surface px-6 py-2 rounded font-semibold hover:bg-surface-container dark:hover:bg-inverse-surface transition-colors"
+          className={`border border-dl-rule text-dl-ink px-6 py-2 font-dl-sans text-dl-body font-semibold hover:border-dl-ink active:scale-[0.98] transition ${FOCUS_RING}`}
         >
           Log out
         </button>

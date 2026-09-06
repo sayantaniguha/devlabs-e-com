@@ -1,64 +1,79 @@
 import Image from "next/image";
 import Link from "next/link";
+import { LoggedOut } from "@/components/account/LoggedOut";
 import { getCurrentProfile } from "@/lib/auth";
 import { getMyEnrolledCourses } from "@/lib/data/courses";
 
+const FOCUS_RING =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2";
+
+export const metadata = { title: "My courses" };
+
 export default async function MyCoursesPage() {
   const profile = await getCurrentProfile();
-
-  if (!profile) {
-    return (
-      <section className="max-w-md mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl text-center">
-        <h1 className="font-headline-lg text-headline-lg text-on-background dark:text-inverse-on-surface mb-stack-md">
-          You're not logged in
-        </h1>
-        <Link
-          href="/login"
-          className="inline-block bg-secondary text-on-primary px-8 py-3 rounded font-semibold hover:bg-secondary-container transition-colors"
-        >
-          Log in
-        </Link>
-      </section>
-    );
-  }
+  if (!profile) return <LoggedOut next="/account/courses" />;
 
   const enrollments = await getMyEnrolledCourses();
 
   return (
-    <section className="max-w-md mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl">
-      <h1 className="font-headline-lg text-headline-lg text-on-background dark:text-inverse-on-surface mb-stack-lg">
-        My Courses
-      </h1>
+    <section className="max-w-2xl mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl">
+      <div className="flex items-end justify-between gap-stack-md border-b border-dl-rule pb-stack-md mb-stack-lg">
+        <h1 className="font-dl-sans text-dl-headline text-dl-ink">
+          My courses
+        </h1>
+        <span className="font-dl-sans text-dl-body text-dl-charcoal tabular-nums whitespace-nowrap">
+          {enrollments.length} enrolled
+        </span>
+      </div>
 
       {enrollments.length === 0 ? (
-        <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container">
-          You haven't enrolled in any courses yet.
-        </p>
-      ) : (
-        <div className="flex flex-col gap-stack-sm">
-          {enrollments.map(({ course }) => (
-            <Link
-              key={course.id}
-              href={`/learn/${course.slug}`}
-              className="flex items-center gap-stack-md border border-outline-variant dark:border-outline rounded-lg p-stack-md hover:bg-surface-container-low dark:hover:bg-inverse-surface transition-colors"
-            >
-              <div className="relative w-20 aspect-video shrink-0 rounded overflow-hidden bg-surface-container-low dark:bg-inverse-surface">
-                {course.thumbnail_url && (
-                  <Image
-                    src={course.thumbnail_url}
-                    alt={course.title}
-                    fill
-                    sizes="80px"
-                    className="object-cover"
-                  />
-                )}
-              </div>
-              <span className="font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface">
-                {course.title}
-              </span>
-            </Link>
-          ))}
+        <div className="border border-dl-rule bg-dl-chalk px-stack-lg py-stack-xl text-center">
+          <p className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink">
+            You have not enrolled in any courses yet.
+          </p>
+          <p className="font-dl-sans text-dl-body text-dl-charcoal mt-2">
+            Everything you enrol in shows up here, with full lifetime access.
+          </p>
+          <Link
+            href="/courses"
+            className={`inline-block mt-stack-md bg-dl-ink text-dl-chalk px-6 py-3 font-dl-sans text-dl-body font-semibold hover:opacity-90 active:scale-[0.98] transition ${FOCUS_RING}`}
+          >
+            Browse courses
+          </Link>
         </div>
+      ) : (
+        <ul className="border-t border-dl-rule divide-y divide-dl-rule">
+          {enrollments.map(({ course }) => (
+            <li key={course.id}>
+              <Link
+                href={`/learn/${course.slug}`}
+                className={`group flex items-center gap-stack-md py-stack-md px-1 hover:bg-dl-sheet transition-colors ${FOCUS_RING}`}
+              >
+                <div className="relative w-24 aspect-video shrink-0 border border-dl-rule bg-dl-sheet overflow-hidden">
+                  {course.thumbnail_url && (
+                    <Image
+                      src={course.thumbnail_url}
+                      alt=""
+                      fill
+                      sizes="96px"
+                      className="object-cover"
+                    />
+                  )}
+                </div>
+                <span className="flex flex-col gap-1 min-w-0">
+                  {course.category && (
+                    <span className="font-dl-sans text-dl-spec text-dl-charcoal uppercase tracking-wide">
+                      {course.category}
+                    </span>
+                  )}
+                  <span className="font-dl-sans text-dl-body font-semibold text-dl-ink group-hover:underline underline-offset-4">
+                    {course.title}
+                  </span>
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
       )}
     </section>
   );

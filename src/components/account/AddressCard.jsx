@@ -9,6 +9,12 @@ import {
 } from "@/lib/actions/addresses";
 import { AddressForm } from "./AddressForm";
 
+const FOCUS_RING =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2";
+
+const ACTION =
+  "font-dl-sans text-dl-body text-dl-charcoal hover:text-dl-ink hover:underline underline-offset-4 transition-colors disabled:opacity-60 disabled:cursor-not-allowed";
+
 export function AddressCard({ address }) {
   const router = useRouter();
   const [editing, setEditing] = useState(false);
@@ -16,7 +22,7 @@ export function AddressCard({ address }) {
 
   if (editing) {
     return (
-      <div className="border border-outline-variant dark:border-outline rounded-lg p-stack-md">
+      <div className="border border-dl-rule bg-dl-chalk p-stack-md">
         <AddressForm
           action={updateAddress}
           address={address}
@@ -43,22 +49,25 @@ export function AddressCard({ address }) {
   }
 
   return (
-    <div className="border border-outline-variant dark:border-outline rounded-lg p-stack-md flex items-start justify-between gap-stack-md">
+    <div className="border border-dl-rule bg-dl-chalk p-stack-md flex items-start justify-between gap-stack-md">
       <div>
         {address.is_default && (
-          <span className="inline-block mb-1 px-2 py-0.5 bg-tertiary-fixed-dim/20 text-on-tertiary-fixed-variant text-[10px] font-bold uppercase tracking-wider rounded">
+          // Bordered tag, matching the low-stock treatment on ProductCard,
+          // rather than a tinted pill.
+          <span className="inline-block mb-2 border border-dl-rule px-2 py-0.5 font-dl-sans text-dl-spec text-dl-charcoal uppercase tracking-wide">
             Default
           </span>
         )}
-        <p className="font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface">
+        <p className="font-dl-sans text-dl-body text-dl-ink">
           {address.line1}
           {address.line2 && <>, {address.line2}</>}
           <br />
-          {address.city}, {address.state} {address.postal_code}
+          {address.city}, {address.state}{" "}
+          <span className="tabular-nums">{address.postal_code}</span>
           {address.phone && (
             <>
               <br />
-              {address.phone}
+              <span className="tabular-nums">{address.phone}</span>
             </>
           )}
         </p>
@@ -67,7 +76,7 @@ export function AddressCard({ address }) {
         <button
           type="button"
           onClick={() => setEditing(true)}
-          className="text-body-sm font-body-sm text-secondary hover:underline"
+          className={`${ACTION} ${FOCUS_RING}`}
         >
           Edit
         </button>
@@ -76,7 +85,7 @@ export function AddressCard({ address }) {
             type="button"
             onClick={handleSetDefault}
             disabled={busy}
-            className="text-body-sm font-body-sm text-secondary hover:underline disabled:opacity-60"
+            className={`${ACTION} ${FOCUS_RING}`}
           >
             Set default
           </button>
@@ -85,7 +94,7 @@ export function AddressCard({ address }) {
           type="button"
           onClick={handleDelete}
           disabled={busy}
-          className="text-body-sm font-body-sm text-error hover:underline disabled:opacity-60"
+          className={`font-dl-sans text-dl-body text-dl-signal-ink hover:underline underline-offset-4 transition-colors disabled:opacity-60 disabled:cursor-not-allowed ${FOCUS_RING}`}
         >
           Delete
         </button>
