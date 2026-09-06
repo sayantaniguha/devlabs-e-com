@@ -7,6 +7,14 @@ import { signUp } from "@/lib/actions/auth";
 
 const initialState = { error: null };
 
+const FOCUS_RING =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2";
+
+const LABEL =
+  "font-dl-sans text-dl-spec text-dl-charcoal uppercase tracking-wide";
+const INPUT =
+  "px-4 py-2 border border-dl-rule bg-dl-chalk font-dl-sans text-dl-body text-dl-ink placeholder:text-dl-charcoal outline-none focus:border-dl-signal transition-colors";
+
 export function SignupForm() {
   const searchParams = useSearchParams();
   const emailParam = searchParams.get("email") ?? "";
@@ -17,61 +25,66 @@ export function SignupForm() {
 
   return (
     <section className="max-w-md mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl">
-      <h1 className="font-headline-lg text-headline-lg text-on-background dark:text-inverse-on-surface mb-stack-lg">
+      <h1 className="font-dl-sans text-dl-headline text-dl-ink border-b border-dl-rule pb-stack-md mb-stack-lg">
         Create an account
       </h1>
       <form action={formAction} className="flex flex-col gap-stack-md">
         <label className="flex flex-col gap-1">
-          <span className="font-label-caps text-label-caps text-on-surface-variant dark:text-on-primary-container uppercase">
-            Full name
-          </span>
+          <span className={LABEL}>Full name</span>
           <input
             type="text"
             name="fullName"
+            autoComplete="name"
             required
-            className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface focus:outline-none focus:border-secondary"
+            className={`${INPUT} ${FOCUS_RING}`}
           />
         </label>
         <label className="flex flex-col gap-1">
-          <span className="font-label-caps text-label-caps text-on-surface-variant dark:text-on-primary-container uppercase">
-            Email
-          </span>
+          <span className={LABEL}>Email</span>
           <input
             type="email"
             name="email"
+            autoComplete="email"
             required
             defaultValue={emailParam}
-            className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface focus:outline-none focus:border-secondary"
+            className={`${INPUT} ${FOCUS_RING}`}
           />
         </label>
         <label className="flex flex-col gap-1">
-          <span className="font-label-caps text-label-caps text-on-surface-variant dark:text-on-primary-container uppercase">
-            Password
-          </span>
+          <span className={LABEL}>Password</span>
           <input
             type="password"
             name="password"
+            autoComplete="new-password"
             required
             minLength={8}
-            className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface focus:outline-none focus:border-secondary"
+            className={`${INPUT} ${FOCUS_RING}`}
           />
+          <span className="font-dl-sans text-dl-spec text-dl-charcoal">
+            At least 8 characters.
+          </span>
         </label>
 
         {state.error && (
-          <p className="text-error text-body-sm font-body-sm">{state.error}</p>
+          <p className="font-dl-sans text-dl-body text-dl-signal-ink">
+            {state.error}
+          </p>
         )}
 
         <button
           type="submit"
           disabled={pending}
-          className="bg-secondary text-on-primary py-3 rounded font-semibold hover:bg-secondary-container transition-colors disabled:opacity-60"
+          className={`bg-dl-ink text-dl-chalk py-3 font-dl-sans text-dl-body font-semibold hover:opacity-90 active:scale-[0.98] transition disabled:opacity-60 disabled:active:scale-100 ${FOCUS_RING}`}
         >
-          {pending ? "Creating account…" : "Create account"}
+          {pending ? "Creating account..." : "Create account"}
         </button>
       </form>
-      <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container mt-stack-md">
+      <p className="font-dl-sans text-dl-body text-dl-charcoal mt-stack-md">
         Already have an account?{" "}
-        <Link href="/login" className="text-secondary hover:underline">
+        <Link
+          href="/login"
+          className={`text-dl-ink underline underline-offset-4 hover:text-dl-signal-ink transition-colors ${FOCUS_RING}`}
+        >
           Log in
         </Link>
       </p>

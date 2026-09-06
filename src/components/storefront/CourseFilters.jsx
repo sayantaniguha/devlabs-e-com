@@ -8,7 +8,10 @@ import { formatPrice } from "@/lib/utils/format";
 const MAX_PRICE_CEILING = 9000;
 const RATING_OPTIONS = [4.5, 4.0, 3.5, 3.0];
 
-export function CourseFilters({ categories, children }) {
+const FOCUS_RING =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2";
+
+export function CourseFilters({ categories, isEmpty, children }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -21,6 +24,12 @@ export function CourseFilters({ categories, children }) {
   const activeCategories = searchParams.getAll("category");
   const activeRating = Number(searchParams.get("minRating")) || null;
   const sort = searchParams.get("sort") ?? "newest";
+
+  const filterCount =
+    activeCategories.length +
+    (activeRating ? 1 : 0) +
+    (searchParams.get("maxPrice") ? 1 : 0) +
+    (searchParams.get("q") ? 1 : 0);
 
   function pushParams(mutate) {
     const params = new URLSearchParams(searchParams.toString());
@@ -54,6 +63,8 @@ export function CourseFilters({ categories, children }) {
   }
 
   function clearAll() {
+    setSearch("");
+    setMaxPrice(MAX_PRICE_CEILING);
     router.push(pathname);
   }
 
@@ -77,20 +88,20 @@ export function CourseFilters({ categories, children }) {
     <>
       <aside className="w-full md:w-[240px] flex-shrink-0 space-y-stack-lg">
         <div className="flex justify-between items-center">
-          <h2 className="text-headline-md font-headline-md text-on-background dark:text-inverse-on-surface">
+          <h2 className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink">
             Filters
           </h2>
           <button
             type="button"
             onClick={clearAll}
-            className="text-body-sm font-body-sm text-secondary hover:underline"
+            className={`font-dl-sans text-dl-body text-dl-charcoal hover:text-dl-ink hover:underline underline-offset-4 ${FOCUS_RING}`}
           >
             Clear all
           </button>
         </div>
 
-        <div className="border-b border-outline-variant/30 pb-stack-md">
-          <h3 className="font-label-caps text-label-caps text-on-background dark:text-inverse-on-surface mb-stack-sm">
+        <div className="border-b border-dl-rule pb-stack-md">
+          <h3 className="font-dl-sans text-dl-spec text-dl-charcoal uppercase tracking-wide mb-stack-sm">
             Category
           </h3>
           <div className="space-y-2">
@@ -103,9 +114,9 @@ export function CourseFilters({ categories, children }) {
                   type="checkbox"
                   checked={activeCategories.includes(name)}
                   onChange={() => toggleCategory(name)}
-                  className="rounded border-outline-variant text-secondary focus:ring-secondary/20 form-checkbox h-4 w-4 bg-surface-container-lowest"
+                  className={`w-4 h-4 accent-dl-ink ${FOCUS_RING}`}
                 />
-                <span className="text-body-sm font-body-sm text-on-surface-variant dark:text-on-primary-container group-hover:text-on-background dark:group-hover:text-inverse-on-surface transition-colors">
+                <span className="font-dl-sans text-dl-body text-dl-charcoal group-hover:text-dl-ink transition-colors">
                   {name}
                 </span>
               </label>
@@ -113,33 +124,39 @@ export function CourseFilters({ categories, children }) {
           </div>
         </div>
 
-        <div className="border-b border-outline-variant/30 pb-stack-md">
-          <h3 className="font-label-caps text-label-caps text-on-background dark:text-inverse-on-surface mb-stack-sm">
+        <div className="border-b border-dl-rule pb-stack-md">
+          <h3 className="font-dl-sans text-dl-spec text-dl-charcoal uppercase tracking-wide mb-stack-sm">
             Rating
           </h3>
-          <div className="space-y-2">
-            {RATING_OPTIONS.map((value) => (
-              <button
-                key={value}
-                type="button"
-                onClick={() => setRating(value)}
-                className={`flex items-center gap-2 w-full text-left rounded px-1 py-1 transition-colors ${
-                  activeRating === value
-                    ? "text-secondary"
-                    : "text-on-surface-variant dark:text-on-primary-container hover:text-on-background dark:hover:text-inverse-on-surface"
-                }`}
-              >
-                <StarRating average={value} size={16} />
-                <span className="text-body-sm font-body-sm">
-                  {value.toFixed(1)} &amp; up
-                </span>
-              </button>
-            ))}
+          <div className="space-y-1">
+            {RATING_OPTIONS.map((value) => {
+              const active = activeRating === value;
+              return (
+                <button
+                  key={value}
+                  type="button"
+                  aria-pressed={active}
+                  onClick={() => setRating(value)}
+                  className={`flex items-center gap-2 w-full text-left px-1 py-1 transition-colors ${FOCUS_RING} ${
+                    active
+                      ? "text-dl-ink"
+                      : "text-dl-charcoal hover:text-dl-ink"
+                  }`}
+                >
+                  <StarRating average={value} size={14} />
+                  <span
+                    className={`font-dl-sans text-dl-body tabular-nums ${active ? "font-semibold" : ""}`}
+                  >
+                    {value.toFixed(1)} &amp; up
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
         <div className="pb-stack-md">
-          <h3 className="font-label-caps text-label-caps text-on-background dark:text-inverse-on-surface mb-stack-sm">
+          <h3 className="font-dl-sans text-dl-spec text-dl-charcoal uppercase tracking-wide mb-stack-sm">
             Price
           </h3>
           <div className="px-1">
@@ -156,10 +173,10 @@ export function CourseFilters({ categories, children }) {
                 pushParams((params) => params.set("maxPrice", String(maxPrice)))
               }
               aria-label="Maximum price"
-              className="w-full h-1 bg-surface-variant rounded-lg appearance-none cursor-pointer"
+              className={`w-full accent-dl-ink cursor-pointer ${FOCUS_RING}`}
             />
           </div>
-          <div className="flex justify-between mt-2 text-price-sm font-price-sm text-on-surface-variant dark:text-on-primary-container">
+          <div className="flex justify-between mt-2 font-dl-sans text-dl-body text-dl-charcoal tabular-nums">
             <span>₹0</span>
             <span>{formatPrice(maxPrice)}</span>
           </div>
@@ -168,44 +185,55 @@ export function CourseFilters({ categories, children }) {
 
       <div className="flex-grow flex flex-col gap-stack-lg">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-stack-md">
-          <div className="relative w-full sm:w-64 group">
-            <span
-              className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant dark:text-on-primary-container group-focus-within:text-secondary transition-colors"
-              aria-hidden="true"
-            >
-              search
-            </span>
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search courses..."
-              aria-label="Search courses"
-              className="w-full pl-10 pr-4 py-2 bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded focus:border-secondary focus:ring-2 focus:ring-secondary/10 transition-all text-body-sm font-body-sm outline-none placeholder:text-on-surface-variant/50 dark:placeholder:text-on-primary-container/50 text-on-surface dark:text-inverse-on-surface"
-            />
-          </div>
-          <div className="relative w-full sm:w-48">
-            <select
-              value={sort}
-              onChange={(e) => setSort(e.target.value)}
-              aria-label="Sort by"
-              className="w-full pl-3 pr-8 py-2 bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded focus:border-secondary focus:ring-2 focus:ring-secondary/10 transition-all text-body-sm font-body-sm appearance-none outline-none text-on-background dark:text-inverse-on-surface cursor-pointer"
-            >
-              <option value="newest">Newest</option>
-              <option value="rating-desc">Highest Rated</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
-            </select>
-            <span
-              className="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant dark:text-on-primary-container pointer-events-none text-[20px]"
-              aria-hidden="true"
-            >
-              expand_more
-            </span>
-          </div>
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search courses..."
+            aria-label="Search courses"
+            className={`w-full sm:w-64 px-4 py-2 bg-dl-chalk border border-dl-rule font-dl-sans text-dl-body text-dl-ink placeholder:text-dl-charcoal outline-none focus:border-dl-signal transition-colors ${FOCUS_RING}`}
+          />
+          <select
+            value={sort}
+            onChange={(e) => setSort(e.target.value)}
+            aria-label="Sort by"
+            className={`w-full sm:w-48 px-3 py-2 bg-dl-chalk border border-dl-rule font-dl-sans text-dl-body text-dl-ink outline-none focus:border-dl-signal transition-colors cursor-pointer ${FOCUS_RING}`}
+          >
+            <option value="newest">Newest</option>
+            <option value="rating-desc">Highest Rated</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+          </select>
         </div>
 
-        {children}
+        {/* Same arrangement as the shop: rendered here rather than passed in,
+            so the recovery action can call clearAll() and also reset the
+            search box and price slider held in local state. */}
+        {isEmpty ? (
+          <div className="border border-dl-rule bg-dl-chalk px-stack-lg py-stack-xl text-center">
+            <p className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink">
+              {filterCount > 0
+                ? "No courses match these filters."
+                : "No courses available right now."}
+            </p>
+            {filterCount > 0 && (
+              <>
+                <p className="font-dl-sans text-dl-body text-dl-charcoal mt-2">
+                  Remove one filter, or clear them all and start again.
+                </p>
+                <button
+                  type="button"
+                  onClick={clearAll}
+                  className={`mt-stack-md bg-dl-ink text-dl-chalk px-6 py-3 font-dl-sans font-semibold hover:opacity-90 active:scale-[0.98] transition ${FOCUS_RING}`}
+                >
+                  Clear all filters
+                </button>
+              </>
+            )}
+          </div>
+        ) : (
+          children
+        )}
       </div>
     </>
   );

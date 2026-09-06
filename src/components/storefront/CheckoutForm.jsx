@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Script from "next/script";
 import { useState } from "react";
@@ -7,6 +8,18 @@ import { confirmPayment, createOrder } from "@/lib/actions/checkout";
 import { cartSubtotal, useCartStore } from "@/lib/cart-store";
 import { FLAT_SHIPPING_FEE, FREE_SHIPPING_THRESHOLD } from "@/lib/constants";
 import { formatPrice } from "@/lib/utils/format";
+
+const FOCUS_RING =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2";
+
+const LABEL =
+  "font-dl-sans text-dl-spec text-dl-charcoal uppercase tracking-wide";
+const INPUT =
+  "px-4 py-2 border border-dl-rule bg-dl-chalk font-dl-sans text-dl-body text-dl-ink placeholder:text-dl-charcoal outline-none focus:border-dl-signal transition-colors";
+
+// Razorpay renders its own modal, so it needs a literal hex rather than a
+// token. This is --dl-ink, matching the site's primary button.
+const RAZORPAY_THEME_COLOR = "#15181B";
 
 export function CheckoutForm({ profile }) {
   const router = useRouter();
@@ -24,24 +37,36 @@ export function CheckoutForm({ profile }) {
 
   if (items.length === 0) {
     return (
-      <section className="max-w-md mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl text-center">
-        <h1 className="font-headline-lg text-headline-lg text-on-background dark:text-inverse-on-surface mb-stack-md">
-          Your cart is empty
-        </h1>
-        <a
-          href="/shop"
-          className="inline-block bg-secondary text-on-primary px-8 py-3 rounded font-semibold hover:bg-secondary-container transition-colors"
-        >
-          Continue shopping
-        </a>
-      </section>
+      // Not an <h1>: the checkout page already carries one above this.
+      <div className="max-w-md mx-auto w-full border border-dl-rule bg-dl-chalk px-stack-lg py-stack-xl text-center">
+        <p className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink">
+          Your cart is empty.
+        </p>
+        <p className="font-dl-sans text-dl-body text-dl-charcoal mt-2">
+          Add a product or a course, then come back to check out.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-stack-sm justify-center mt-stack-md">
+          <Link
+            href="/shop"
+            className={`inline-block bg-dl-ink text-dl-chalk px-6 py-3 font-dl-sans text-dl-body font-semibold hover:opacity-90 active:scale-[0.98] transition ${FOCUS_RING}`}
+          >
+            Browse shop
+          </Link>
+          <Link
+            href="/courses"
+            className={`inline-block border border-dl-rule px-6 py-3 font-dl-sans text-dl-body font-semibold text-dl-ink hover:border-dl-ink active:scale-[0.98] transition ${FOCUS_RING}`}
+          >
+            Browse courses
+          </Link>
+        </div>
+      </div>
     );
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     if (!razorpayReady) {
-      setError("Payment is still loading — try again in a moment.");
+      setError("Payment is still loading. Try again in a moment.");
       return;
     }
     setSubmitting(true);
@@ -87,7 +112,7 @@ export function CheckoutForm({ profile }) {
         email: result.customerEmail,
         contact: result.customerPhone,
       },
-      theme: { color: "#4b41e1" },
+      theme: { color: RAZORPAY_THEME_COLOR },
       handler: async (response) => {
         await confirmPayment({
           razorpayOrderId: response.razorpay_order_id,
@@ -116,126 +141,121 @@ export function CheckoutForm({ profile }) {
         src="https://checkout.razorpay.com/v1/checkout.js"
         onLoad={() => setRazorpayReady(true)}
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-xl">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter items-start">
         <form onSubmit={handleSubmit} className="flex flex-col gap-stack-md">
-          <h2 className="font-headline-md text-headline-md text-on-background dark:text-inverse-on-surface">
+          <h2 className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink border-b border-dl-rule pb-stack-sm">
             Shipping details
           </h2>
 
           {!profile && (
             <label className="flex flex-col gap-1">
-              <span className="font-label-caps text-label-caps text-on-surface-variant dark:text-on-primary-container uppercase">
-                Email
-              </span>
+              <span className={LABEL}>Email</span>
               <input
                 type="email"
                 name="guestEmail"
+                autoComplete="email"
                 required
-                className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface"
+                className={`${INPUT} ${FOCUS_RING}`}
               />
             </label>
           )}
 
           <label className="flex flex-col gap-1">
-            <span className="font-label-caps text-label-caps text-on-surface-variant dark:text-on-primary-container uppercase">
-              Full name
-            </span>
+            <span className={LABEL}>Full name</span>
             <input
               type="text"
               name="fullName"
+              autoComplete="name"
               required
               defaultValue={profile?.full_name ?? ""}
-              className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface"
+              className={`${INPUT} ${FOCUS_RING}`}
             />
           </label>
 
           <label className="flex flex-col gap-1">
-            <span className="font-label-caps text-label-caps text-on-surface-variant dark:text-on-primary-container uppercase">
-              Phone
-            </span>
+            <span className={LABEL}>Phone</span>
             <input
               type="tel"
               name="phone"
+              autoComplete="tel"
               required
-              className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface"
+              className={`${INPUT} ${FOCUS_RING}`}
             />
           </label>
 
           <label className="flex flex-col gap-1">
-            <span className="font-label-caps text-label-caps text-on-surface-variant dark:text-on-primary-container uppercase">
-              Address line 1
-            </span>
+            <span className={LABEL}>Address line 1</span>
             <input
               type="text"
               name="line1"
+              autoComplete="address-line1"
               required
-              className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface"
+              className={`${INPUT} ${FOCUS_RING}`}
             />
           </label>
 
           <label className="flex flex-col gap-1">
-            <span className="font-label-caps text-label-caps text-on-surface-variant dark:text-on-primary-container uppercase">
-              Address line 2 (optional)
-            </span>
+            <span className={LABEL}>Address line 2 (optional)</span>
             <input
               type="text"
               name="line2"
-              className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface"
+              autoComplete="address-line2"
+              className={`${INPUT} ${FOCUS_RING}`}
             />
           </label>
 
           <div className="grid grid-cols-2 gap-stack-sm">
             <label className="flex flex-col gap-1">
-              <span className="font-label-caps text-label-caps text-on-surface-variant dark:text-on-primary-container uppercase">
-                City
-              </span>
+              <span className={LABEL}>City</span>
               <input
                 type="text"
                 name="city"
+                autoComplete="address-level2"
                 required
-                className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface"
+                className={`${INPUT} ${FOCUS_RING}`}
               />
             </label>
             <label className="flex flex-col gap-1">
-              <span className="font-label-caps text-label-caps text-on-surface-variant dark:text-on-primary-container uppercase">
-                State
-              </span>
+              <span className={LABEL}>State</span>
               <input
                 type="text"
                 name="state"
+                autoComplete="address-level1"
                 required
-                className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface"
+                className={`${INPUT} ${FOCUS_RING}`}
               />
             </label>
           </div>
 
           <label className="flex flex-col gap-1">
-            <span className="font-label-caps text-label-caps text-on-surface-variant dark:text-on-primary-container uppercase">
-              Postal code
-            </span>
+            <span className={LABEL}>Postal code</span>
             <input
               type="text"
               name="postalCode"
+              autoComplete="postal-code"
+              inputMode="numeric"
               required
-              className="px-4 py-2 border border-outline-variant dark:border-outline rounded bg-surface dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface w-40"
+              className={`${INPUT} ${FOCUS_RING} w-40`}
             />
           </label>
 
           {error && (
-            <p className="text-error text-body-sm font-body-sm">{error}</p>
+            <p role="alert" className="font-dl-sans text-dl-body text-dl-signal-ink">
+              {error}
+            </p>
           )}
 
           <button
             type="submit"
             disabled={submitting}
-            className="w-full h-12 bg-secondary text-on-secondary rounded font-body-lg text-body-lg font-medium disabled:opacity-60"
+            className={`w-full h-12 bg-dl-ink text-dl-chalk font-dl-sans text-dl-body-lg font-semibold tabular-nums hover:opacity-90 active:scale-[0.98] transition disabled:opacity-60 disabled:active:scale-100 ${FOCUS_RING}`}
           >
-            {submitting ? "Processing…" : `Pay ${formatPrice(total)}`}
+            {submitting ? "Processing..." : `Pay ${formatPrice(total)}`}
           </button>
         </form>
 
-        <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg p-stack-lg h-fit">
-          <h2 className="font-headline-md text-headline-md text-on-background dark:text-inverse-on-surface mb-stack-md">
+        <div className="border border-dl-rule bg-dl-chalk p-stack-lg h-fit">
+          <h2 className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink mb-stack-md">
             Order summary
           </h2>
           <div className="flex flex-col gap-stack-sm mb-stack-md">
@@ -247,34 +267,34 @@ export function CheckoutForm({ profile }) {
               return (
                 <div
                   key={key}
-                  className="flex justify-between text-body-sm font-body-sm"
+                  className="flex justify-between gap-stack-sm font-dl-sans text-dl-body"
                 >
-                  <span className="text-on-surface-variant dark:text-on-primary-container">
+                  <span className="text-dl-charcoal">
                     {item.name}
                     {item.variantLabel ? ` (${item.variantLabel})` : ""} ×{" "}
-                    {item.quantity}
+                    <span className="tabular-nums">{item.quantity}</span>
                   </span>
-                  <span className="text-on-surface dark:text-inverse-on-surface">
+                  <span className="text-dl-ink tabular-nums whitespace-nowrap">
                     {formatPrice(item.unitPrice * item.quantity)}
                   </span>
                 </div>
               );
             })}
           </div>
-          <div className="border-t border-outline-variant dark:border-outline pt-stack-sm flex flex-col gap-1">
-            <div className="flex justify-between text-body-sm font-body-sm text-on-surface-variant dark:text-on-primary-container">
+          <div className="border-t border-dl-rule pt-stack-sm flex flex-col gap-1">
+            <div className="flex justify-between font-dl-sans text-dl-body text-dl-charcoal">
               <span>Subtotal</span>
-              <span>{formatPrice(subtotal)}</span>
+              <span className="tabular-nums">{formatPrice(subtotal)}</span>
             </div>
-            <div className="flex justify-between text-body-sm font-body-sm text-on-surface-variant dark:text-on-primary-container">
+            <div className="flex justify-between font-dl-sans text-dl-body text-dl-charcoal">
               <span>Shipping</span>
-              <span>
+              <span className="tabular-nums">
                 {shippingTotal === 0 ? "Free" : formatPrice(shippingTotal)}
               </span>
             </div>
-            <div className="flex justify-between font-price-lg text-price-lg text-on-background dark:text-inverse-on-surface font-bold pt-1">
+            <div className="flex justify-between font-dl-sans text-dl-body-lg font-semibold text-dl-ink pt-1">
               <span>Total</span>
-              <span>{formatPrice(total)}</span>
+              <span className="tabular-nums">{formatPrice(total)}</span>
             </div>
           </div>
         </div>

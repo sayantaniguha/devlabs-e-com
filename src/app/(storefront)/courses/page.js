@@ -17,26 +17,30 @@ export default async function CoursesPage({ searchParams }) {
 
   return (
     <section className="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl">
-      <h1 className="font-headline-lg text-headline-lg text-on-background dark:text-inverse-on-surface mb-stack-sm">
-        Courses
-      </h1>
-      <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container mb-stack-xl">
-        Learn from the team building DevLabs.
-      </p>
+      <div className="flex justify-between items-end border-b border-dl-rule pb-stack-md mb-stack-lg">
+        <div>
+          <h1 className="font-dl-sans text-dl-ink [font-stretch:110%] text-[clamp(2rem,4vw+1rem,3rem)] leading-[1.05]">
+            Courses
+          </h1>
+          <p className="font-dl-sans text-dl-body text-dl-charcoal mt-2">
+            Taught by the engineers who build DevLabs.
+          </p>
+        </div>
+        <span className="font-dl-sans text-dl-body text-dl-charcoal tabular-nums whitespace-nowrap">
+          {courses.length} course{courses.length === 1 ? "" : "s"}
+        </span>
+      </div>
 
-      <div className="flex flex-col md:flex-row gap-stack-xl">
-        <CourseFilters categories={categories}>
-          {courses.length === 0 ? (
-            <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container">
-              No courses match these filters.
-            </p>
-          ) : (
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-gutter">
-              {courses.map((course, i) => (
-                <CourseCard key={course.id} course={course} priority={i < 3} />
-              ))}
-            </div>
-          )}
+      <div className="flex flex-col md:flex-row gap-gutter">
+        <CourseFilters
+          categories={categories}
+          isEmpty={courses.length === 0}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
+            {courses.map((course, i) => (
+              <CourseCard key={course.id} course={course} priority={i < 3} />
+            ))}
+          </div>
         </CourseFilters>
       </div>
     </section>

@@ -5,11 +5,11 @@ export default async function CheckoutPage() {
   const profile = await getCurrentProfile();
 
   return (
-    <main className="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-lg">
-      <h1 className="text-display font-display text-on-background dark:text-inverse-on-surface mb-stack-lg">
+    <section className="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl">
+      <h1 className="font-dl-sans text-dl-ink [font-stretch:110%] text-[clamp(2rem,4vw+1rem,3rem)] leading-[1.05] border-b border-dl-rule pb-stack-md mb-stack-lg">
         Checkout
       </h1>
       <CheckoutForm profile={profile} />
-    </main>
+    </section>
   );
 }

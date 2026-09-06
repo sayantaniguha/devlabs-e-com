@@ -1,6 +1,25 @@
 import Link from "next/link";
+import { CheckIcon } from "@/components/ui/icons";
 import { getOrderForConfirmation } from "@/lib/data/orders";
 import { formatPrice } from "@/lib/utils/format";
+
+const FOCUS_RING =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2";
+
+const PRIMARY = `inline-block bg-dl-ink text-dl-chalk px-6 py-3 font-dl-sans text-dl-body font-semibold hover:opacity-90 active:scale-[0.98] transition ${FOCUS_RING}`;
+
+function Plate({ title, children, className = "" }) {
+  return (
+    <section
+      className={`border border-dl-rule bg-dl-chalk p-stack-lg mb-stack-lg ${className}`}
+    >
+      <h2 className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink mb-stack-md">
+        {title}
+      </h2>
+      {children}
+    </section>
+  );
+}
 
 export default async function CheckoutSuccessPage({ searchParams }) {
   const sp = await searchParams;
@@ -8,16 +27,18 @@ export default async function CheckoutSuccessPage({ searchParams }) {
 
   if (!order) {
     return (
-      <section className="max-w-md mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl text-center">
-        <h1 className="font-headline-lg text-headline-lg text-on-background dark:text-inverse-on-surface mb-stack-md">
-          Order not found
-        </h1>
-        <Link
-          href="/shop"
-          className="inline-block bg-secondary text-on-primary px-8 py-3 rounded font-semibold hover:bg-secondary-container transition-colors"
-        >
-          Continue shopping
-        </Link>
+      <section className="max-w-md mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl">
+        <div className="border border-dl-rule bg-dl-chalk px-stack-lg py-stack-xl text-center">
+          <h1 className="font-dl-sans text-dl-headline text-dl-ink">
+            Order not found
+          </h1>
+          <p className="font-dl-sans text-dl-body text-dl-charcoal mt-stack-sm">
+            This confirmation link may have expired or been mistyped.
+          </p>
+          <Link href="/shop" className={`mt-stack-md ${PRIMARY}`}>
+            Continue shopping
+          </Link>
+        </div>
       </section>
     );
   }
@@ -27,109 +48,106 @@ export default async function CheckoutSuccessPage({ searchParams }) {
 
   return (
     <section className="max-w-2xl mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl">
-      <div className="text-center mb-stack-xl">
-        <span
-          className={`material-symbols-outlined text-[48px] mb-stack-sm ${isPaymentFailed ? "text-error" : "text-on-tertiary-container"}`}
-          aria-hidden="true"
+      <div className="border border-dl-rule bg-dl-sheet p-stack-lg text-center mb-stack-lg">
+        {isPaid && (
+          <span className="inline-flex items-center justify-center w-12 h-12 border border-dl-ink text-dl-ink mb-stack-sm">
+            <CheckIcon className="w-6 h-6" />
+          </span>
+        )}
+        <h1
+          className={`font-dl-sans text-dl-headline ${isPaymentFailed ? "text-dl-signal-ink" : "text-dl-ink"}`}
         >
           {isPaymentFailed
-            ? "error"
-            : isPaid
-              ? "check_circle"
-              : "hourglass_top"}
-        </span>
-        <h1 className="font-headline-lg text-headline-lg text-on-background dark:text-inverse-on-surface">
-          {isPaymentFailed
-            ? "We couldn't complete this order"
+            ? "We could not complete this order"
             : isPaid
               ? "Order confirmed"
-              : "Confirming your payment…"}
+              : "Confirming your payment"}
         </h1>
-        <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container mt-stack-xs">
-          Order {order.order_number}
-          {isPaymentFailed &&
-            " — your payment went through, but an item sold out before we could confirm it. Nothing was shipped. Contact us and we'll sort out a refund."}
-          {!isPaymentFailed &&
-            !isPaid &&
-            " — this can take a few seconds to finalize. Refresh if it doesn't update."}
+        <p className="font-dl-sans text-dl-body text-dl-charcoal mt-stack-xs">
+          Order{" "}
+          <span className="font-dl-mono text-dl-ink">{order.order_number}</span>
         </p>
         {isPaymentFailed && (
-          <Link
-            href="/contact"
-            className="inline-block mt-stack-md bg-secondary text-on-primary px-6 py-2 rounded font-semibold hover:bg-secondary-container transition-colors"
-          >
+          <p className="font-dl-sans text-dl-body text-dl-charcoal mt-stack-sm max-w-prose mx-auto">
+            Your payment went through, but an item sold out before we could
+            confirm it. Nothing was shipped. Contact us and we will sort out a
+            refund.
+          </p>
+        )}
+        {!isPaymentFailed && !isPaid && (
+          <p className="font-dl-sans text-dl-body text-dl-charcoal mt-stack-sm max-w-prose mx-auto">
+            This can take a few seconds to finalise. Refresh if it does not
+            update.
+          </p>
+        )}
+        {isPaymentFailed && (
+          <Link href="/contact" className={`mt-stack-md ${PRIMARY}`}>
             Contact support
           </Link>
         )}
       </div>
 
-      <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg p-stack-lg mb-stack-lg">
-        <h2 className="font-headline-md text-headline-md text-on-background dark:text-inverse-on-surface mb-stack-md">
-          Items
-        </h2>
+      <Plate title="Items">
         <div className="flex flex-col gap-stack-sm mb-stack-md">
           {order.items.map((item) => (
             <div
               key={item.id}
-              className="flex justify-between text-body-sm font-body-sm"
+              className="flex justify-between gap-stack-sm font-dl-sans text-dl-body"
             >
-              <span className="text-on-surface-variant dark:text-on-primary-container">
+              <span className="text-dl-charcoal">
                 {item.name_snapshot}
                 {item.variant_label_snapshot
                   ? ` (${item.variant_label_snapshot})`
                   : ""}{" "}
-                × {item.quantity}
+                × <span className="tabular-nums">{item.quantity}</span>
               </span>
-              <span className="text-on-surface dark:text-inverse-on-surface">
+              <span className="text-dl-ink tabular-nums whitespace-nowrap">
                 {formatPrice(item.unit_price_snapshot * item.quantity)}
               </span>
             </div>
           ))}
         </div>
-        <div className="border-t border-outline-variant dark:border-outline pt-stack-sm flex flex-col gap-1">
-          <div className="flex justify-between text-body-sm font-body-sm text-on-surface-variant dark:text-on-primary-container">
+        <div className="border-t border-dl-rule pt-stack-sm flex flex-col gap-1">
+          <div className="flex justify-between font-dl-sans text-dl-body text-dl-charcoal">
             <span>Subtotal</span>
-            <span>{formatPrice(order.subtotal)}</span>
+            <span className="tabular-nums">{formatPrice(order.subtotal)}</span>
           </div>
-          <div className="flex justify-between text-body-sm font-body-sm text-on-surface-variant dark:text-on-primary-container">
+          <div className="flex justify-between font-dl-sans text-dl-body text-dl-charcoal">
             <span>Shipping</span>
-            <span>
+            <span className="tabular-nums">
               {order.shipping_total === 0
                 ? "Free"
                 : formatPrice(order.shipping_total)}
             </span>
           </div>
-          <div className="flex justify-between font-price-lg text-price-lg text-on-background dark:text-inverse-on-surface font-bold pt-1">
+          <div className="flex justify-between font-dl-sans text-dl-body-lg font-semibold text-dl-ink pt-1">
             <span>Total</span>
-            <span>{formatPrice(order.total)}</span>
+            <span className="tabular-nums">{formatPrice(order.total)}</span>
           </div>
         </div>
-      </div>
+      </Plate>
 
-      <div className="bg-surface-container-lowest dark:bg-inverse-surface border border-outline-variant dark:border-outline rounded-lg p-stack-lg mb-stack-lg">
-        <h2 className="font-headline-md text-headline-md text-on-background dark:text-inverse-on-surface mb-stack-sm">
-          Shipping to
-        </h2>
-        <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container">
+      <Plate title="Shipping to">
+        <p className="font-dl-sans text-dl-body text-dl-charcoal">
           {order.shipping_name}
           <br />
           {order.shipping_line1}
           {order.shipping_line2 && <>, {order.shipping_line2}</>}
           <br />
           {order.shipping_city}, {order.shipping_state}{" "}
-          {order.shipping_postal_code}
+          <span className="tabular-nums">{order.shipping_postal_code}</span>
         </p>
-      </div>
+      </Plate>
 
       {!order.user_id && order.guest_email && (
-        <div className="bg-surface-container-low dark:bg-primary-container border border-outline-variant dark:border-outline rounded-lg p-stack-lg mb-stack-lg text-center">
-          <p className="font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface mb-stack-sm">
+        <div className="border border-dl-rule bg-dl-sheet p-stack-lg mb-stack-lg text-center">
+          <p className="font-dl-sans text-dl-body text-dl-ink mb-stack-sm">
             Create an account to track this order and check out faster next
             time.
           </p>
           <Link
             href={`/signup?email=${encodeURIComponent(order.guest_email)}`}
-            className="inline-block bg-secondary text-on-primary px-6 py-2 rounded font-semibold hover:bg-secondary-container transition-colors"
+            className={PRIMARY}
           >
             Create an account
           </Link>
@@ -137,10 +155,7 @@ export default async function CheckoutSuccessPage({ searchParams }) {
       )}
 
       <div className="text-center">
-        <Link
-          href="/shop"
-          className="inline-block bg-secondary text-on-primary px-8 py-3 rounded font-semibold hover:bg-secondary-container transition-colors"
-        >
+        <Link href="/shop" className={PRIMARY}>
           Continue shopping
         </Link>
       </div>

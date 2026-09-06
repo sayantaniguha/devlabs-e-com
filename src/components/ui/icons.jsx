@@ -1,6 +1,7 @@
-// Small authored SVG glyphs — not an icon library, just the couple of
-// utility marks (close, disclosure chevron) used more than once in the
-// DevLabs redesign. Single stroke, currentColor, decorative by default.
+// Small authored SVG glyphs — not an icon library, just the utility marks
+// used more than once in the DevLabs redesign. Single stroke, currentColor,
+// decorative by default. The course surfaces previously pulled a second icon
+// family (Material Symbols); these replace it so the site has one.
 
 export function CloseIcon({ className = "" }) {
   return (
@@ -77,6 +78,78 @@ export function MoonIcon({ className = "" }) {
       focusable="false"
     >
       <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+    </svg>
+  );
+}
+
+// Rating star. Filled and empty are the same outline so the row keeps a
+// steady silhouette; only the fill changes, which is what carries the value
+// in an achromatic system.
+export function StarIcon({ className = "", filled = false, style }) {
+  return (
+    <svg
+      viewBox="0 0 16 16"
+      className={className}
+      style={style}
+      fill={filled ? "currentColor" : "none"}
+      stroke="currentColor"
+      strokeWidth="1.25"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M8 1.8l1.85 3.95 4.15.58-3.02 2.95.73 4.22L8 11.5l-3.71 2l.73-4.22L2 6.33l4.15-.58z" />
+    </svg>
+  );
+}
+
+export function CheckIcon({ className = "" }) {
+  return (
+    <svg
+      viewBox="0 0 16 16"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M3 8.5l3.5 3.5L13 4.5" />
+    </svg>
+  );
+}
+
+export function LockIcon({ className = "" }) {
+  return (
+    <svg
+      viewBox="0 0 16 16"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <rect x="3.25" y="7" width="9.5" height="6.5" />
+      <path d="M5.5 7V5a2.5 2.5 0 015 0v2" />
+    </svg>
+  );
+}
+
+export function PlayIcon({ className = "" }) {
+  return (
+    <svg
+      viewBox="0 0 16 16"
+      className={className}
+      fill="currentColor"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M5 3.5l7 4.5-7 4.5z" />
     </svg>
   );
 }
