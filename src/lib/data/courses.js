@@ -38,6 +38,23 @@ export const getCourseCategories = unstable_cache(
   { tags: ["course-categories"] },
 );
 
+// Used by the loading skeleton so it renders the same number of cards the
+// page will. head:true fetches the count without any rows, and it shares the
+// "courses" tag, so adding a course keeps the skeleton in step automatically.
+export const getActiveCourseCount = unstable_cache(
+  async function getActiveCourseCount() {
+    const supabase = createAdminClient();
+    const { count, error } = await supabase
+      .from("courses")
+      .select("id", { count: "exact", head: true })
+      .eq("status", "active");
+    if (error) throw error;
+    return count ?? 0;
+  },
+  ["active-course-count"],
+  { tags: ["courses"] },
+);
+
 export const getCourses = unstable_cache(
   async function getCourses({
     category,
