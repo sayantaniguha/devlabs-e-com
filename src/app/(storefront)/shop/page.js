@@ -8,6 +8,12 @@ import { getCategories, getProducts } from "@/lib/data/products";
 // counts, and slicing an already-fetched array is simplest and lowest-risk.
 const PAGE_SIZE = 6;
 
+export const metadata = {
+  title: "Shop",
+  description:
+    "Official DevLabs apparel and desk gear. Hoodies, tees, drinkware and desk setup, made for people who write software.",
+};
+
 export default async function ShopPage({ searchParams }) {
   const sp = await searchParams;
 
@@ -26,10 +32,7 @@ export default async function ShopPage({ searchParams }) {
   ]);
 
   const totalPages = Math.max(1, Math.ceil(allProducts.length / PAGE_SIZE));
-  const currentPage = Math.min(
-    Math.max(1, Number(sp.page) || 1),
-    totalPages,
-  );
+  const currentPage = Math.min(Math.max(1, Number(sp.page) || 1), totalPages);
   const products = allProducts.slice(
     (currentPage - 1) * PAGE_SIZE,
     currentPage * PAGE_SIZE,
@@ -70,7 +73,11 @@ export default async function ShopPage({ searchParams }) {
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
             {products.map((product, i) => (
-              <ProductCard key={product.id} product={product} priority={i < 3} />
+              <ProductCard
+                key={product.id}
+                product={product}
+                priority={i < 3}
+              />
             ))}
           </div>
         </ShopFilters>

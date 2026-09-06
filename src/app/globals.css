@@ -350,9 +350,12 @@ dialog.dl-motion[open] .dl-drawer-panel {
   .dl-motion,
   .dl-motion::backdrop,
   .dl-motion-child {
+    /* Hoisted so the declaration stays on one line. Wrapped across two, the
+       !important lands on a continuation line and the suppression above it
+       no longer applies. */
+    --dl-motion-props: opacity, background-color, color, display, overlay;
     /* biome-ignore lint/complexity/noImportantStyles: reduced-motion must override all author rules */
-    transition-property:
-      opacity, background-color, color, display, overlay !important;
+    transition-property: var(--dl-motion-props) !important;
     /* biome-ignore lint/complexity/noImportantStyles: reduced-motion must override all author rules */
     transition-duration: 200ms !important;
     /* Both, because the drawer moves via `transform` (own CSS) and the toast

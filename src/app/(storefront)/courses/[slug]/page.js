@@ -7,6 +7,41 @@ import {
   getMyReview,
 } from "@/lib/data/courses";
 
+// getCourseBySlug is tag-cached, so this does not cost a second query when
+// the page below calls it again.
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const course = await getCourseBySlug(slug);
+  if (!course) return { title: "Course not found" };
+
+  const description = course.description ?? "";
+  return {
+    title: course.title,
+    description,
+    openGraph: {
+      type: "article",
+      title: course.title,
+      description,
+      images: course.thumbnail_url
+        ? [
+            {
+              url: course.thumbnail_url,
+              width: 1024,
+              height: 576,
+              alt: course.title,
+            },
+          ]
+        : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: course.title,
+      description,
+      images: course.thumbnail_url ? [course.thumbnail_url] : undefined,
+    },
+  };
+}
+
 export default async function CourseDetailPage({ params }) {
   const { slug } = await params;
   const course = await getCourseBySlug(slug);

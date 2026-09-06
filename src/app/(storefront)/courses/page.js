@@ -2,6 +2,12 @@ import { CourseCard } from "@/components/storefront/CourseCard";
 import { CourseFilters } from "@/components/storefront/CourseFilters";
 import { getCourseCategories, getCourses } from "@/lib/data/courses";
 
+export const metadata = {
+  title: "Courses",
+  description:
+    "Engineering courses taught by the people who build DevLabs. Rendering, systems, infrastructure, security and interview preparation.",
+};
+
 export default async function CoursesPage({ searchParams }) {
   const sp = await searchParams;
   const [courses, categories] = await Promise.all([
@@ -32,10 +38,7 @@ export default async function CoursesPage({ searchParams }) {
       </div>
 
       <div className="flex flex-col md:flex-row gap-gutter">
-        <CourseFilters
-          categories={categories}
-          isEmpty={courses.length === 0}
-        >
+        <CourseFilters categories={categories} isEmpty={courses.length === 0}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
             {courses.map((course, i) => (
               <CourseCard key={course.id} course={course} priority={i < 3} />

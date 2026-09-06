@@ -1,6 +1,7 @@
 export const metadata = {
-  title: "About — DevLabs",
-  description: "Building the tools and community for the next generation of engineers.",
+  title: "About",
+  description:
+    "Building the tools and community for the next generation of engineers.",
 };
 
 const VALUES = [
@@ -28,10 +29,10 @@ export default function AboutPage() {
         About DevLabs
       </h1>
       <p className="font-body-lg text-body-lg text-on-surface-variant dark:text-on-primary-container mb-stack-xl">
-        DevLabs makes apparel, desk gear, and courses for developers —
-        designed and taught by the same team building the product. Comfortable,
-        functional, and minimal, with courses that treat engineering as a
-        craft worth teaching properly.
+        DevLabs makes apparel, desk gear, and courses for developers — designed
+        and taught by the same team building the product. Comfortable,
+        functional, and minimal, with courses that treat engineering as a craft
+        worth teaching properly.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-stack-lg mb-stack-xl">

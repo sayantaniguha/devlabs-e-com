@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Contact — DevLabs",
+  title: "Contact",
   description: "Get in touch with the DevLabs team.",
 };
 
@@ -25,8 +25,8 @@ export default function ContactPage() {
         Contact us
       </h1>
       <p className="font-body-sm text-body-sm text-on-surface-variant dark:text-on-primary-container mb-stack-lg">
-        Questions about an order, a course, or anything else — we usually
-        reply within a business day.
+        Questions about an order, a course, or anything else — we usually reply
+        within a business day.
       </p>
 
       <div className="flex flex-col gap-stack-sm">

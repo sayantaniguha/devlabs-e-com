@@ -8,6 +8,41 @@ import { getProductBySlug, getRelatedProducts } from "@/lib/data/products";
 // categories here are small enough that one related item is common.
 const MIN_RELATED = 3;
 
+// getProductBySlug is tag-cached, so this does not cost a second query when
+// the page below calls it again.
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
+  if (!product) return { title: "Product not found" };
+
+  const description = product.description ?? "";
+  return {
+    title: product.name,
+    description,
+    openGraph: {
+      type: "website",
+      title: product.name,
+      description,
+      images: product.primaryImage
+        ? [
+            {
+              url: product.primaryImage,
+              width: 1024,
+              height: 1024,
+              alt: product.name,
+            },
+          ]
+        : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: product.name,
+      description,
+      images: product.primaryImage ? [product.primaryImage] : undefined,
+    },
+  };
+}
+
 export default async function ProductPage({ params }) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
