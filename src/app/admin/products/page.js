@@ -95,11 +95,20 @@ export default async function AdminProductsPage({ searchParams }) {
                 })}
                 {products.length === 0 && (
                   <tr>
-                    <td
-                      colSpan={6}
-                      className="px-stack-lg py-8 text-center text-dl-charcoal"
-                    >
-                      No products yet.
+                    <td colSpan={6} className="px-stack-lg py-stack-xl text-center">
+                      <p className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink">
+                        No products yet.
+                      </p>
+                      <p className="font-dl-sans text-dl-body text-dl-charcoal mt-2">
+                        Add your first product to start selling. You can set
+                        sizes, stock, and images as you go.
+                      </p>
+                      <Link
+                        href="/admin/products?new=1"
+                        className="inline-block mt-stack-md bg-dl-ink text-dl-chalk px-6 py-3 font-dl-sans text-dl-body font-semibold hover:opacity-90 active:scale-[0.98] transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2"
+                      >
+                        Add your first product
+                      </Link>
                     </td>
                   </tr>
                 )}

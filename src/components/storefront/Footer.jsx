@@ -11,8 +11,8 @@ export function Footer() {
             DevLabs
           </div>
           <p className="font-dl-sans text-dl-body text-dl-charcoal mb-4">
-            Building the tools and community for the next generation of
-            engineers.
+            Official apparel, desk gear, and engineering courses from the team
+            that builds DevLabs Infrastructure.
           </p>
           <p className="font-dl-sans text-dl-body text-dl-charcoal">
             © {YEAR} DevLabs Infrastructure. All rights reserved.

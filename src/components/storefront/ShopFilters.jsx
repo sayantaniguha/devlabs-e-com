@@ -14,7 +14,13 @@ const FOCUS_RING =
 const CHIP =
   "flex items-center gap-1.5 border border-dl-rule pl-3 pr-2 py-1 font-dl-sans text-dl-spec text-dl-charcoal";
 
-export function ShopFilters({ categories, currentPage, totalPages, children }) {
+export function ShopFilters({
+  categories,
+  currentPage,
+  totalPages,
+  isEmpty,
+  children,
+}) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -319,7 +325,35 @@ export function ShopFilters({ categories, currentPage, totalPages, children }) {
           </div>
         )}
 
-        {children}
+        {/* Rendered here rather than passed in from the page so the recovery
+            action can call clearAll(), which also resets the search box and
+            price slider held in local state. A link to /shop would clear the
+            URL but leave those two controls showing stale values. */}
+        {isEmpty ? (
+          <div className="border border-dl-rule bg-dl-chalk px-stack-lg py-stack-xl text-center">
+            <p className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink">
+              {activeChips.length > 0
+                ? "No products match these filters."
+                : "No products available right now."}
+            </p>
+            {activeChips.length > 0 && (
+              <>
+                <p className="font-dl-sans text-dl-body text-dl-charcoal mt-2">
+                  Remove one filter, or clear them all and start again.
+                </p>
+                <button
+                  type="button"
+                  onClick={clearAll}
+                  className={`mt-stack-md bg-dl-ink text-dl-chalk px-6 py-3 font-dl-sans font-semibold hover:opacity-90 active:scale-[0.98] transition ${FOCUS_RING}`}
+                >
+                  Clear all filters
+                </button>
+              </>
+            )}
+          </div>
+        ) : (
+          children
+        )}
 
         {totalPages > 1 && (
           <nav

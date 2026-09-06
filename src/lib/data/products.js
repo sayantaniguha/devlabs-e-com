@@ -130,15 +130,39 @@ export const getProductBySlug = unstable_cache(
 export const getRelatedProducts = unstable_cache(
   async function getRelatedProducts(categoryId, excludeProductId, limit = 4) {
     const supabase = createAdminClient();
-    const { data, error } = await supabase
-      .from("products")
-      .select(PRODUCT_SELECT)
-      .eq("status", "active")
-      .eq("category_id", categoryId)
-      .neq("id", excludeProductId)
-      .limit(limit);
-    if (error) throw error;
-    return data.map(decorate);
+
+    // Same category first — those are the genuinely relevant ones.
+    let products = [];
+    if (categoryId) {
+      const { data, error } = await supabase
+        .from("products")
+        .select(PRODUCT_SELECT)
+        .eq("status", "active")
+        .eq("category_id", categoryId)
+        .neq("id", excludeProductId)
+        .limit(limit);
+      if (error) throw error;
+      products = data ?? [];
+    }
+
+    // Categories in this catalog hold only a handful of products each, so a
+    // strict same-category query returns 0-1 rows on most product pages and
+    // the row renders as a broken grid. Top up with other active products
+    // rather than shipping a one-item recommendation.
+    if (products.length < limit) {
+      const exclude = [excludeProductId, ...products.map((p) => p.id)];
+      const { data, error } = await supabase
+        .from("products")
+        .select(PRODUCT_SELECT)
+        .eq("status", "active")
+        .not("id", "in", `(${exclude.join(",")})`)
+        .order("created_at", { ascending: false })
+        .limit(limit - products.length);
+      if (error) throw error;
+      products = [...products, ...(data ?? [])];
+    }
+
+    return products.map(decorate);
   },
   ["related-products"],
   { tags: ["products"] },

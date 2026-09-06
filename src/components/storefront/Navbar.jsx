@@ -5,9 +5,10 @@ import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { cartItemCount, useCartStore } from "@/lib/cart-store";
 
+// Courses lead: they are the business, merch is the gift shop.
 const NAV_LINKS = [
-  { href: "/shop", label: "Shop" },
   { href: "/courses", label: "Courses" },
+  { href: "/shop", label: "Shop" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];

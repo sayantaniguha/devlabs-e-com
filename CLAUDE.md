@@ -60,6 +60,39 @@ For multi-step tasks, state a brief plan:
 
 Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
+## 5. Verification Gotchas
+
+**Validate every detector and measurement against a known positive before trusting its output.** A tool that reports "clean" is worthless until you have watched it fail on a case you know is dirty. Each of the traps below produced *plausible numbers while measuring the wrong thing*:
+
+- `.stats()` returned whole-image means labelled as per-region values
+- a run-detector reported 15/15 clean because its gap tolerance was narrower than letter spacing
+- a lint baseline showed 106 vs 30 errors because the comparison tree was checked out with different line endings
+
+None of these looked wrong. Two of them were used to support a decision before the error was caught. When several regions report *identical* values, or a result is suspiciously clean, or a baseline differs implausibly, suspect the instrument first.
+
+**A measurement that silently measures the wrong thing is worse than no measurement.** Known traps in this repo:
+
+**`sharp().stats()` ignores the pipeline.** `stats()` reports on the *input image*, so a preceding `.extract()` has no effect and you get whole-image statistics labelled as a region:
+
+```js
+// WRONG — returns whole-image stats, extract() is ignored
+const s = await sharp(f).extract(box).stats();
+
+// RIGHT — decode the region and compute from the raw buffer
+const buf = await sharp(f).extract(box).greyscale().raw().toBuffer();
+const mean = buf.reduce((a, v) => a + v, 0) / buf.length;
+```
+
+This produced a real error: background values reported per-region were actually whole-image means, and a design decision was made on them before the mistake was caught. When several regions report *identical* values, suspect this bug rather than the image.
+
+**CSS `zoom` does not change `window.innerWidth` or trigger media queries.** It cannot be used to test responsive reflow. Resize the viewport instead.
+
+**A native modal `<dialog>` passes focus through `document.body` for one tab as the cycle wraps.** That is not a focus-trap failure. Assert that no *focusable page control outside the dialog* receives focus, not that `dialog.contains(activeElement)` is true on every tab.
+
+**Tailwind v4 emits `translate-y-*` via the CSS `translate` property, not `transform`.** Transitioning `transform` animates nothing; transition `translate`.
+
+**Next.js caches optimised images at `.next/dev/cache/images`** — note `dev/`, not `.next/cache/images`. The cache key is the request URL, **not** the file's contents, so replacing a file in `public/` at the same path never invalidates it. The dev server will keep serving the old image indefinitely while the file on disk is correct, which reads as "my change did nothing". After swapping any asset in `public/`, stop the server, delete `.next/dev/cache/images`, and restart. Verify what is actually *painted* (screenshot the element and measure it) rather than what is on disk.
+
 ---
 
 **These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.

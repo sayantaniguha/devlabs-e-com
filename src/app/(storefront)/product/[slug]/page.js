@@ -4,14 +4,18 @@ import { ProductCard } from "@/components/storefront/ProductCard";
 import { ProductDetail } from "@/components/storefront/ProductDetail";
 import { getProductBySlug, getRelatedProducts } from "@/lib/data/products";
 
+// Below this, the row reads as a broken grid rather than a recommendation:
+// categories here are small enough that one related item is common.
+const MIN_RELATED = 3;
+
 export default async function ProductPage({ params }) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
   if (!product) notFound();
 
-  const related = product.category_id
-    ? await getRelatedProducts(product.category_id, product.id)
-    : [];
+  // Called unconditionally now: the fallback fills the row for uncategorised
+  // products too, instead of leaving them with nothing.
+  const related = await getRelatedProducts(product.category_id, product.id);
 
   return (
     <main className="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-lg">
@@ -41,7 +45,7 @@ export default async function ProductPage({ params }) {
 
       <ProductDetail product={product} />
 
-      {related.length > 0 && (
+      {related.length >= MIN_RELATED && (
         <section className="mt-stack-xl pt-stack-xl border-t border-dl-rule">
           <div className="flex justify-between items-end mb-stack-lg">
             <h2 className="font-dl-sans text-dl-headline text-dl-ink">
