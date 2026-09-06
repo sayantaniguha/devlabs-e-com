@@ -70,6 +70,10 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 None of these looked wrong. Two of them were used to support a decision before the error was caught. When several regions report *identical* values, or a result is suspiciously clean, or a baseline differs implausibly, suspect the instrument first.
 
+**With a JIT compiler, a class that appears in no source file is never generated.** Tailwind only emits utilities it finds by scanning source. So testing a class in isolation — injecting it into a live page to see what it does — *always passes*, because the class does not exist in the stylesheet and therefore does nothing. An inert class is indistinguishable from a harmless one.
+
+This nearly hid a real defect: `outline-hidden` appeared to fix a missing focus ring when tested that way. It did not. It was absent from every source file, so Tailwind had never generated it. Once written into a component it was generated, behaved exactly like `outline-none`, and killed the ring again. Before trusting any test of a utility's behaviour, confirm the class is present in source, or add it to a file first and rebuild.
+
 **Absence of reproduction is not evidence of absence.** The same rule applied to sampling rather than instruments. A defect that reproduces 60% of the time survives three consecutive clean checks about **6%** of the time (0.4³ = 0.064) — which is often enough that it will happen to you. An intermittent CLS in this repo was declared "a one-off, does not reproduce" on exactly that basis; it was in fact failing 6 of every 10 loads, and a 10-run loop found it immediately with the offending element named.
 
 For anything intermittent: state the sample size, run enough iterations that the expected number of failures is comfortably above one, and report a hit rate (`6/10`) rather than a verdict. Three green runs justify "I could not reproduce it in three runs", never "it is fixed".
