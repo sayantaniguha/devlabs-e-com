@@ -25,7 +25,13 @@ export function ProductDetail({ product }) {
     return product.variants.find((v) => v.size === selectedSize) ?? null;
   }, [hasSizes, product.variants, selectedSize]);
 
-  const canAdd = selectedVariant && selectedVariant.stock_quantity > 0;
+  // Three distinct states, not two. Collapsing "nothing picked yet" into
+  // "out of stock" made the page load claiming it was unavailable while
+  // showing four sizes in stock.
+  const needsSize = hasSizes && !selectedSize;
+  const canAdd =
+    !needsSize && selectedVariant && selectedVariant.stock_quantity > 0;
+  const soldOut = !needsSize && !canAdd;
   const maxQuantity = selectedVariant?.stock_quantity ?? 1;
 
   function handleSelectSize(variant) {
@@ -112,12 +118,10 @@ export function ProductDetail({ product }) {
         <h1 className="font-dl-sans text-dl-headline text-dl-ink">
           {product.name}
         </h1>
-        <div className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink tabular-nums mt-2">
+        {/* The description lives in the accordion below, once. */}
+        <div className="font-dl-sans text-dl-body-lg font-semibold text-dl-ink tabular-nums mt-2 border-b border-dl-rule pb-stack-md">
           {formatPrice(product.base_price)}
         </div>
-        <p className="font-dl-sans text-dl-body text-dl-charcoal border-b border-dl-rule mt-4 pb-stack-md">
-          {product.description}
-        </p>
 
         {hasSizes && (
           <div className="mt-stack-lg">
@@ -199,12 +203,18 @@ export function ProductDetail({ product }) {
         </div>
 
         <div className="flex flex-col space-y-stack-xs font-dl-sans text-dl-body border-b border-dl-rule mt-stack-lg pb-stack-md">
-          {canAdd ? (
-            <span className="text-dl-charcoal">In stock and ready to ship</span>
-          ) : (
-            <span className="text-dl-signal-ink">Out of stock</span>
+          {needsSize && (
+            <span className="text-dl-charcoal">Select a size to continue</span>
           )}
-          <span className="text-dl-charcoal">Ships in 2-3 business days</span>
+          {canAdd && (
+            <span className="text-dl-charcoal">In stock and ready to ship</span>
+          )}
+          {soldOut && <span className="text-dl-signal-ink">Out of stock</span>}
+          {/* Only promise a delivery window on something that can actually
+              ship — this sat under "Out of stock" and contradicted it. */}
+          {!soldOut && (
+            <span className="text-dl-charcoal">Ships in 2-3 business days</span>
+          )}
         </div>
 
         <div className="divide-y divide-dl-rule">

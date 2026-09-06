@@ -19,18 +19,25 @@ export default async function Home() {
     <>
       {/* Hero — DevLabs redesign token layer (dl-*). Everything below this
           section still renders on the previous system; see globals.css. */}
-      <section className="bg-dl-chalk">
+      <section className="bg-dl-chalk border-b border-dl-rule">
         <div className="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl flex flex-col md:flex-row items-center gap-gutter">
           <div className="flex-1">
-            <h1 className="font-dl-sans font-extrabold text-dl-ink [font-stretch:125%] text-[clamp(2.25rem,5vw+1rem,4.5rem)] leading-[0.98] tracking-[-0.01em]">
-              Engineered for Innovation.
+            {/* Ceiling is 46px, not 72px: the hero text column is ~595px at
+                1440, and 72px fitted about 14 characters per line, so any
+                two-clause headline wrapped to 4-5 lines. Measured cap for
+                this copy is 48px at 1440 and 27px at 768; the ramp below
+                stays under both. */}
+            <h1 className="font-dl-sans font-extrabold text-dl-ink [font-stretch:125%] text-[clamp(1.5rem,3vw+2px,2.875rem)] leading-[0.98] tracking-[-0.01em]">
+              Built by the team
               <br />
-              Styled for You.
+              that builds DevLabs.
             </h1>
+            {/* The headline now carries the provenance claim, so the subhead
+                no longer repeats "taught by the team building the product"
+                and just names what is for sale. */}
             <p className="font-dl-sans text-dl-body-lg text-dl-charcoal max-w-prose mt-4">
-              Official DevLabs merchandise and courses. High-quality apparel
-              and gear, taught by the team building the product. Comfortable,
-              functional, and minimal.
+              Official apparel, desk gear, and engineering courses.
+              Comfortable, functional, minimal.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mt-8">
               <Link
@@ -64,23 +71,8 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Trust bar — dl tokens, no icons: words carry it instead */}
-      <section className="bg-dl-chalk border-b border-dl-rule">
-        <ul className="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop divide-y divide-dl-rule sm:divide-y-0 sm:flex">
-          {[
-            "Free shipping over ₹1,499",
-            "7-day returns on unworn apparel",
-            "Built by developers, for developers",
-          ].map((text) => (
-            <li
-              key={text}
-              className="flex-1 py-stack-sm sm:py-stack-md sm:px-6 sm:border-l sm:first:border-l-0 border-dl-rule font-dl-sans text-dl-body text-dl-charcoal text-center sm:text-left"
-            >
-              {text}
-            </li>
-          ))}
-        </ul>
-      </section>
+      {/* Trust bar removed: the PromoBanner marquee above already states the
+          same three facts, and both sat inside one viewport. */}
 
       {/* Shop by category — indexed spec list, not icon tiles */}
       <section className="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-xl">
@@ -98,11 +90,13 @@ export default async function Home() {
                 href={`/shop?category=${category.slug}`}
                 className="group flex flex-col justify-between gap-8 p-stack-lg border-r border-b border-dl-rule bg-dl-chalk hover:bg-dl-sheet transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:-outline-offset-2"
               >
-                <span className="font-dl-mono text-dl-spec text-dl-charcoal tabular-nums">
-                  {count} {count === 1 ? "product" : "products"}
-                </span>
+                {/* Name leads. The count is metadata and reads second, so the
+                    eye lands on the category rather than on "1 product". */}
                 <span className="font-dl-sans text-dl-body text-dl-ink group-hover:underline underline-offset-4">
                   {category.name}
+                </span>
+                <span className="font-dl-mono text-dl-spec text-dl-charcoal tabular-nums">
+                  {count} {count === 1 ? "product" : "products"}
                 </span>
               </Link>
             );

@@ -66,22 +66,13 @@ export default async function ShopPage({ searchParams }) {
           categories={categories}
           currentPage={currentPage}
           totalPages={totalPages}
+          isEmpty={products.length === 0}
         >
-          {products.length === 0 ? (
-            <p className="font-dl-sans text-dl-body text-dl-charcoal py-stack-xl text-center">
-              No products match these filters.
-            </p>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
-              {products.map((product, i) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  priority={i < 3}
-                />
-              ))}
-            </div>
-          )}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
+            {products.map((product, i) => (
+              <ProductCard key={product.id} product={product} priority={i < 3} />
+            ))}
+          </div>
         </ShopFilters>
       </div>
     </main>
