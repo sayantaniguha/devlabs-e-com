@@ -1,0 +1,13 @@
+# Normalise line endings. core.autocrlf was true with no .gitattributes, so
+# files were LF when written and CRLF after git touched them, and biome (which
+# expects LF) flagged whichever files git had most recently checked out. The
+# lint count swung between 26 and 38 for that reason alone.
+* text=auto eol=lf
+
+# Explicit so no binary can be mangled by text detection.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.woff binary
+*.woff2 binary
