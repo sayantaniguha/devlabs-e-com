@@ -26,16 +26,6 @@ const REQUIREMENTS_BY_LEVEL = {
     "No prior experience required. The course builds up to advanced material.",
 };
 
-function timeAgo(iso) {
-  const days = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
-  if (days <= 0) return "today";
-  if (days === 1) return "1 day ago";
-  if (days < 30) return `${days} days ago`;
-  const months = Math.floor(days / 30);
-  if (months === 1) return "1 month ago";
-  return `${months} months ago`;
-}
-
 function Panel({ title, children, className = "" }) {
   return (
     <section
@@ -304,7 +294,7 @@ export function CourseDetail({ course, isEnrolled, isAdminPreview, myReview }) {
                       </span>
                       <StarRating average={review.rating} size={14} />
                       <span className="font-dl-sans text-dl-spec text-dl-charcoal">
-                        {timeAgo(review.created_at)}
+                        {review.timeAgoLabel}
                       </span>
                     </div>
                     {review.comment && (

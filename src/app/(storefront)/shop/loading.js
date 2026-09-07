@@ -1,6 +1,6 @@
 export default function ShopLoading() {
   return (
-    <main className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full pb-stack-xl animate-pulse">
+    <section className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full pb-stack-xl animate-pulse">
       <div className="py-stack-lg border-b border-outline-variant/30 mb-stack-lg">
         <div className="h-4 w-24 bg-surface-container-low dark:bg-inverse-surface rounded mb-stack-sm" />
         <div className="h-10 w-48 bg-surface-container-low dark:bg-inverse-surface rounded" />
@@ -20,6 +20,6 @@ export default function ShopLoading() {
           ))}
         </div>
       </div>
-    </main>
+    </section>
   );
 }

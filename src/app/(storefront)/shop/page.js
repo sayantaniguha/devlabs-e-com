@@ -39,7 +39,7 @@ export default async function ShopPage({ searchParams }) {
   );
 
   return (
-    <main className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full pb-stack-xl">
+    <section className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full pb-stack-xl">
       <div className="py-stack-lg border-b border-dl-rule mb-stack-lg flex flex-col md:flex-row justify-between items-baseline gap-stack-sm">
         <div>
           <nav
@@ -82,6 +82,6 @@ export default async function ShopPage({ searchParams }) {
           </div>
         </ShopFilters>
       </div>
-    </main>
+    </section>
   );
 }

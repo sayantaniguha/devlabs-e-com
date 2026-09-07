@@ -52,14 +52,18 @@ All colors are CSS custom properties, defined once in `:root` (light) and re-dec
 
 | Token | Size | Line-height | Tracking | Weight | Use |
 |-------|------|-------------|----------|--------|-----|
-| `--text-dl-nameplate` | 72px | 0.98 | -0.01em | 800 | Landing hero headline only. Rendered as a fluid `clamp(2.25rem, 5vw+1rem, 4.5rem)` on that one element (see Exceptions) — this token's fixed 72px value describes its **desktop** ceiling. |
+| `--text-dl-nameplate` | 72px | 0.98 | -0.01em | 800 | **Currently unused.** The landing hero, its only intended consumer, renders `clamp(1.5rem, 3vw+2px, 2.875rem)` instead, so the shipped desktop ceiling is **46px**, not this token's 72px (see Exceptions). |
 | `--text-dl-headline` | 28px | 1.2 | -0.005em | 600 | Section headings (`Shop by Category`, `Revenue Overview`, dialog titles, product H1). |
 | `--text-dl-body-lg` | 18px | 1.6 | 0 | 400 | Hero/lede paragraphs, product price display. |
 | `--text-dl-body` | 15px | 1.6 | 0 | 400 | Default body text, nav links, form labels, table cells. |
 | `--text-dl-spec` | 13px | 1.4 | 0.02em | 500 | Small caps labels, mono identifiers/counts, badge text. |
 
 **Exceptions (documented, not accidents):**
-- The landing hero H1 is the *only* element using fluid `clamp()` sizing instead of the fixed token value — a real mobile-overflow bug (confirmed via Playwright at 320/390px, not assumed) forced this. Every other heading in the system uses the fixed `--text-dl-*` scale. Do not generalize the clamp() pattern to other headings without a reason as concrete as this one.
+- The landing hero H1 is the *only* element using fluid `clamp()` sizing instead of the fixed token value. Two measured problems forced it, neither assumed:
+  1. **Mobile overflow.** 72px overflowed at 320/390px (confirmed via Playwright).
+  2. **Line count.** The hero text column is ~595px at 1440, so 72px fitted roughly 14 characters per line and *every* two-clause headline wrapped to 4-5 lines. Measured ceilings for a two-line headline were 48px at 1440 and 27px at 768.
+
+  The shipped value is `clamp(1.5rem, 3vw+2px, 2.875rem)` — a **46px** desktop ceiling, verified at two lines across 1920/1440/1024/768/375 with the CTAs above the fold at each. `--text-dl-nameplate` (72px) is consequently unused; it is kept as the documented ceiling the scale was designed around, not as a value anything renders. Every other heading uses the fixed `--text-dl-*` scale. Do not generalize the clamp() pattern without a reason as concrete as this one.
 - `[font-stretch:110%]`/`[font-stretch:125%]` (arbitrary values, not tokens) widen Archivo's variable `wdth` axis for the wordmark and hero headline specifically. Not applied elsewhere.
 
 ### Spacing Variables

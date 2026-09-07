@@ -53,7 +53,7 @@ export default async function ProductPage({ params }) {
   const related = await getRelatedProducts(product.category_id, product.id);
 
   return (
-    <main className="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-lg">
+    <section className="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-lg">
       <div className="flex items-center gap-stack-sm font-dl-sans text-dl-body text-dl-charcoal mb-stack-lg">
         <Link
           href="/"
@@ -94,6 +94,6 @@ export default async function ProductPage({ params }) {
           </div>
         </section>
       )}
-    </main>
+    </section>
   );
 }
