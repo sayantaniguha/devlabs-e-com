@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import { ChevronIcon } from "@/components/ui/icons";
 import { useCartStore } from "@/lib/cart-store";
 import { formatPrice } from "@/lib/utils/format";
@@ -13,6 +13,7 @@ export function ProductDetail({ product }) {
   const addItem = useCartStore((s) => s.addItem);
   const openCart = useCartStore((s) => s.openCart);
 
+  const sizeLabelId = useId();
   const hasSizes = product.variants.some((v) => v.size);
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState(
@@ -80,39 +81,49 @@ export function ProductDetail({ product }) {
             />
           )}
         </div>
+        {/* role="group" because a bare <div> has role "generic", which does
+            not support an accessible name — the aria-label below was being
+            discarded outright. */}
         {images.length > 1 && (
-          <div
-            className="grid grid-cols-4 gap-stack-sm"
-            aria-label="Product images"
-          >
-            {images.map((img, i) => {
-              const active = i === selectedImage;
-              return (
-                <button
-                  key={img.url ?? i}
-                  type="button"
-                  aria-current={active ? "true" : undefined}
-                  aria-label={`View image ${i + 1} of ${images.length}`}
-                  onClick={() => setSelectedImage(i)}
-                  className={`aspect-square bg-dl-sheet overflow-hidden cursor-pointer relative transition-colors ${FOCUS_RING} ${
-                    active
-                      ? "border-2 border-dl-ink"
-                      : "border border-dl-rule opacity-70 hover:opacity-100 hover:border-dl-ink"
-                  }`}
-                >
-                  {img.url && (
-                    <Image
-                      src={img.url}
-                      alt=""
-                      fill
-                      sizes="120px"
-                      className="object-contain"
-                    />
-                  )}
-                </button>
-              );
-            })}
-          </div>
+          <>
+            {/* biome-ignore lint/a11y/useSemanticElements: <fieldset> groups
+                form controls. These are view switchers, not inputs, so
+                fieldset/legend would be semantically wrong; role="group" is
+                the honest fit. */}
+            <div
+              role="group"
+              className="grid grid-cols-4 gap-stack-sm"
+              aria-label="Product images"
+            >
+              {images.map((img, i) => {
+                const active = i === selectedImage;
+                return (
+                  <button
+                    key={img.url ?? i}
+                    type="button"
+                    aria-current={active ? "true" : undefined}
+                    aria-label={`View image ${i + 1} of ${images.length}`}
+                    onClick={() => setSelectedImage(i)}
+                    className={`aspect-square bg-dl-sheet overflow-hidden cursor-pointer relative transition-colors ${FOCUS_RING} ${
+                      active
+                        ? "border-2 border-dl-ink"
+                        : "border border-dl-rule opacity-70 hover:opacity-100 hover:border-dl-ink"
+                    }`}
+                  >
+                    {img.url && (
+                      <Image
+                        src={img.url}
+                        alt=""
+                        fill
+                        sizes="120px"
+                        className="object-contain"
+                      />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </>
         )}
       </div>
 
@@ -128,10 +139,32 @@ export function ProductDetail({ product }) {
 
         {hasSizes && (
           <div className="mt-stack-lg">
-            <span className="block font-dl-sans text-dl-spec text-dl-charcoal uppercase tracking-wide mb-stack-sm">
+            <span
+              id={sizeLabelId}
+              className="block font-dl-sans text-dl-spec text-dl-charcoal uppercase tracking-wide mb-stack-sm"
+            >
               Size
             </span>
-            <div className="flex flex-wrap gap-stack-sm" aria-label="Size">
+            {/* Named by the visible "Size" label rather than a duplicate
+                aria-label, so the accessible name cannot drift from what is
+                on screen. The old aria-label is removed, not left alongside:
+                aria-labelledby wins, so keeping it would leave a dead
+                attribute that reads as doing something.
+
+                role="group" and not "radiogroup": radiogroup promises a
+                roving tabindex, arrow-key navigation and skipping disabled
+                options. None of that is implemented, and declaring it
+                without would be worse than these plain buttons, each of
+                which already tabs and activates correctly. */}
+            {/* biome-ignore lint/a11y/useSemanticElements: these are buttons,
+                not form inputs. <fieldset>/<legend> brings default border and
+                legend layout behaviour for no semantic gain over role="group",
+                which already exposes the correct role and name. */}
+            <div
+              role="group"
+              aria-labelledby={sizeLabelId}
+              className="flex flex-wrap gap-stack-sm"
+            >
               {product.variants.map((v) => {
                 const outOfStock = v.stock_quantity <= 0;
                 const active = v.size === selectedSize;
