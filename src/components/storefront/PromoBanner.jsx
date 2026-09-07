@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 // Advertises merch shipping/returns — not relevant (and slightly misleading)
 // on course pages, where there's nothing to ship.

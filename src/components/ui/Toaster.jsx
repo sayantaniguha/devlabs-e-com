@@ -64,39 +64,52 @@ function Toast({ id, message }) {
   }
 
   return (
-    <div
-      ref={elRef}
-      popover="manual"
-      role="status"
-      aria-live="polite"
-      data-state={open ? "open" : "closed"}
-      className={[
-        // Reset the UA popover defaults, then place it in the content area:
-        // clear of the 260px admin sidebar on the left, and clear of the
-        // 520px product drawer on the right — which is open when this fires,
-        // and whose Save button sits bottom-right.
-        "dl-motion fixed inset-auto bottom-4 left-[calc(260px+1rem)] m-0 w-auto max-w-[min(24rem,calc(100vw-260px-2rem))]",
-        "flex items-center gap-3 border border-dl-rule bg-dl-chalk px-4 py-3 shadow-dl-overlay",
-        "font-dl-sans text-dl-body text-dl-ink",
-        // Enters from below and leaves the same way — one direction, so the
-        // motion reads as a single object arriving and departing.
-        // Tailwind v4 emits translate-y-* via the CSS `translate` property,
-        // not `transform` — transitioning `transform` here animates nothing.
-        "translate-y-[120%] opacity-0 duration-200",
-        "data-[state=open]:translate-y-0 data-[state=open]:opacity-100 data-[state=open]:duration-[320ms]",
-        "transition-[translate,opacity] ease-[cubic-bezier(0.23,1,0.32,1)]",
-      ].join(" ")}
-    >
-      <span className="flex-1">{message}</span>
-      <button
-        type="button"
-        onClick={handleDismiss}
-        aria-label="Dismiss notification"
-        className="shrink-0 text-dl-charcoal transition-colors hover:text-dl-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2"
+    // Fragment only so the suppression below can attach to the div; it adds
+    // no DOM node, so this stays the popover element.
+    <>
+      {/* biome-ignore lint/a11y/useSemanticElements: <output> is a
+          form-associated element for the result of a calculation or a user
+          action, with a form owner and a `for` attribute. This is a global
+          transient notification, it holds an interactive dismiss button, and
+          it is the popover host promoted to the top layer. <output>'s
+          implicit role is already `status`, which is declared explicitly
+          here, so the swap would satisfy the rule while changing nothing an
+          assistive technology consumes and adding form semantics that do not
+          apply. */}
+      <div
+        ref={elRef}
+        popover="manual"
+        role="status"
+        aria-live="polite"
+        data-state={open ? "open" : "closed"}
+        className={[
+          // Reset the UA popover defaults, then place it in the content area:
+          // clear of the 260px admin sidebar on the left, and clear of the
+          // 520px product drawer on the right — which is open when this fires,
+          // and whose Save button sits bottom-right.
+          "dl-motion fixed inset-auto bottom-4 left-[calc(260px+1rem)] m-0 w-auto max-w-[min(24rem,calc(100vw-260px-2rem))]",
+          "flex items-center gap-3 border border-dl-rule bg-dl-chalk px-4 py-3 shadow-dl-overlay",
+          "font-dl-sans text-dl-body text-dl-ink",
+          // Enters from below and leaves the same way — one direction, so the
+          // motion reads as a single object arriving and departing.
+          // Tailwind v4 emits translate-y-* via the CSS `translate` property,
+          // not `transform` — transitioning `transform` here animates nothing.
+          "translate-y-[120%] opacity-0 duration-200",
+          "data-[state=open]:translate-y-0 data-[state=open]:opacity-100 data-[state=open]:duration-[320ms]",
+          "transition-[translate,opacity] ease-[cubic-bezier(0.23,1,0.32,1)]",
+        ].join(" ")}
       >
-        <CloseIcon className="h-4 w-4" />
-      </button>
-    </div>
+        <span className="flex-1">{message}</span>
+        <button
+          type="button"
+          onClick={handleDismiss}
+          aria-label="Dismiss notification"
+          className="shrink-0 text-dl-charcoal transition-colors hover:text-dl-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-dl-signal focus-visible:outline-offset-2"
+        >
+          <CloseIcon className="h-4 w-4" />
+        </button>
+      </div>
+    </>
   );
 }
 

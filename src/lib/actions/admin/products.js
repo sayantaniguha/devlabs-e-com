@@ -125,14 +125,16 @@ export async function updateProduct(input) {
   }
 
   if (toInsert.length) {
-    const { error: insertError } = await supabase.from("product_variants").insert(
-      toInsert.map((v) => ({
-        product_id: parsed.data.id,
-        size: v.size || null,
-        sku: v.sku || null,
-        stock_quantity: v.stock_quantity,
-      })),
-    );
+    const { error: insertError } = await supabase
+      .from("product_variants")
+      .insert(
+        toInsert.map((v) => ({
+          product_id: parsed.data.id,
+          size: v.size || null,
+          sku: v.sku || null,
+          stock_quantity: v.stock_quantity,
+        })),
+      );
     if (insertError) return { error: "Could not save new variants." };
   }
 
