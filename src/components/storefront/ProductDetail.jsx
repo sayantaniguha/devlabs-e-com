@@ -139,11 +139,19 @@ export function ProductDetail({ product }) {
 
         {hasSizes && (
           <div className="mt-stack-lg">
+            {/* Literal caps, not just the CSS transform. This span is named by
+                aria-labelledby below, and Chromium computes the accessible
+                name from *rendered* text — so with source "Size" plus
+                text-transform, implementations reading rendered text get
+                "SIZE" while any reading textContent get "Size". Writing the
+                caps in the source makes every implementation agree. The
+                uppercase class stays so the span still matches the shared
+                small-caps label idiom used in 30-odd other places. */}
             <span
               id={sizeLabelId}
               className="block font-dl-sans text-dl-spec text-dl-charcoal uppercase tracking-wide mb-stack-sm"
             >
-              Size
+              SIZE
             </span>
             {/* Named by the visible "Size" label rather than a duplicate
                 aria-label, so the accessible name cannot drift from what is
